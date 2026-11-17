@@ -37,7 +37,16 @@
      const title=document.createElement('h3');title.textContent=f.title;
      const read=document.createElement('button');read.type='button';read.className='button primary';read.textContent='📖 قراءة PDF';read.addEventListener('click',()=>openViewer(f));
      const external=document.createElement('a');external.className='sub-link';external.href=f.url.replace('/preview','/view');external.target='_blank';external.rel='noopener noreferrer';external.textContent='فتح أو تنزيل من Google Drive ↗';
-     card.append(title,read,external);results.append(card);
+     const cover=document.createElement('img');
+     const fileId=f.url.match(/\/file\/d\/([^/]+)/)?.[1];
+     cover.className='library-cover';cover.alt='معاينة غلاف '+f.title;
+     cover.loading='lazy';cover.decoding='async';
+     if(fileId)cover.src='https://drive.google.com/thumbnail?id='+encodeURIComponent(fileId)+'&sz=w480';
+     cover.addEventListener('error',()=>{cover.hidden=true;coverFallback.hidden=false;});
+     const coverFallback=document.createElement('div');coverFallback.className='library-cover-fallback';coverFallback.hidden=true;coverFallback.textContent='الغلاف غير متاح للعرض';
+     const coverBox=document.createElement('div');coverBox.className='library-cover-box';coverBox.append(cover,coverFallback);
+     const gradeLabel=document.createElement('p');gradeLabel.className='library-grade-label';gradeLabel.textContent=grade.options[grade.selectedIndex].text;
+     card.append(coverBox,gradeLabel,title,read,external);results.append(card);
    }
    empty.hidden=matched.length>0;
    if(!matched.length)empty.textContent=all.length?'ماكو ملف يطابق البحث. امسح كلمة البحث حتى تشوف كل ملفات الصف.':'ما متوفرة ملفات موثقة لهذا الصف وهذا القسم حالياً. راح تنضاف هنا بعد رفع ملفات PDF الأصلية.';
