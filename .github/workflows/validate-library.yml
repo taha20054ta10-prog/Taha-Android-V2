@@ -1,0 +1,23 @@
+name: Audit educational library links
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 4 * * 1'
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python library-import/validate_catalog.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: taha-android-library-audit
+          path: library-import/audit-report.json
+          retention-days: 30
