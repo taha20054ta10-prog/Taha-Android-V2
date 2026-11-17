@@ -1,0 +1,23 @@
+name: Import approved school PDFs to Supabase
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  import-pdfs:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Upload verified, rehosting-approved PDF files
+        env:
+          SUPABASE_STORAGE_SECRET: ${{ secrets.SUPABASE_STORAGE_SECRET }}
+        run: python3 library-import/import_pdfs.py
+      - name: Upload result report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: library-import-report
+          path: library-import/report.json
+          if-no-files-found: ignore
