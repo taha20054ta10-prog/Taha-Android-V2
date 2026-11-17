@@ -9,7 +9,8 @@ arrays=re.findall(r'(?:const\s+files\s*=|files\.push\(\.\.\.)\s*(\[.*?\])\s*(?:;
 items=[]
 for chunk in arrays:
  try: items.extend(json.loads(chunk))
- except json.JSONDecodeError: pass
+ except json.JSONDecodeError as exc: raise ValueError('Cannot parse library catalog: '+str(exc)) from exc
+if not items: raise RuntimeError('No catalog entries parsed: aborting empty audit')
 results=[]
 for i,f in enumerate(items):
  u=f.get('url','')
@@ -24,14 +25,14 @@ for i,f in enumerate(items):
    data=resp.read(2048)
    row['http_status']=resp.status
    row['content_type']=ct
-   row['status']='pdf_header_verified' if data.startswith(b'%PDF-') else ('source_page_reachable' if f.get('externalSource') or 'html' in ct else 'non_pdf_response')
+   row['status']='pdf_header_verified' if data.startswith(b'%PDF-') else ('source_page_reachable' if f.get('externalSource') else ('viewer_page_reachable' if 'drive.google.com' in u and 'html' in ct else 'unexpected_non_pdf'))
  except urllib.error.HTTPError as exc:
   row['http_status']=exc.code;row['status']='http_error'
  except Exception as exc:
   row['status']='network_error';row['error']=str(exc)[:160]
  results.append(row)
  if i%25==0: print('Checked',i+1,'of',len(items),flush=True)
-summary={'checked_at_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'total':len(results),'statuses':{x:sum(r['status']==x for r in results) for x in sorted({r['status'] for r in results})},'by_grade':{str(g):sum(r.get('grade')==str(g) for r in results) for g in range(1,16)}}
+summary={'audit_note':'PDF header checks verify file type only, not full download or content accuracy','checked_at_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'total':len(results),'statuses':{x:sum(r['status']==x for r in results) for x in sorted({r['status'] for r in results})},'by_grade':{str(g):sum(r.get('grade')==str(g) for r in results) for g in range(1,16)}}
 out=ROOT/'library-import';out.mkdir(exist_ok=True)
 (out/'audit-report.json').write_text(json.dumps({'summary':summary,'entries':results},ensure_ascii=False,indent=2),encoding='utf-8')
 print(json.dumps(summary,ensure_ascii=False,indent=2))
