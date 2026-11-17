@@ -7,7 +7,7 @@ s=(ROOT/'library.js').read_text(encoding='utf-8')
 # JSONDecoder.raw_decode handles JavaScript lines without semicolons.
 decoder=json.JSONDecoder()
 arrays=[]
-for match in re.finditer(r'(?:const\s+files\s*=|files\.push\(\.\.\.\))\s*(?=\[)',s):
+for match in re.finditer(r'(?:const\s+files\s*=|files\.push\(\.\.\.)\s*(?=\[)',s):
  chunk=s[match.end():].lstrip()
  parsed, consumed=decoder.raw_decode(chunk)
  if not isinstance(parsed,list): raise ValueError('Expected array at '+str(match.start()))
