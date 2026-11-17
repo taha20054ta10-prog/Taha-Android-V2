@@ -171,3 +171,5 @@ body{background:radial-gradient(ellipse at 85% 5%,#1d2354 0%,transparent 40%),#0
 @keyframes identity-float{50%{transform:translateY(-9px)}}
 @media(max-width:680px){.slide-logo{width:108px;height:108px}.slide-logo span{font-size:3.5rem}.slide-identity strong{font-size:.72rem}.slide-identity small{font-size:.46rem}.slide-identity{gap:5px}}
 @media(prefers-reduced-motion:reduce){.slide-identity{animation:none}}
+
+.pdf-viewer{width:min(98vw,1050px);height:min(94dvh,900px);max-width:none;max-height:none;border:1px solid #5779ae;border-radius:16px;background:#0b1832;color:white;padding:12px;box-shadow:0 20px 90px #000a}.pdf-viewer::backdrop{background:#000c}.pdf-toolbar{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px}.pdf-toolbar strong{font-size:.95rem}.pdf-toolbar button{background:#334e83;color:white;border:0;border-radius:9px;padding:9px 16px;cursor:pointer}.pdf-viewer iframe{width:100%;height:calc(100% - 110px);border:0;background:white;border-radius:8px}.pdf-viewer p{font-size:.75rem;display:inline;margin-inline-end:12px}.pdf-viewer a{color:#91ceff;font-size:.8rem}
