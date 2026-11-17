@@ -72,9 +72,9 @@
      const external=document.createElement('a');external.className='sub-link';external.href=f.url.replace('/preview','/view');external.target='_blank';external.rel='noopener noreferrer';external.textContent='فتح ملف PDF ↗';
      const cover=document.createElement('img');
      cover.className='library-cover';cover.alt='غلاف بتصميم طه أندرويد: '+f.title;
-     cover.loading='lazy';cover.decoding='async';cover.src=coverFor(f);
+     cover.loading='lazy';cover.decoding='async';cover.src='covers/catalog/'+String(files.indexOf(f)).padStart(3,'0')+'.jpg';
      const coverFallback=document.createElement('div');coverFallback.className='library-cover-fallback';coverFallback.hidden=true;coverFallback.textContent=f.title+' — '+grade.options[grade.selectedIndex].text;
-     cover.addEventListener('error',()=>{cover.hidden=true;coverFallback.hidden=false;});
+     cover.addEventListener('error',()=>{cover.src=coverFor(f);cover.onerror=()=>{cover.hidden=true;coverFallback.hidden=false;};});
      const coverBox=document.createElement('div');coverBox.className='library-cover-box';coverBox.append(cover,coverFallback);
      const credit=document.createElement('small');credit.className='library-cover-credit';credit.textContent='المصمم والمبرمج طه علي الازيرجاوي';
      const gradeLabel=document.createElement('p');gradeLabel.className='library-grade-label';gradeLabel.textContent=grade.options[grade.selectedIndex].text;
