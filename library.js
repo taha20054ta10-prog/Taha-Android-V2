@@ -16,7 +16,7 @@
    let viewer=document.getElementById('pdf-viewer');
    if(!viewer){
      viewer=document.createElement('dialog');viewer.id='pdf-viewer';viewer.className='pdf-viewer';
-     viewer.innerHTML='<div class="pdf-toolbar"><strong id="pdf-title"></strong><button type="button" id="pdf-close">إغلاق ✕</button></div><iframe title="قارئ الكتب PDF" referrerpolicy="no-referrer"></iframe><p>إذا ما اشتغل العرض، استخدم زر فتح الملف في Google Drive.</p><a id="pdf-external" target="_blank" rel="noopener noreferrer">فتح الملف في Google Drive ↗</a>';
+     viewer.innerHTML='<div class="pdf-toolbar"><strong id="pdf-title"></strong><button type="button" id="pdf-close">إغلاق ✕</button></div><iframe title="قارئ الكتب PDF" referrerpolicy="no-referrer"></iframe><p>إذا تعذر عرض الملف داخل الموقع، افتحه من الرابط المباشر.</p><a id="pdf-external" target="_blank" rel="noopener noreferrer">فتح PDF مباشرة ↗</a> <a id="pdf-download" target="_blank" rel="noopener noreferrer">⬇ تنزيل PDF</a>';
      document.body.append(viewer);
      viewer.querySelector('#pdf-close').addEventListener('click',()=>viewer.close());
      viewer.addEventListener('close',()=>viewer.querySelector('iframe').removeAttribute('src'));
@@ -24,6 +24,8 @@
    viewer.querySelector('#pdf-title').textContent=f.title;
    viewer.querySelector('iframe').src=f.url;
    viewer.querySelector('#pdf-external').href=f.url.replace('/preview','/view');
+   const driveId=f.url.match(/\/file\/d\/([^/]+)/)?.[1];
+   viewer.querySelector('#pdf-download').href=driveId?'https://drive.google.com/uc?export=download&id='+encodeURIComponent(driveId):f.url;
    if(typeof viewer.showModal==='function')viewer.showModal();
    else window.open(f.url.replace('/preview','/view'),'_blank','noopener');
  }
@@ -36,7 +38,7 @@
      const card=document.createElement('article');card.className='card library-book';
      const title=document.createElement('h3');title.textContent=f.title;
      const read=document.createElement('button');read.type='button';read.className='button primary';read.textContent='📖 قراءة PDF';read.addEventListener('click',()=>openViewer(f));
-     const external=document.createElement('a');external.className='sub-link';external.href=f.url.replace('/preview','/view');external.target='_blank';external.rel='noopener noreferrer';external.textContent='فتح أو تنزيل PDF ↗';
+     const external=document.createElement('a');external.className='sub-link';external.href=f.url.replace('/preview','/view');external.target='_blank';external.rel='noopener noreferrer';external.textContent='فتح ملف PDF ↗';
      const cover=document.createElement('img');
      const fileId=f.url.match(/\/file\/d\/([^/]+)/)?.[1];
      cover.className='library-cover';cover.alt='معاينة غلاف '+f.title;
