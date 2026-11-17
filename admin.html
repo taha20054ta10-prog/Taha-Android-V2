@@ -1,1 +1,48 @@
-<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>إدارة إحصائيات طه أندرويد</title><link rel="stylesheet" href="site.css"></head><body><main class="container section"><h1>📊 إحصائيات طه أندرويد</h1><p>هذه صفحة إرشادية لإدارة الإحصائيات، وليست لوحة تعرض بيانات فعلية بعد. لن تُعرض أعداد تخمينية أو بيانات زوار علنية.</p><div class="card" style="padding:22px"><h2>تفعيل إحصائيات الزيارات والتحميلات</h2><p>اربط الموقع بخدمة Google Analytics 4، ثم أضف معرّف القياس الخاص بك (يبدأ بـ G-) إلى إعدادات analytics.js. عندها تبدأ إحصائيات الزيارات، الزوار النشطين، وفتح الكتب والضغط على روابط التحميل بالتسجيل.</p><p><a class="button primary" href="https://analytics.google.com/" target="_blank" rel="noopener noreferrer">فتح لوحة Google Analytics ↗</a></p><p>مهم: الضغط على زر تحميل لا يثبت اكتمال تنزيل الملف أو تثبيت التطبيق. فتح PDF يسجّل طلب فتحه، وليس بالضرورة قراءته بالكامل.</p></div><p><a href="index.html">العودة للموقع</a></p></main></body></html>
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="theme-color" content="#0b141c">
+  <title>لوحة الإيرادات | طه أندرويد</title>
+  <link rel="icon" href="icon.png">
+  <link rel="stylesheet" href="site.css">
+  <link rel="stylesheet" href="partner.css">
+  <script src="partner.js" defer></script>
+</head>
+<body class="partner-page">
+  <header class="partner-header"><div class="container partner-bar">
+    <a class="brand" href="index.html"><img src="icon.png" alt="" width="42" height="42"><span>طه أندرويد<small dir="ltr">TAHA ANDROID V2</small></span></a>
+    <a class="partner-back" href="index.html">العودة للموقع ←</a>
+  </div></header>
+  <main class="container partner-main">
+    <div class="dashboard-heading"><div><p class="partner-label">إدارة الإعلانات</p><h1>لوحة الإيرادات</h1><p>سجّل مستحقات الرعايات والمبالغ اللي استلمتها بالدينار العراقي.</p></div><a class="button primary" href="#record-panel">＋ إضافة إيراد</a></div>
+    <p class="local-note">السجل يدوي ومحفوظ في هذا المتصفح فقط. نزّل نسخة CSV للاحتفاظ بالبيانات خارج المتصفح.</p>
+    <section class="partner-grid metrics" aria-label="ملخص الإيرادات">
+      <article class="partner-panel"><h2>إجمالي الإيرادات المسجّلة</h2><strong id="total-amount">٠</strong> <small>د.ع</small></article>
+      <article class="partner-panel"><h2>المبالغ المستلمة</h2><strong id="paid-amount">٠</strong> <small>د.ع</small></article>
+      <article class="partner-panel"><h2>بانتظار الاستلام</h2><strong id="pending-amount">٠</strong> <small>د.ع</small></article>
+    </section>
+    <div class="dashboard-grid">
+      <section class="partner-panel ledger-panel" aria-labelledby="ledger-title">
+        <div class="ledger-heading"><div><h2 id="ledger-title">سجل الإيرادات</h2><p id="record-count">٠ عمليات</p></div><button type="button" class="button ghost" id="export-ledger" disabled>تنزيل CSV ↓</button></div>
+        <div id="ledger-empty" class="ledger-empty">أضف أول إيراد حتى يظهر بالسجل.</div>
+        <div id="ledger-scroll" class="ledger-scroll" hidden><table><thead><tr><th scope="col">الحملة</th><th scope="col">التاريخ</th><th scope="col">المبلغ</th><th scope="col">الحالة</th><th scope="col">الإجراء</th></tr></thead><tbody id="ledger-rows"></tbody></table></div>
+        <p class="form-note" id="ledger-status" role="status"></p>
+      </section>
+      <section class="partner-panel" id="record-panel" aria-labelledby="record-title">
+        <h2 id="record-title">إضافة إيراد</h2>
+        <form id="ledger-form">
+          <label>اسم الحملة<input name="campaign" required maxlength="100" placeholder="مثال: رعاية تطبيق"></label>
+          <div class="input-pair"><label>المبلغ بالدينار<input name="amount" type="number" min="1" max="999999999" step="1" required></label><label>التاريخ<input name="date" type="date" required></label></div>
+          <label>الحالة<select name="status"><option value="pending">بانتظار الاستلام</option><option value="paid">مستلم</option></select></label>
+          <div class="record-actions"><button class="button primary" type="submit">حفظ الإيراد</button><button class="button ghost" id="cancel-edit" type="button" hidden>إلغاء</button></div>
+        </form>
+      </section>
+    </div>
+    <section class="partner-panel analytics-panel"><h2>إعلانات Google AdSense</h2><p>تُراجع حالة الموقع والأرباح الفعلية من حساب الناشر في AdSense بعد ربط الموقع والموافقة عليه.</p><a class="button ghost" href="https://adsense.google.com/" target="_blank" rel="noopener noreferrer">فتح Google AdSense ↗</a></section>
+<div class="partner-panel analytics-panel"><h2>تفعيل إحصائيات الزيارات والتحميلات</h2><p>اربط الموقع بخدمة Google Analytics 4، ثم أضف معرّف القياس الخاص بك (يبدأ بـ G-) إلى إعدادات analytics.js. عندها تبدأ إحصائيات الزيارات، الزوار النشطين، وفتح الكتب والضغط على روابط التحميل بالتسجيل.</p><p><a class="button primary" href="https://analytics.google.com/" target="_blank" rel="noopener noreferrer">فتح لوحة Google Analytics ↗</a></p><p>مهم: الضغط على زر تحميل لا يثبت اكتمال تنزيل الملف أو تثبيت التطبيق. فتح PDF يسجّل طلب فتحه، وليس بالضرورة قراءته بالكامل.</p></div>
+  </main>
+</body>
+</html>
