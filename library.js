@@ -41,12 +41,15 @@
      const fileId=f.url.match(/\/file\/d\/([^/]+)/)?.[1];
      cover.className='library-cover';cover.alt='معاينة غلاف '+f.title;
      cover.loading='lazy';cover.decoding='async';
-     if(fileId)cover.src='https://drive.google.com/thumbnail?id='+encodeURIComponent(fileId)+'&sz=w480';
+     const subject=f.title.includes('رياضيات')?'math':f.title.includes('انكليزي')||f.title.includes('إنكليزي')||f.title.includes('الإنكليزي')?'english':null;
+     if(subject&&grade.value==='1')cover.src='covers/'+subject+'-first-primary.svg';
+     else if(fileId)cover.src='https://drive.google.com/thumbnail?id='+encodeURIComponent(fileId)+'&sz=w480';
      cover.addEventListener('error',()=>{cover.hidden=true;coverFallback.hidden=false;});
      const coverFallback=document.createElement('div');coverFallback.className='library-cover-fallback';coverFallback.setAttribute('role','img');coverFallback.setAttribute('aria-label','بطاقة تعريفية للكتاب، وليست الغلاف الأصلي');coverFallback.hidden=true;coverFallback.textContent=f.title+' — '+grade.options[grade.selectedIndex].text;
      const coverBox=document.createElement('div');coverBox.className='library-cover-box';coverBox.append(cover,coverFallback);
+     const credit=document.createElement('small');credit.className='library-cover-credit';credit.textContent='المصمم والمبرمج طه علي الازيرجاوي';
      const gradeLabel=document.createElement('p');gradeLabel.className='library-grade-label';gradeLabel.textContent=grade.options[grade.selectedIndex].text;
-     card.append(coverBox,gradeLabel,title,read,external);results.append(card);
+     card.append(coverBox,gradeLabel,title,read,external,credit);results.append(card);
    }
    empty.hidden=matched.length>0;
    if(!matched.length)empty.textContent=all.length?'ماكو ملف يطابق البحث. امسح كلمة البحث حتى تشوف كل ملفات الصف.':'ما متوفرة ملفات موثقة لهذا الصف وهذا القسم حالياً. راح تنضاف هنا بعد رفع ملفات PDF الأصلية.';
