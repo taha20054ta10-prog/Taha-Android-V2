@@ -28,6 +28,7 @@ def main():
     if not isinstance(entries, list):
         raise ValueError("Manifest must be an array")
     report = []
+    catalog = []
     if not key:
         print("SUPABASE_STORAGE_SECRET missing; no uploads attempted.")
         return 2
@@ -76,6 +77,7 @@ def main():
             result["sha256"] = hashlib.sha256(data).hexdigest()
             result["grade"] = grade
             result["type"] = kind
+            catalog.append({"grade": grade, "type": kind, "title": name, "url": result["public_url"]})
         except Exception as exc:
             result["status"] = "error"
             result["reason"] = str(exc)[:200]
@@ -83,6 +85,7 @@ def main():
             report.append(result)
             print(name + ": " + result["status"])
     REPORT.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
+    Path("library-import/uploaded-catalog.json").write_text(json.dumps(catalog, ensure_ascii=False, indent=2), encoding="utf-8")
     return 1 if any(r["status"] == "error" for r in report) else 0
 
 if __name__ == "__main__":
