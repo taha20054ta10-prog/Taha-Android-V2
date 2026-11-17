@@ -24,4 +24,5 @@ jobs:
           path: |
             library-import/report.json
             library-import/preflight-report.json
+            library-import/uploaded-catalog.json
           if-no-files-found: ignore
