@@ -77,21 +77,26 @@
 .services-offer-phone i{display:block;height:6%;border-radius:4px;background:#609ab2;margin-top:14%}
 @media(max-width:600px){.services-offer-inner{grid-template-columns:minmax(0,1fr);gap:.5rem}.services-offer-art{display:none}}
 </style>
+<style>
+.study-desk{overflow:hidden;border-radius:24px;border:1px solid #9bbdd950;background:#101f33;color:#edf8ff;box-shadow:0 14px 42px #06132540}
+.study-desk header{padding:clamp(1.25rem,4vw,2.6rem);background:radial-gradient(ellipse at left,#2e6478,transparent 68%),linear-gradient(135deg,#10243e,#17394d)}
+.study-desk h2{font-size:clamp(1.65rem,3.8vw,2.8rem);margin:0;color:#f3fbff}.study-desk p{color:#d1e8f9;margin:.5rem 0}.study-desk a{color:#a6ecff;text-decoration:underline}
+.study-work{padding:clamp(1rem,3vw,1.6rem)}.study-work [hidden]{display:none}.study-controls,.study-results{display:flex;flex-wrap:wrap;gap:.55rem;margin-bottom:1rem}
+.study-desk button,.study-desk input,.study-desk textarea,.study-desk select{font:inherit;min-width:0;padding:.55rem .7rem;border:1px solid #92b4cc80;border-radius:9px;color:#f4fbff;background:#152e48}.study-desk button{cursor:pointer}.study-desk button[type=submit],.study-desk button[aria-pressed=true]{background:#a3f1ed;color:#0b2834;font-weight:800}.study-desk button:disabled{opacity:.6}
+.study-input-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.5rem}.study-selects{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.6rem}.study-desk label{display:block;margin:.45rem 0}.study-desk textarea,.study-desk select{display:block;width:100%}.study-desk small{display:block;margin:.45rem 0;color:#cfe0eb}
+.study-screen iframe{width:100%;max-width:900px;aspect-ratio:16/9;border:0;border-radius:12px}.study-screen:empty{display:none}.study-work a{display:inline-block;margin:.5rem 0 .4rem 1rem}.study-work a[hidden]{display:none}
+#study-answer{white-space:pre-wrap;overflow-wrap:anywhere;margin:1rem 0;line-height:1.85}#study-answer:empty{display:none}
+</style>
 </head>
 <body>
   <a class="skip" href="#main">انتقل للمحتوى</a>
   <header class="header">
     <div class="container nav-shell">
-      <a class="brand" href="#home">
+      <a class="brand" href="#study-desk">
         <img src="icon.png" alt="" width="44" height="44">
         <span>طه أندرويد <small dir="ltr">TAHA ANDROID V2</small></span>
       </a>
-      <nav aria-label="القائمة الرئيسية">
-        <a href="#apps">التطبيقات</a>
-        <a href="#education">المدرّس الذكي</a><a href="library.html">الكتب والملازم</a>
-        <a href="#bots">البوتات</a>
-        <a href="#videos">الفيديوهات</a><a href="#social-hub">تواصل معنا</a><a href="#articles">دليل الاستخدام</a>
-      </nav>
+      <nav aria-label="القائمة الرئيسية"><a href="#study-desk">مركز الدراسة</a><a href="library.html">الكتب والملازم</a><a href="#videos">الفيديوهات</a><a href="#bots">البوتات</a><a href="#social-hub">تواصل معنا</a><a href="#articles">دليل الاستخدام</a><a href="#apps">التطبيقات</a></nav>
       <a class="button ghost nav-contact" href="#contact">تابعنا <span aria-hidden="true">↗</span></a>
     </div>
   </header>
@@ -102,6 +107,45 @@
     </div>
 
     <div class="news-ticker" aria-label="أخبار وخدمات طه أندرويد"><strong>آخر الأخبار ✦</strong><div class="ticker-window"><div class="ticker-track"><a href="#home">أهلاً بكم في طه أندرويد | تطبيقات وخدمات رقمية عراقية</a><a href="#apps">Download Plus PRO — تحميل الفيديو والصوت</a><a href="#minhaji">منهاجي بلس PRO — كتب ومناهج المرحلة الابتدائية</a><a href="#apps">Taha Share PRO — مشروع مشاركة ونقل الملفات</a><a href="#apps">Taha Sports PRO — مشروع الخدمات الرياضية</a><a href="library.html">المكتبة المدرسية — من الأول الابتدائي إلى السادس الإعدادي</a><a href="library.html">تصفح الكتب المدرسية والمناهج العراقية PDF</a><a href="library.html">الملازم والملخصات والأسئلة الوزارية حسب الصف — المتوفر حالياً</a><a href="#education">المدرّس الذكي — خدمات تعليمية ومساعدة دراسية</a><a href="https://t.me/TahaAppsPlusPRO_bot" target="_blank" rel="noopener noreferrer">بوت طه أندرويد — التطبيقات والخدمات</a><a href="https://t.me/FundingEmpirePRO_bot" target="_blank" rel="noopener noreferrer">إمبراطورية التمويل PRO — النقاط والهدايا وتمويل القنوات</a><a href="#videos">شاهد شروحات التطبيقات والفيديوهات</a><a href="#social-hub">تابع حساباتنا الرسمية على منصات التواصل</a><a href="#contact">المصمم والمبرمج طه علي الازيرجاوي</a><a href="#home">أهلاً بكم في طه أندرويد | تطبيقات وخدمات رقمية عراقية</a><a href="#apps">Download Plus PRO — تحميل الفيديو والصوت</a><a href="#minhaji">منهاجي بلس PRO — كتب ومناهج المرحلة الابتدائية</a><a href="#apps">Taha Share PRO — مشروع مشاركة ونقل الملفات</a><a href="#apps">Taha Sports PRO — مشروع الخدمات الرياضية</a><a href="library.html">المكتبة المدرسية — من الأول الابتدائي إلى السادس الإعدادي</a><a href="library.html">تصفح الكتب المدرسية والمناهج العراقية PDF</a><a href="library.html">الملازم والملخصات والأسئلة الوزارية حسب الصف — المتوفر حالياً</a><a href="#education">المدرّس الذكي — خدمات تعليمية ومساعدة دراسية</a><a href="https://t.me/TahaAppsPlusPRO_bot" target="_blank" rel="noopener noreferrer">بوت طه أندرويد — التطبيقات والخدمات</a><a href="https://t.me/FundingEmpirePRO_bot" target="_blank" rel="noopener noreferrer">إمبراطورية التمويل PRO — النقاط والهدايا وتمويل القنوات</a><a href="#videos">شاهد شروحات التطبيقات والفيديوهات</a><a href="#social-hub">تابع حساباتنا الرسمية على منصات التواصل</a><a href="#contact">المصمم والمبرمج طه علي الازيرجاوي</a></div></div></div>
+<section class="container section" id="study-desk" aria-labelledby="study-desk-title">
+<div class="study-desk">
+  <header><h2 id="study-desk-title">مركز الدراسة</h2><p>ابحث عن شرح للدرس أو اسأل المدرّس الذكي خطوة بخطوة.</p><a href="library.html">افتح الكتب والملازم ←</a></header>
+  <div class="study-work">
+    <div class="study-controls" aria-label="أدوات الدراسة"><button type="button" data-study="search" aria-pressed="true">▶ شروحات يوتيوب</button><button type="button" data-study="tutor" aria-pressed="false">✦ اسأل المدرّس الذكي</button></div>
+    <div id="study-search">
+      <form id="study-video-form"><label for="study-query">شنو الدرس اللي تريد تبحث عنه؟</label><div class="study-input-row"><input id="study-query" maxlength="140" required placeholder="مثلاً الاشتقاق للسادس العلمي"><button type="submit">بحث</button></div></form>
+      <p id="study-search-note" role="status">اختار من الشروحات المختارة أدناه.</p>
+      <div id="study-results" class="study-results" aria-label="نتائج الشروحات"></div>
+      <div id="study-screen" class="study-screen"></div>
+      <a id="study-watch" hidden target="_blank" rel="noopener noreferrer">افتح الفيديو على يوتيوب ↗</a>
+      <a id="study-all" href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">افتح يوتيوب ↗</a>
+    </div>
+    <div id="study-tutor" hidden>
+      <form id="study-tutor-form"><div class="study-selects"><label>الصف <select id="study-grade" required></select></label><label>المادة <select id="study-subject" required></select></label></div>
+      <label for="study-question">اكتب سؤالك الدراسي</label><textarea id="study-question" required minlength="2" maxlength="650" rows="4" placeholder="مثلاً ليش النصف يساوي ربعين؟"></textarea>
+      <small>يُرسل نص السؤال لخدمة الذكاء الاصطناعي. لا تكتب معلومات شخصية.</small>
+      <button type="submit">اطلب الشرح</button></form>
+      <div id="study-answer" role="status"></div><a href="https://t.me/TahaAppsPlusPRO_bot" target="_blank" rel="noopener noreferrer">المدرّس على تيليجرام ↗</a>
+    </div>
+  </div>
+</div></section>
+    <section id="library" class="container section"><div class="card" style="padding:25px;background:linear-gradient(130deg,#10294c,#24194a)"><p class="eyebrow">📚 قسم مستقل</p><h2>المكتبة الدراسية العراقية</h2><p>من الأول الابتدائي إلى السادس الإعدادي العلمي والأدبي: الكتب والملازم والأسئلة داخل الموقع بصفحة خاصة، بعيداً عن زحمة الصفحة الرئيسية.</p><a class="button primary" href="library.html">ادخل المكتبة الدراسية ←</a></div></section>
+    <section id="education" class="container section" aria-labelledby="education-title">
+      <div class="education">
+        <div>
+          <p class="eyebrow"><span></span> الدراسة على تليگرام</p>
+          <h2 id="education-title">المدرّس الذكي</h2>
+          <p>اختار صفّك والمادة من المكتبة الموجودة داخل الموقع، واطّلع على الملفات المنشورة. اكتب سؤالك للمراجعة، وتأكد من الجواب ويا كتابك أو مدرّسك.</p>
+          <a class="button primary" href="https://t.me/TahaAppsPlusPRO_bot" target="_blank" rel="noopener noreferrer">افتح البوت التعليمي <span aria-hidden="true">↗</span></a>
+          <p class="command">بعد فتح البوت اكتب <code dir="ltr">/study</code></p>
+        </div>
+        <ul class="education-list">
+          <li><span aria-hidden="true">▤</span><div><strong>مكتبة الدراسة</strong><small>اختار المرحلة، الصف والمادة</small></div></li>
+          <li><span aria-hidden="true">?</span><div><strong>اسأل المدرّس</strong><small>راجع فكرة أو خطوات حل مسألة</small></div></li>
+          <li><span aria-hidden="true">✓</span><div><strong>أرشيف الوزاريات</strong><small>روابط للسادس العلمي والأدبي</small></div></li>
+        </ul>
+      </div>
+    </section>
     <section class="showcase container" aria-label="أبرز خدمات طه أندرويد"><div class="showcase-head"><h2>اكتشف عالم طه أندرويد</h2><p>تنقّل بين تطبيقاتنا والمكتبة وخدمات تليگرام</p></div><div class="showcase-frame" id="showcase" aria-roledescription="عرض شرائح"><div class="showcase-slides"><article class="showcase-slide active" aria-hidden="false"><div class="slide-identity" aria-label="طه أندرويد"><div class="slide-logo official-logo"><img src="icon.png" alt="شعار طه أندرويد" loading="lazy"></div><strong>طه أندرويد</strong><small>TAHA APPS PLUS PRO</small></div><div class="slide-copy"><span class="slide-count">01 / 09</span><h3>طه أندرويد</h3><p>تطبيقات وبوتات وخدمات رقمية بمكان واحد</p><a class="button primary" href="#apps" >اكتشف المزيد ←</a></div></article><article class="showcase-slide" aria-hidden="true"><div class="slide-identity" aria-label="Download Plus PRO"><div class="slide-logo original-app-logo"><img src="assets/app-logos/download-plus.webp" alt="أيقونة Download Plus PRO الأصلية" loading="lazy" decoding="async"></div><strong>Download Plus PRO</strong><small>TAHA APPS PLUS PRO</small></div><div class="slide-copy"><span class="slide-count">02 / 09</span><h3>Download Plus PRO</h3><p>تعرّف على تطبيق إدارة التنزيلات</p><a class="button primary" href="#apps" >اكتشف المزيد ←</a></div></article><article class="showcase-slide" aria-hidden="true"><div class="slide-identity" aria-label="منهاجي بلس PRO"><div class="slide-logo original-app-logo"><img src="assets/app-logos/minhaji-plus.webp" alt="أيقونة منهاجي بلس PRO الأصلية" loading="lazy" decoding="async"></div><strong>منهاجي بلس PRO</strong><small>TAHA APPS PLUS PRO</small></div><div class="slide-copy"><span class="slide-count">03 / 09</span><h3>منهاجي بلس PRO</h3><p>كتب وتدريبات للمرحلة الابتدائية</p><a class="button primary" href="#minhaji" >اكتشف المزيد ←</a></div></article><article class="showcase-slide" aria-hidden="true"><div class="slide-identity" aria-label="المكتبة الدراسية"><div class="slide-logo original-app-logo portrait-art"><img src="assets/app-logos/study-library.webp" alt="تصميم مكتبة طه أندرويد الدراسية" loading="lazy" decoding="async"></div><strong>المكتبة الدراسية</strong><small>TAHA ANDROID</small></div><div class="slide-copy"><span class="slide-count">04 / 09</span><h3>المكتبة الدراسية</h3><p>كتب المناهج العراقية والملازم والوزاريات حسب الصف</p><a class="button primary" href="library.html">تصفّح المكتبة ←</a></div></article><article class="showcase-slide" aria-hidden="true"><div class="slide-identity" aria-label="Taha Share PRO"><div class="slide-logo original-app-logo"><img src="assets/app-logos/taha-share.webp" alt="شعار Taha Share PRO الأصلي" loading="lazy" decoding="async"></div><strong>Taha Share PRO</strong><small>TAHA APPS PLUS PRO</small></div><div class="slide-copy"><span class="slide-count">05 / 09</span><h3>Taha Share PRO</h3><p>مشروع مشاركة الملفات بين الأجهزة</p><a class="button primary" href="#apps" >اكتشف المزيد ←</a></div></article><article class="showcase-slide" aria-hidden="true"><div class="slide-identity" aria-label="Taha Sports PRO"><div class="slide-logo original-app-logo portrait-art"><img src="assets/app-logos/taha-sports.webp" alt="واجهة تطبيق Taha Sports PRO الأصلية" loading="lazy" decoding="async"></div><strong>Taha Sports PRO</strong><small>TAHA APPS PLUS PRO</small></div><div class="slide-copy"><span class="slide-count">06 / 09</span><h3>Taha Sports PRO</h3><p>تابع أخبار مشروعنا الرياضي</p><a class="button primary" href="#apps" >اكتشف المزيد ←</a></div></article><article class="showcase-slide" aria-hidden="true"><div class="slide-identity" aria-label="المدرّس الذكي"><div class="slide-logo original-app-logo portrait-art"><img src="assets/app-logos/smart-teacher.webp" alt="تصميم المدرّس الذكي" loading="lazy" decoding="async"></div><strong>المدرّس الذكي</strong><small>TAHA APPS PLUS PRO</small></div><div class="slide-copy"><span class="slide-count">07 / 09</span><h3>المدرّس الذكي</h3><p>مكتبة دراسية ومساعدة تعليمية</p><a class="button primary" href="library.html" >اكتشف المزيد ←</a></div></article><article class="showcase-slide" aria-hidden="true"><div class="slide-identity" aria-label="بوت طه أندرويد"><div class="slide-logo original-app-logo"><img src="icon.png" alt="شعار طه أندرويد" loading="lazy" decoding="async"></div><strong>بوت طه أندرويد</strong><small>TAHA APPS PLUS PRO</small></div><div class="slide-copy"><span class="slide-count">08 / 09</span><h3>طه أندرويد | إدارة وحماية</h3><p>خدمات البوت والتطبيقات والدراسة</p><a class="button primary" href="https://t.me/TahaAppsPlusPRO_bot" target="_blank" rel="noopener noreferrer">اكتشف المزيد ←</a></div></article><article class="showcase-slide" aria-hidden="true"><div class="slide-identity" aria-label="إمبراطورية التمويل"><div class="slide-logo original-app-logo"><img src="assets/app-logos/funding-empire.webp" alt="شعار إمبراطورية التمويل الأصلي" loading="lazy" decoding="async"></div><strong>إمبراطورية التمويل</strong><small>TAHA APPS PLUS PRO</small></div><div class="slide-copy"><span class="slide-count">09 / 09</span><h3>إمبراطورية التمويل</h3><p>مهام ونقاط وهدايا وإحالات</p><a class="button primary" href="https://t.me/FundingEmpirePRO_bot" target="_blank" rel="noopener noreferrer">اكتشف المزيد ←</a></div></article></div><div class="showcase-controls"><button type="button" id="slide-prev" aria-label="الشريحة السابقة">❮</button><div class="slide-dots" id="slide-dots"><button type="button" class="active" aria-label="انتقل للشريحة 1" aria-current="true" data-slide="0"></button><button type="button" class="" aria-label="انتقل للشريحة 2" aria-current="false" data-slide="1"></button><button type="button" class="" aria-label="انتقل للشريحة 3" aria-current="false" data-slide="2"></button><button type="button" class="" aria-label="انتقل للشريحة 4" aria-current="false" data-slide="3"></button><button type="button" class="" aria-label="انتقل للشريحة 5" aria-current="false" data-slide="4"></button><button type="button" class="" aria-label="انتقل للشريحة 6" aria-current="false" data-slide="5"></button><button type="button" class="" aria-label="انتقل للشريحة 7" aria-current="false" data-slide="6"></button><button type="button" class="" aria-label="انتقل للشريحة 8" aria-current="false" data-slide="7"></button><button type="button" aria-label="انتقل للشريحة 9" aria-current="false" data-slide="8"></button></div><button type="button" id="slide-next" aria-label="الشريحة التالية">❯</button></div></div></section>
     <section class="hero container" id="home" aria-labelledby="hero-title">
       <div class="hero-copy">
@@ -144,7 +188,73 @@
 <p class="feedback-note">تگدر ترسل تقييم، اقتراح، أو الاثنين. رأيك يوصل لإدارة الموقع.</p>
 <button class="button primary" type="submit">إرسال الرأي ←</button></fieldset>
 <p id="feedback-status" role="status" aria-live="polite"></p></form></aside></section>
-    <section id="apps" class="container section" aria-labelledby="apps-title">
+
+
+
+
+
+
+    <section id="bots" class="container section" aria-labelledby="bots-title">
+      <div class="section-head"><div><h2 id="bots-title">بوتات تليگرام</h2><p>روابط مباشرة للبوتات التابعة لطه أندرويد.</p></div></div>
+      <div class="two-columns">
+        <article class="card service">
+          <span class="app-icon mint bot-logo" role="img" aria-label="رمز البوت">✦</span><div><h3 dir="ltr" lang="en">Taha Apps Plus PRO Bot</h3><p>التطبيقات، مكتبة الدراسة، وخدمات تفاعلية.</p><a class="sub-link" href="https://t.me/TahaAppsPlusPRO_bot" target="_blank" rel="noopener noreferrer">فتح البوت ↗</a></div>
+        </article>
+        <article class="card service">
+          <span class="app-icon lavender bot-logo" role="img" aria-label="رمز البوت">♥</span><div><h3 dir="ltr" lang="en">Taha Heart PRO</h3><p>بوت مستقل لإضافة تفاعل القلب إلى منشورات القنوات بعد إعداده.</p><a class="sub-link" href="https://t.me/TahaHeartPRO_bot" target="_blank" rel="noopener noreferrer">عرض البوت ↗</a></div>
+        </article>
+        <article class="card service">
+          <span class="app-icon amber bot-logo" role="img" aria-label="رمز البوت">♛</span><div><h3>إمبراطورية التمويل <bdi>Funding Empire PRO</bdi></h3><p>بوت تمويل القنوات والمجموعات بالنقاط، مع مهام الاشتراك والهدايا والإحالات. افتح البوت للاطلاع على الخدمات المتاحة.</p><a class="sub-link" href="https://t.me/FundingEmpirePRO_bot" target="_blank" rel="noopener noreferrer">فتح إمبراطورية التمويل ↗</a></div>
+        </article>
+      </div>
+    </section>
+
+
+    <section id="videos" class="container section"><div class="section-head"><div><h2>فيديوهات وشروحات طه أندرويد</h2><p>شاهد العرض التعريفي وافتح شرح الخدمة اللي تحتاجها.</p></div></div>
+<div class="card feature-video"><video controls playsinline preload="metadata" aria-label="عرض طه أندرويد" poster="android-hero.webp"><source src="media/taha-android-v2-official-ad.mp4" type="video/mp4"></video><div><h3>إعلان طه أندرويد الرسمي</h3><p>جولة بـ٣٥ ثانية في التطبيقات والمكتبة الدراسية وخدمات تليگرام.</p><div class="actions"><a class="button primary" href="#apps">تصفّح التطبيقات ←</a><a class="button ghost" href="library.html">افتح المكتبة</a></div></div></div>
+<div class="feature-grid guide-grid"><article class="card feature-tile"><h3>شرح تحميل التطبيقات</h3><video class="guide-player" controls playsinline preload="metadata" aria-label="شرح تحميل التطبيقات"><source src="media/apps-guide.mp4" type="video/mp4"></video><p>من بطاقة التطبيق إلى تنزيل ملف APK وتثبيته.</p><a class="sub-link" href="#articles">عرض دليل التثبيت ←</a></article><article class="card feature-tile"><h3>شرح المكتبة المدرسية</h3><video class="guide-player" controls playsinline preload="metadata" aria-label="شرح المكتبة المدرسية"><source src="media/study-guide.mp4" type="video/mp4"></video><p>اختيار الصف، تصفّح الملازم والوزاريات، وطريقة فتح PDF.</p><a class="sub-link" href="library.html">افتح المكتبة الدراسية ←</a></article></div>
+</section>
+
+<section id="social-hub" class="container section social-hub" aria-labelledby="social-hub-title">
+  <div class="section-head"><div><h2 id="social-hub-title">تابع طه أندرويد</h2><p>شروحات التطبيقات، المقاطع القصيرة وآخر منشورات القناة.</p></div></div>
+  <div class="media-hub">
+    <div class="media-tabs" role="tablist" aria-label="منصات طه أندرويد"><button type="button" id="media-youtube" role="tab" aria-controls="media-panel" aria-selected="true" tabindex="0" data-platform="youtube"><span aria-hidden="true">▶</span> يوتيوب</button><button type="button" id="media-tiktok" role="tab" aria-controls="media-panel" aria-selected="false" tabindex="-1" data-platform="tiktok"><span aria-hidden="true">♪</span> تيك توك</button><button type="button" id="media-instagram" role="tab" aria-controls="media-panel" aria-selected="false" tabindex="-1" data-platform="instagram"><span aria-hidden="true">◎</span> إنستغرام</button><button type="button" id="media-telegram" role="tab" aria-controls="media-panel" aria-selected="false" tabindex="-1" data-platform="telegram"><span aria-hidden="true">✈</span> تيليجرام</button></div>
+    <div id="media-panel" role="tabpanel" aria-labelledby="media-youtube" tabindex="0">
+      <div class="media-layout">
+        <div id="media-stage" class="media-stage"></div>
+        <div class="media-side">
+          <h3 id="media-heading">شروحات يوتيوب</h3>
+          <div id="media-items" class="media-items"></div>
+          <a id="media-open-video" class="media-open-video" target="_blank" rel="noopener noreferrer" hidden>افتح الفيديو في تيك توك ↗</a>
+          <a id="media-source" class="sub-link" href="https://www.youtube.com/@abomomel" target="_blank" rel="noopener noreferrer">افتح القناة على يوتيوب ↗</a>
+        </div>
+      </div>
+    </div>
+    <noscript><p><a href="https://www.youtube.com/@abomomel">يوتيوب</a> · <a href="https://www.tiktok.com/@abomomel3">تيك توك</a> · <a href="https://www.instagram.com/abo.moammal.official/">إنستغرام</a> · <a href="https://t.me/TahaAppsPlusPRO">تيليجرام</a></p></noscript>
+  </div>
+</section>
+    <section id="articles" class="container section guides" aria-labelledby="articles-title">
+      <div class="section-head"><div><h2 id="articles-title">دليل الاستخدام</h2><p>خطوات التحميل والتثبيت والوصول لقسم الدراسة.</p></div></div>
+      <div class="faq">
+        <details id="install-guide">
+          <summary>شلون أثبّت تطبيق <bdi>APK</bdi>؟</summary>
+          <ol>
+            <li>افتح رابط التحميل من بطاقة التطبيق ونزّل الملف على جهاز أندرويد.</li>
+            <li>افتح الملف من التنزيلات. إذا طلب أندرويد السماح بالتثبيت من هذا المصدر، اسمح للمصدر الذي فتحت منه الملف.</li>
+            <li>أكمل التثبيت، وبعدها تگدر توقف السماح من إعدادات الجهاز.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>وين ألقى الكتب والملازم؟</summary>
+          <p>افتح <a href="library.html">المكتبة الدراسية داخل الموقع</a>، ثم اختر الصف والكتب أو الملازم لقراءة ملفات PDF.</p>
+        </details>
+        <details>
+          <summary>وين تنزل تحديثات التطبيقات؟</summary>
+          <p>تابع <a href="https://t.me/TahaAppsPlusPRO" target="_blank" rel="noopener noreferrer">القناة الرسمية على تليگرام</a> لمعرفة الإصدارات الجديدة وروابطها.</p>
+        </details>
+      </div>
+    </section>
+      <section id="apps" class="container section" aria-labelledby="apps-title">
       <div class="section-head">
         <div>
           <h2 id="apps-title">متجر التطبيقات</h2>
@@ -211,86 +321,6 @@
         <button class="button ghost" type="button" id="reset-catalog">عرض كل التطبيقات</button>
       </div>
     <aside class="sponsor-placement" id="catalog-sponsor" aria-label="إعلان ممول" hidden></aside>
-    </section>
-
-    <section id="education" class="container section" aria-labelledby="education-title">
-      <div class="education">
-        <div>
-          <p class="eyebrow"><span></span> الدراسة على تليگرام</p>
-          <h2 id="education-title">المدرّس الذكي</h2>
-          <p>اختار صفّك والمادة من المكتبة الموجودة داخل الموقع، واطّلع على الملفات المنشورة. اكتب سؤالك للمراجعة، وتأكد من الجواب ويا كتابك أو مدرّسك.</p>
-          <a class="button primary" href="https://t.me/TahaAppsPlusPRO_bot" target="_blank" rel="noopener noreferrer">افتح البوت التعليمي <span aria-hidden="true">↗</span></a>
-          <p class="command">بعد فتح البوت اكتب <code dir="ltr">/study</code></p>
-        </div>
-        <ul class="education-list">
-          <li><span aria-hidden="true">▤</span><div><strong>مكتبة الدراسة</strong><small>اختار المرحلة، الصف والمادة</small></div></li>
-          <li><span aria-hidden="true">?</span><div><strong>اسأل المدرّس</strong><small>راجع فكرة أو خطوات حل مسألة</small></div></li>
-          <li><span aria-hidden="true">✓</span><div><strong>أرشيف الوزاريات</strong><small>روابط للسادس العلمي والأدبي</small></div></li>
-        </ul>
-      </div>
-    </section>
-
-
-    <section id="library" class="container section"><div class="card" style="padding:25px;background:linear-gradient(130deg,#10294c,#24194a)"><p class="eyebrow">📚 قسم مستقل</p><h2>المكتبة الدراسية العراقية</h2><p>من الأول الابتدائي إلى السادس الإعدادي العلمي والأدبي: الكتب والملازم والأسئلة داخل الموقع بصفحة خاصة، بعيداً عن زحمة الصفحة الرئيسية.</p><a class="button primary" href="library.html">ادخل المكتبة الدراسية ←</a></div></section>
-    <section id="bots" class="container section" aria-labelledby="bots-title">
-      <div class="section-head"><div><h2 id="bots-title">بوتات تليگرام</h2><p>روابط مباشرة للبوتات التابعة لطه أندرويد.</p></div></div>
-      <div class="two-columns">
-        <article class="card service">
-          <span class="app-icon mint bot-logo" role="img" aria-label="رمز البوت">✦</span><div><h3 dir="ltr" lang="en">Taha Apps Plus PRO Bot</h3><p>التطبيقات، مكتبة الدراسة، وخدمات تفاعلية.</p><a class="sub-link" href="https://t.me/TahaAppsPlusPRO_bot" target="_blank" rel="noopener noreferrer">فتح البوت ↗</a></div>
-        </article>
-        <article class="card service">
-          <span class="app-icon lavender bot-logo" role="img" aria-label="رمز البوت">♥</span><div><h3 dir="ltr" lang="en">Taha Heart PRO</h3><p>بوت مستقل لإضافة تفاعل القلب إلى منشورات القنوات بعد إعداده.</p><a class="sub-link" href="https://t.me/TahaHeartPRO_bot" target="_blank" rel="noopener noreferrer">عرض البوت ↗</a></div>
-        </article>
-        <article class="card service">
-          <span class="app-icon amber bot-logo" role="img" aria-label="رمز البوت">♛</span><div><h3>إمبراطورية التمويل <bdi>Funding Empire PRO</bdi></h3><p>بوت تمويل القنوات والمجموعات بالنقاط، مع مهام الاشتراك والهدايا والإحالات. افتح البوت للاطلاع على الخدمات المتاحة.</p><a class="sub-link" href="https://t.me/FundingEmpirePRO_bot" target="_blank" rel="noopener noreferrer">فتح إمبراطورية التمويل ↗</a></div>
-        </article>
-      </div>
-    </section>
-
-
-    <section id="videos" class="container section"><div class="section-head"><div><h2>فيديوهات وشروحات طه أندرويد</h2><p>شاهد العرض التعريفي وافتح شرح الخدمة اللي تحتاجها.</p></div></div>
-<div class="card feature-video"><video controls playsinline preload="metadata" aria-label="عرض طه أندرويد" poster="android-hero.webp"><source src="media/taha-android-v2-official-ad.mp4" type="video/mp4"></video><div><h3>إعلان طه أندرويد الرسمي</h3><p>جولة بـ٣٥ ثانية في التطبيقات والمكتبة الدراسية وخدمات تليگرام.</p><div class="actions"><a class="button primary" href="#apps">تصفّح التطبيقات ←</a><a class="button ghost" href="library.html">افتح المكتبة</a></div></div></div>
-<div class="feature-grid guide-grid"><article class="card feature-tile"><h3>شرح تحميل التطبيقات</h3><video class="guide-player" controls playsinline preload="metadata" aria-label="شرح تحميل التطبيقات"><source src="media/apps-guide.mp4" type="video/mp4"></video><p>من بطاقة التطبيق إلى تنزيل ملف APK وتثبيته.</p><a class="sub-link" href="#articles">عرض دليل التثبيت ←</a></article><article class="card feature-tile"><h3>شرح المكتبة المدرسية</h3><video class="guide-player" controls playsinline preload="metadata" aria-label="شرح المكتبة المدرسية"><source src="media/study-guide.mp4" type="video/mp4"></video><p>اختيار الصف، تصفّح الملازم والوزاريات، وطريقة فتح PDF.</p><a class="sub-link" href="library.html">افتح المكتبة الدراسية ←</a></article></div>
-</section>
-
-<section id="social-hub" class="container section social-hub" aria-labelledby="social-hub-title">
-  <div class="section-head"><div><h2 id="social-hub-title">تابع طه أندرويد</h2><p>شروحات التطبيقات، المقاطع القصيرة وآخر منشورات القناة.</p></div></div>
-  <div class="media-hub">
-    <div class="media-tabs" role="tablist" aria-label="منصات طه أندرويد"><button type="button" id="media-youtube" role="tab" aria-controls="media-panel" aria-selected="true" tabindex="0" data-platform="youtube"><span aria-hidden="true">▶</span> يوتيوب</button><button type="button" id="media-tiktok" role="tab" aria-controls="media-panel" aria-selected="false" tabindex="-1" data-platform="tiktok"><span aria-hidden="true">♪</span> تيك توك</button><button type="button" id="media-instagram" role="tab" aria-controls="media-panel" aria-selected="false" tabindex="-1" data-platform="instagram"><span aria-hidden="true">◎</span> إنستغرام</button><button type="button" id="media-telegram" role="tab" aria-controls="media-panel" aria-selected="false" tabindex="-1" data-platform="telegram"><span aria-hidden="true">✈</span> تيليجرام</button></div>
-    <div id="media-panel" role="tabpanel" aria-labelledby="media-youtube" tabindex="0">
-      <div class="media-layout">
-        <div id="media-stage" class="media-stage"></div>
-        <div class="media-side">
-          <h3 id="media-heading">شروحات يوتيوب</h3>
-          <div id="media-items" class="media-items"></div>
-          <a id="media-open-video" class="media-open-video" target="_blank" rel="noopener noreferrer" hidden>افتح الفيديو في تيك توك ↗</a>
-          <a id="media-source" class="sub-link" href="https://www.youtube.com/@abomomel" target="_blank" rel="noopener noreferrer">افتح القناة على يوتيوب ↗</a>
-        </div>
-      </div>
-    </div>
-    <noscript><p><a href="https://www.youtube.com/@abomomel">يوتيوب</a> · <a href="https://www.tiktok.com/@abomomel3">تيك توك</a> · <a href="https://www.instagram.com/abo.moammal.official/">إنستغرام</a> · <a href="https://t.me/TahaAppsPlusPRO">تيليجرام</a></p></noscript>
-  </div>
-</section>
-    <section id="articles" class="container section guides" aria-labelledby="articles-title">
-      <div class="section-head"><div><h2 id="articles-title">دليل الاستخدام</h2><p>خطوات التحميل والتثبيت والوصول لقسم الدراسة.</p></div></div>
-      <div class="faq">
-        <details id="install-guide">
-          <summary>شلون أثبّت تطبيق <bdi>APK</bdi>؟</summary>
-          <ol>
-            <li>افتح رابط التحميل من بطاقة التطبيق ونزّل الملف على جهاز أندرويد.</li>
-            <li>افتح الملف من التنزيلات. إذا طلب أندرويد السماح بالتثبيت من هذا المصدر، اسمح للمصدر الذي فتحت منه الملف.</li>
-            <li>أكمل التثبيت، وبعدها تگدر توقف السماح من إعدادات الجهاز.</li>
-          </ol>
-        </details>
-        <details>
-          <summary>وين ألقى الكتب والملازم؟</summary>
-          <p>افتح <a href="library.html">المكتبة الدراسية داخل الموقع</a>، ثم اختر الصف والكتب أو الملازم لقراءة ملفات PDF.</p>
-        </details>
-        <details>
-          <summary>وين تنزل تحديثات التطبيقات؟</summary>
-          <p>تابع <a href="https://t.me/TahaAppsPlusPRO" target="_blank" rel="noopener noreferrer">القناة الرسمية على تليگرام</a> لمعرفة الإصدارات الجديدة وروابطها.</p>
-        </details>
-      </div>
     </section>
   </main>
   <footer id="contact">
@@ -433,6 +463,106 @@
     });
   });
   select(tabs[0]);
+})();
+</script>
+<script>
+(() => {
+  const root = document.querySelector('#study-desk');
+  const byId = id => root.querySelector('#study-' + id);
+  const api = 'https://tahaappspluspro.pythonanywhere.com/api/website-study/';
+  const titles = [
+    ['4XOktuE0Fb4', 'قواعد الاشتقاق — رياضيات السادس العلمي'],
+    ['2UCFAtdQ-nM', 'ربط المتسعات — فيزياء السادس العلمي'],
+    ['Y5DResHXXR4', 'جولة في المكتبة الدراسية لطه أندرويد'],
+    ['5SNY_dWSJOg', 'منهاجي بلس — كتب ومناهج الابتدائية']
+  ];
+  let hasSearch = false;
+  async function request(kind, data) {
+    const response = await fetch(api + kind, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(data), signal:AbortSignal.timeout(25000)});
+    const result = await response.json();
+    if (!response.ok) throw new Error(result.error || 'تعذّر الاتصال بالخدمة.');
+    return result;
+  }
+  request('status', {}).then(status => {
+    hasSearch = status.youtube;
+    if (!status.tutor) byId('answer').textContent = 'خدمة الإجابات داخل الموقع قيد الربط. تگدر تفتح المدرّس على تيليجرام.';
+  }).catch(() => {});
+
+  root.querySelectorAll('[data-study]').forEach(button => button.addEventListener('click', () => {
+    const searching = button.dataset.study === 'search';
+    byId('search').hidden = !searching;
+    byId('tutor').hidden = searching;
+    if (!searching) { byId('screen').replaceChildren(); byId('watch').hidden = true; }
+    root.querySelectorAll('[data-study]').forEach(other => other.setAttribute('aria-pressed', String(other === button)));
+  }));
+  function showVideos(videos) {
+    byId('screen').replaceChildren();
+    byId('watch').hidden = true;
+    byId('results').replaceChildren(...videos.filter(([id]) => /^[\w-]{11}$/.test(id)).map(([id,title]) => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.textContent = title;
+      button.addEventListener('click', () => {
+        const frame = document.createElement('iframe');
+        frame.title = title;
+        frame.src = 'https://www.youtube-nocookie.com/embed/' + id + '?playsinline=1';
+        frame.allowFullscreen = true;
+        frame.referrerPolicy = 'strict-origin-when-cross-origin';
+        byId('screen').replaceChildren(frame);
+        byId('watch').href = 'https://www.youtube.com/watch?v=' + id;
+        byId('watch').hidden = false;
+      });
+      return button;
+    }));
+  }
+  showVideos(titles);
+  byId('video-form').addEventListener('submit', async event => {
+    event.preventDefault();
+    const query = byId('query').value.trim();
+    if (!query) return;
+    const button = event.currentTarget.querySelector('button');
+    const note = byId('search-note');
+    const all = byId('all');
+    all.href = 'https://www.youtube.com/results?' + new URLSearchParams({search_query:query});
+    all.textContent = 'بحث عن هذا الدرس على يوتيوب ↗';
+    button.disabled = true;
+    try {
+      if (hasSearch) {
+        note.textContent = 'جاري البحث…';
+        try {
+          const data = await request('youtube', {query});
+          showVideos(data.videos.map(video => [video.id,video.title]));
+          note.textContent = data.videos.length ? 'اختار فيديو لتشغيله داخل الموقع.' : 'ما ظهرت نتائج قابلة للتضمين لهذا الدرس.';
+          return;
+        } catch {}
+      }
+      const normalize = value => value.toLowerCase().replace(/[أإآ]/g,'ا').replace(/[\u064B-\u065F]/g,'');
+      const keywords = normalize(query).split(/\s+/).filter(word => word.length > 2 && !['شرح','للصف','الصف'].includes(word));
+      const matches = titles.map(video => [video,keywords.filter(word => normalize(video[1]).includes(word)).length]).filter(([,score]) => score > 0).sort((a,b)=>b[1]-a[1]).map(([video])=>video);
+      showVideos(matches);
+      note.textContent = matches.length ? 'نتائج من الشروحات المختارة بالموقع.' : 'ماكو شرح مطابق ضمن مختارات الموقع.';
+    } finally { button.disabled = false; }
+  });
+
+  const grades = {"p1":"الأول الابتدائي","p2":"الثاني الابتدائي","p3":"الثالث الابتدائي","p4":"الرابع الابتدائي","p5":"الخامس الابتدائي","p6":"السادس الابتدائي","m1":"الأول المتوسط","m2":"الثاني المتوسط","m3":"الثالث المتوسط","h4s":"الرابع الإعدادي — علمي","h4l":"الرابع الإعدادي — أدبي","h5s":"الخامس الإعدادي — علمي","h5l":"الخامس الإعدادي — أدبي","h6s":"السادس الإعدادي — علمي","h6l":"السادس الإعدادي — أدبي"};
+  const subjects = {math:'الرياضيات',arabic:'اللغة العربية',english:'اللغة الإنكليزية',science:'العلوم',physics:'الفيزياء',chemistry:'الكيمياء',biology:'الأحياء',social:'الاجتماعيات',history:'التاريخ',geography:'الجغرافية',islam:'التربية الإسلامية',other:'مادة أخرى'};
+  for (const [field, values] of [['grade',grades],['subject',subjects]]) {
+    byId(field).add(new Option('اختار', ''));
+    Object.entries(values).forEach(([value,label]) => byId(field).add(new Option(label,value)));
+  }
+  byId('tutor-form').addEventListener('submit', async event => {
+    event.preventDefault();
+    const button = event.currentTarget.querySelector('button');
+    const answer = byId('answer');
+    button.disabled = true;
+    answer.textContent = 'جاري تحضير الشرح…';
+    try {
+      const result = await request('tutor', {query:byId('question').value,grade:byId('grade').value,subject:byId('subject').value});
+      answer.textContent = result.answer;
+    } catch (error) {
+      answer.textContent = /Failed to fetch|signal|timeout|JSON|Unexpected/i.test(error.message) ? 'تعذّر الاتصال بالمدرّس. جرّب تيليجرام من الرابط أدناه.' : error.message;
+    } finally { button.disabled = false; }
+  });
 })();
 </script>
 </body>
