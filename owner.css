@@ -1,0 +1,17 @@
+.owner-gate{max-width:490px;margin:clamp(1rem,7vw,6rem) auto;padding:clamp(1.4rem,5vw,2.8rem);background:linear-gradient(135deg,#17312c,#111e29 65%);box-shadow:0 28px 70px #0005}
+.owner-gate h1{font-size:clamp(1.8rem,5vw,2.8rem)}
+.owner-gate form{margin-top:1.5rem}
+.owner-gate [role=status]{min-height:1.6em;margin-top:1rem}
+.owner-controls{display:flex;gap:.65rem;flex-wrap:wrap;align-items:end}
+.owner-metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,175px),1fr));gap:.8rem;margin-block:1.1rem}
+.owner-metrics h2{font-size:.88rem}
+.owner-metrics strong{display:block;color:var(--mint);font-size:2.1rem}
+.owner-metrics small{color:var(--muted);line-height:1.4;display:block}
+.owner-report{list-style:none;padding:0;margin:1.1rem 0 0;display:grid;gap:.4rem;max-height:23rem;overflow:auto}
+.owner-report li{display:grid;grid-template-columns:6.2rem minmax(0,1fr) 3rem;align-items:center;gap:.65rem;font-size:.8rem}
+.owner-report progress{width:100%;height:.75rem;accent-color:var(--mint)}
+#owner-dashboard details{margin-top:1.1rem}
+#owner-dashboard details>summary{cursor:pointer;font-weight:800;color:var(--mint)}
+@media (max-width:480px){.owner-report li{grid-template-columns:4.5rem minmax(0,1fr) 2.5rem}.owner-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+.owner-gate fieldset{border:0;padding:0;margin:0;display:grid;gap:.85rem;min-width:0}

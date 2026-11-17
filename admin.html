@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex,nofollow">
   <meta name="theme-color" content="#0b141c">
-  <title>لوحة الإيرادات | طه أندرويد</title>
+  <title>لوحة المالك | طه أندرويد</title>
   <link rel="icon" href="icon.png">
   <link rel="stylesheet" href="site.css">
   <link rel="stylesheet" href="partner.css">
-  <script src="partner.js" defer></script>
+  <link rel="stylesheet" href="owner.css"><script src="metrics-config.js" defer></script><script src="owner-admin.js" defer></script><script src="partner.js" defer></script>
 </head>
 <body class="partner-page">
   <header class="partner-header"><div class="container partner-bar">
@@ -17,6 +17,11 @@
     <a class="partner-back" href="index.html">العودة للموقع ←</a>
   </div></header>
   <main class="container partner-main">
+<section class="partner-panel owner-gate" id="owner-gate"><p class="partner-label">إدارة طه أندرويد</p><h1>دخول المالك</h1><form id="owner-login" method="post"><fieldset disabled><label>البريد الإلكتروني<input name="email" type="email" autocomplete="username" required></label><label>كلمة المرور<input name="password" type="password" autocomplete="current-password" required></label><button type="submit" class="button primary">تسجيل الدخول ←</button></fieldset></form><p id="owner-status" role="status"></p></section>
+<div id="owner-dashboard" hidden><div class="dashboard-heading"><div><p class="partner-label">الزيارات والنشاط</p><h1 id="owner-title" tabindex="-1">لوحة المالك</h1></div><div class="owner-controls"><label>الفترة<select id="metrics-range"><option value="1">اليوم</option><option value="7" selected>آخر ٧ أيام</option><option value="30">آخر ٣٠ يوماً</option></select></label><button class="button ghost" type="button" id="owner-logout">خروج</button></div></div>
+<section class="owner-metrics" aria-label="إحصائيات الموقع"><article class="partner-panel"><h2>متصلون حالياً</h2><strong data-stat="active">—</strong><small>نشطوا خلال آخر ٩٠ ثانية</small></article><article class="partner-panel"><h2>المتصفحات الزائرة</h2><strong data-stat="visitors">—</strong><small>تقريب للزوار الفريدين</small></article><article class="partner-panel"><h2>مشاهدات الصفحات</h2><strong data-stat="views">—</strong><small>مرات فتح الصفحات</small></article><article class="partner-panel"><h2>ضغطات التحميل</h2><strong data-stat="downloads">—</strong><small>ضغط على رابط تحميل</small></article><article class="partner-panel"><h2>فتح المستندات</h2><strong data-stat="pdf_opens">—</strong><small>طلبات فتح PDF</small></article></section>
+<section class="partner-panel"><h2>مشاهدات الصفحات حسب اليوم</h2><p id="metrics-status" role="status"></p><ol class="owner-report" id="metrics-report"></ol></section>
+<details><summary>سجل الرعايات والإيرادات</summary>
     <div class="dashboard-heading"><div><p class="partner-label">إدارة الإعلانات</p><h1>لوحة الإيرادات</h1><p>سجّل مستحقات الرعايات والمبالغ اللي استلمتها بالدينار العراقي.</p></div><a class="button primary" href="#record-panel">＋ إضافة إيراد</a></div>
     <p class="local-note">السجل يدوي ومحفوظ في هذا المتصفح فقط. نزّل نسخة CSV للاحتفاظ بالبيانات خارج المتصفح.</p>
     <section class="partner-grid metrics" aria-label="ملخص الإيرادات">
@@ -42,7 +47,7 @@
       </section>
     </div>
     <section class="partner-panel analytics-panel"><h2>إعلانات Google AdSense</h2><p>تُراجع حالة الموقع والأرباح الفعلية من حساب الناشر في AdSense بعد ربط الموقع والموافقة عليه.</p><a class="button ghost" href="https://adsense.google.com/" target="_blank" rel="noopener noreferrer">فتح Google AdSense ↗</a></section>
-<div class="partner-panel analytics-panel"><h2>تفعيل إحصائيات الزيارات والتحميلات</h2><p>اربط الموقع بخدمة Google Analytics 4، ثم أضف معرّف القياس الخاص بك (يبدأ بـ G-) إلى إعدادات analytics.js. عندها تبدأ إحصائيات الزيارات، الزوار النشطين، وفتح الكتب والضغط على روابط التحميل بالتسجيل.</p><p><a class="button primary" href="https://analytics.google.com/" target="_blank" rel="noopener noreferrer">فتح لوحة Google Analytics ↗</a></p><p>مهم: الضغط على زر تحميل لا يثبت اكتمال تنزيل الملف أو تثبيت التطبيق. فتح PDF يسجّل طلب فتحه، وليس بالضرورة قراءته بالكامل.</p></div>
+</details></div>
   </main>
 </body>
 </html>
