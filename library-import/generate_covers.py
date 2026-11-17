@@ -5,7 +5,7 @@ from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 ROOT=Path(__file__).resolve().parents[1]
 js=(ROOT/'library.js').read_text(encoding='utf-8')
-items=json.loads(re.search(r'const files=(\[.*?\]);',js,re.S).group(1))
+items=json.loads(re.search(r'const files=(\[.*?\])\s*\n\s*let type=',js,re.S).group(1))
 OUT=ROOT/'covers'/'catalog'
 OUT.mkdir(parents=True,exist_ok=True)
 W,H=600,840
