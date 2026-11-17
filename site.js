@@ -59,7 +59,7 @@ openLinkedGuide();
    for(const f of matched){
      const card=document.createElement('article');card.className='card library-book';
      const details=document.createElement('div');const title=document.createElement('h3');title.textContent=f.title;
-     const link=document.createElement('a');link.className='button primary';link.href=f.url;link.target='_blank';link.rel='noopener noreferrer';link.textContent='📖 فتح PDF داخل المتصفح';
+     const link=document.createElement('a');link.className='button primary';link.href=f.url;link.target='_blank';link.rel='noopener noreferrer';link.textContent='📖 قراءة PDF داخل الموقع';link.addEventListener('click',e=>{e.preventDefault();let viewer=document.getElementById('pdf-viewer');if(!viewer){viewer=document.createElement('dialog');viewer.id='pdf-viewer';viewer.className='pdf-viewer';viewer.innerHTML='<div class="pdf-toolbar"><strong id="pdf-title"></strong><button type="button" id="pdf-close">إغلاق ✕</button></div><iframe title="قارئ الكتب PDF" loading="lazy" referrerpolicy="no-referrer"></iframe><p>إذا تعذّر العرض بسبب صلاحيات Google Drive، افتح الملف في نافذة جديدة.</p><a id="pdf-external" target="_blank" rel="noopener noreferrer">فتح في Google Drive ↗</a>';document.body.append(viewer);viewer.querySelector('#pdf-close').addEventListener('click',()=>viewer.close());viewer.addEventListener('close',()=>viewer.querySelector('iframe').removeAttribute('src'));}viewer.querySelector('#pdf-title').textContent=f.title;viewer.querySelector('iframe').src=f.url;viewer.querySelector('#pdf-external').href=f.url.replace('/preview','/view');viewer.showModal();});
      details.append(title,link);card.append(details);results.append(card);
    }
    empty.hidden=matched.length>0;
