@@ -26,6 +26,7 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5274790697033263"
           crossorigin="anonymous"></script>
 <link rel="stylesheet" href="education-live.css"><script src="education-live.js" defer></script>
+<link rel="stylesheet" href="feedback.css"><script src="feedback.js" defer></script>
 </head>
 <body>
   <a class="skip" href="#main">انتقل للمحتوى</a>
@@ -70,7 +71,15 @@
 
     <div class="container"><a class="sponsor-strip" href="ads.html"><span><strong>الإعلانات والرعايات</strong><small>عرّف جمهور طه أندرويد بتطبيقك أو خدمتك.</small></span><b>فرص التعاون&nbsp; ←</b></a></div>
     <aside class="container sponsor-placement" id="home-sponsor" aria-label="إعلان ممول" hidden></aside>
-<section class="container section" aria-label="مختارات طه أندرويد"><div class="feature-grid"><a class="card feature-tile" href="#apps"><small>التطبيقات</small><strong>حمّل تطبيقات أندرويد ←</strong></a><a class="card feature-tile" href="library.html"><small>الدراسة</small><strong>كتب وملازم حسب صفك ←</strong></a><a class="card feature-tile" href="#videos"><small>الفيديو</small><strong>شاهد عروض وشروحات الموقع ←</strong></a><a class="card feature-tile" href="ads.html"><small>الرعايات</small><strong>اعرض مشروعك لجمهورنا ←</strong></a></div></section>
+<section class="container section feedback-layout" aria-label="مختارات طه أندرويد وآراء الزوار"><div class="feature-grid"><a class="card feature-tile" href="#apps"><small>التطبيقات</small><strong>حمّل تطبيقات أندرويد ←</strong></a><a class="card feature-tile" href="library.html"><small>الدراسة</small><strong>كتب وملازم حسب صفك ←</strong></a><a class="card feature-tile" href="#videos"><small>الفيديو</small><strong>شاهد عروض وشروحات الموقع ←</strong></a><a class="card feature-tile" href="ads.html"><small>الرعايات</small><strong>اعرض مشروعك لجمهورنا ←</strong></a></div><aside class="card feedback-card" id="feedback" aria-labelledby="feedback-title">
+<h2 id="feedback-title">آراء الطلبة والزوار</h2><p>شلون تجربتك؟ وإذا أكو شي تحب نضيفه، اكتب اقتراحك.</p>
+<form id="site-feedback-form" method="post"><fieldset id="feedback-fields" disabled>
+<fieldset class="feedback-rating"><legend>تقييم الموقع</legend><div class="feedback-stars"><label><input type="radio" name="rating" value="1" aria-label="نجمة واحدة"><span aria-hidden="true">★</span></label><label><input type="radio" name="rating" value="2" aria-label="نجمتان"><span aria-hidden="true">★</span></label><label><input type="radio" name="rating" value="3" aria-label="ثلاث نجوم"><span aria-hidden="true">★</span></label><label><input type="radio" name="rating" value="4" aria-label="أربع نجوم"><span aria-hidden="true">★</span></label><label><input type="radio" name="rating" value="5" aria-label="خمس نجوم"><span aria-hidden="true">★</span></label></div></fieldset>
+<label for="feedback-suggestion">شنو تحب نضيف للموقع؟</label>
+<textarea id="feedback-suggestion" name="suggestion" rows="3" maxlength="600" placeholder="مثلاً: أريد ملازم أكثر لصفّي…"></textarea>
+<p class="feedback-note">تگدر ترسل تقييم، اقتراح، أو الاثنين. رأيك يوصل لإدارة الموقع.</p>
+<button class="button primary" type="submit">إرسال الرأي ←</button></fieldset>
+<p id="feedback-status" role="status" aria-live="polite"></p></form></aside></section>
     <section id="apps" class="container section" aria-labelledby="apps-title">
       <div class="section-head">
         <div>

@@ -9,7 +9,8 @@
   <link rel="icon" href="icon.png">
   <link rel="stylesheet" href="site.css">
   <link rel="stylesheet" href="partner.css">
-  <link rel="stylesheet" href="owner.css"><script src="metrics-config.js" defer></script><script src="owner-admin.js" defer></script><script src="partner.js" defer></script>
+  <link rel="stylesheet" href="owner.css"><script src="metrics-config.js" defer></script><script src="owner-admin.js?v=feedback-1" defer></script><script src="partner.js" defer></script>
+<link rel="stylesheet" href="feedback.css">
 </head>
 <body class="partner-page">
   <header class="partner-header"><div class="container partner-bar">
@@ -21,7 +22,9 @@
 <div id="owner-dashboard" hidden><div class="dashboard-heading"><div><p class="partner-label">الزيارات والنشاط</p><h1 id="owner-title" tabindex="-1">لوحة المالك</h1></div><div class="owner-controls"><label>الفترة<select id="metrics-range"><option value="1">اليوم</option><option value="7" selected>آخر ٧ أيام</option><option value="30">آخر ٣٠ يوماً</option></select></label><button class="button ghost" type="button" id="owner-logout">خروج</button></div></div>
 <section class="owner-metrics" aria-label="إحصائيات الموقع"><article class="partner-panel"><h2>متصلون حالياً</h2><strong data-stat="active">—</strong><small>نشطوا خلال آخر ٩٠ ثانية</small></article><article class="partner-panel"><h2>المتصفحات الزائرة</h2><strong data-stat="visitors">—</strong><small>تقريب للزوار الفريدين</small></article><article class="partner-panel"><h2>مشاهدات الصفحات</h2><strong data-stat="views">—</strong><small>مرات فتح الصفحات</small></article><article class="partner-panel"><h2>ضغطات التحميل</h2><strong data-stat="downloads">—</strong><small>ضغط على رابط تحميل</small></article><article class="partner-panel"><h2>فتح المستندات</h2><strong data-stat="pdf_opens">—</strong><small>طلبات فتح PDF</small></article></section>
 <section class="partner-panel"><h2>مشاهدات الصفحات حسب اليوم</h2><p id="metrics-status" role="status"></p><ol class="owner-report" id="metrics-report"></ol></section>
-<details><summary>سجل الرعايات والإيرادات</summary>
+<section class="partner-panel owner-feedback" aria-labelledby="owner-feedback-title">
+<div class="dashboard-heading"><h2 id="owner-feedback-title">آراء الطلبة والزوار</h2><button type="button" class="button ghost" id="refresh-feedback">تحديث الآراء</button></div>
+<p id="owner-feedback-summary" role="status"></p><ul id="owner-feedback-list"></ul></section><details><summary>سجل الرعايات والإيرادات</summary>
     <div class="dashboard-heading"><div><p class="partner-label">إدارة الإعلانات</p><h1>لوحة الإيرادات</h1><p>سجّل مستحقات الرعايات والمبالغ اللي استلمتها بالدينار العراقي.</p></div><a class="button primary" href="#record-panel">＋ إضافة إيراد</a></div>
     <p class="local-note">السجل يدوي ومحفوظ في هذا المتصفح فقط. نزّل نسخة CSV للاحتفاظ بالبيانات خارج المتصفح.</p>
     <section class="partner-grid metrics" aria-label="ملخص الإيرادات">

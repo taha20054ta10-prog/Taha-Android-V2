@@ -7,6 +7,10 @@
   const range = document.querySelector('#metrics-range')
   const report = document.querySelector('#metrics-report')
   const nf = new Intl.NumberFormat('ar-IQ')
+  const feedbackList = document.querySelector('#owner-feedback-list')
+  const feedbackSummary = document.querySelector('#owner-feedback-summary')
+  const feedbackButton = document.querySelector('#refresh-feedback')
+  const feedbackDate = new Intl.DateTimeFormat('ar-IQ', {dateStyle:'medium', timeStyle:'short', timeZone:'Asia/Baghdad'})
   let accessToken
   let refreshing = false
   let generation = 0
@@ -28,6 +32,8 @@
     dashboard.hidden = true
     status.textContent = message
     report.replaceChildren()
+    feedbackList.replaceChildren()
+    feedbackSummary.textContent = ''
     dashboard.querySelectorAll('[data-stat]').forEach(node => { node.textContent = '—' })
   }
 
@@ -55,6 +61,34 @@
     note.textContent = 'آخر تحديث ' + new Intl.DateTimeFormat('ar-IQ', {
       hour: 'numeric', minute: '2-digit', timeZone: 'Asia/Baghdad'
     }).format(new Date())
+  }
+
+  async function refreshFeedback() {
+    if (!accessToken || feedbackButton.disabled) return
+    feedbackButton.disabled = true
+    feedbackSummary.textContent = 'جارٍ جلب الآراء…'
+    const session = generation
+    try {
+      const data = await request('/rest/v1/rpc/taha_owner_feedback', {}, accessToken)
+      if (session !== generation) return
+      const average = data.average == null ? '—' : nf.format(data.average) + ' من ٥'
+      feedbackSummary.textContent = 'متوسط التقييم: ' + average + ' · التقييمات: ' +
+        nf.format(data.rating_count) + ' · الاقتراحات: ' + nf.format(data.suggestion_count)
+      feedbackList.replaceChildren(...data.recent.map(entry => {
+        const row = document.createElement('li')
+        const stamp = document.createElement('small')
+        const comment = document.createElement('p')
+        stamp.textContent = feedbackDate.format(new Date(entry.updated_at)) +
+          (entry.rating ? ' · ' + nf.format(entry.rating) + ' من ٥' : '')
+        comment.textContent = entry.suggestion || 'تقييم بالنجوم'
+        row.append(stamp, comment)
+        return row
+      }))
+    } catch {
+      if (session === generation) feedbackSummary.textContent = 'تعذّر تحميل الآراء. جرّب التحديث.'
+    } finally {
+      feedbackButton.disabled = false
+    }
   }
 
   async function refresh() {
@@ -91,6 +125,7 @@
       gate.hidden = true
       dashboard.hidden = false
       document.querySelector('#owner-title').focus()
+      refreshFeedback()
     } catch {
       status.textContent = 'تعذّر تسجيل الدخول. تحقّق من حساب المالك وكلمة المرور.'
     } finally {
@@ -103,7 +138,9 @@
     lock('تم تسجيل الخروج.')
     login.elements.email.focus()
   })
+  feedbackButton.addEventListener('click', refreshFeedback)
   range.addEventListener('change', refresh)
   login.querySelector('fieldset').disabled = false
   setInterval(() => { if (!document.hidden) refresh() }, 20000)
 })()
+
