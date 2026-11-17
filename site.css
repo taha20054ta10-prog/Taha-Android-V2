@@ -179,3 +179,9 @@ body{background:radial-gradient(ellipse at 85% 5%,#1d2354 0%,transparent 40%),#0
 
 /* Clickable, accessible services news ticker */
 .news-ticker .ticker-track{gap:0;animation:news-scroll 95s linear infinite;direction:rtl}.news-ticker .ticker-track a{display:inline-flex;align-items:center;white-space:nowrap;color:#d5e5ff;text-decoration:none;padding-inline:20px;font-weight:600}.news-ticker .ticker-track a:before{content:'✦';color:#a78bfa;margin-inline-end:12px}.news-ticker .ticker-track a:hover,.news-ticker .ticker-track a:focus-visible{color:#86e9ff;text-decoration:underline}.news-ticker .ticker-window:hover .ticker-track,.news-ticker .ticker-window:focus-within .ticker-track{animation-play-state:paused}@keyframes news-scroll{from{transform:translateX(0)}to{transform:translateX(50%)}}@media(prefers-reduced-motion:reduce){.news-ticker .ticker-track{animation:none}.news-ticker .ticker-window{overflow-x:auto}}
+
+/* Use the original artwork without stretching the source. */
+.slide-logo.original-app-logo{transform:none;overflow:hidden;background:#0e2033;border-color:#69b2d65c;box-shadow:0 8px 30px #050d2566}
+.slide-logo.original-app-logo img{width:100%;height:100%;object-fit:contain}
+.slide-logo.original-app-logo.portrait-art img{width:94%;height:94%}
+.app-icon.original-product-logo{display:block;object-fit:contain}
