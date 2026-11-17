@@ -1,0 +1,12 @@
+.education-ticker{display:flex;align-items:center;gap:14px;padding:8px max(16px,calc((100vw - 1180px)/2));background:#102337;border-block:1px solid #365975;color:#eaf5ff;overflow:hidden;font-size:.86rem}
+.education-ticker-label{flex:none;color:#ffd987;font-weight:800;white-space:nowrap;text-decoration:none}
+.education-ticker-label:hover,.education-ticker-label:focus-visible{text-decoration:underline}
+.education-ticker-window{min-width:0;flex:1;overflow:hidden}
+.education-ticker-track,.education-ticker-set{display:flex;align-items:center;width:max-content}
+.education-ticker-track:has(.education-ticker-set){animation:education-headlines var(--education-duration,40s) linear infinite}
+.education-ticker-track a{color:#e2f1ff;white-space:nowrap;padding-inline:16px;text-decoration:none}
+.education-ticker-track a::before{content:"•";color:#ffd987;margin-inline-end:10px}
+.education-ticker-track a:hover,.education-ticker-track a:focus-visible{text-decoration:underline}
+.education-ticker-window:hover .education-ticker-track,.education-ticker-window:focus-within .education-ticker-track{animation-play-state:paused}
+@keyframes education-headlines{from{transform:translateX(0)}to{transform:translateX(50%)}}
+@media(prefers-reduced-motion:reduce){.education-ticker-window{overflow:auto}.education-ticker-track:has(.education-ticker-set){animation:none}.education-ticker-set[aria-hidden]{display:none}}
