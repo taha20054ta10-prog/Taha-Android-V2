@@ -47,5 +47,24 @@ openLinkedGuide();
 // Accessible eight-slide carousel; pause while hovered or focused.
 (()=>{const root=document.querySelector('#showcase');if(!root)return;const slides=[...root.querySelectorAll('.showcase-slide')],dots=[...root.querySelectorAll('[data-slide]')];let current=0,timer;const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;function show(n){current=(n+slides.length)%slides.length;slides.forEach((s,i)=>{s.classList.toggle('active',i===current);s.setAttribute('aria-hidden',String(i!==current));s.querySelector('a').tabIndex=i===current?0:-1});dots.forEach((d,i)=>{d.classList.toggle('active',i===current);d.setAttribute('aria-current',String(i===current))})}function stop(){clearInterval(timer)}function start(){stop();if(!reduced)timer=setInterval(()=>show(current+1),5500)}document.querySelector('#slide-prev').addEventListener('click',()=>{show(current-1);start()});document.querySelector('#slide-next').addEventListener('click',()=>{show(current+1);start()});dots.forEach(d=>d.addEventListener('click',()=>{show(Number(d.dataset.slide));start()}));root.addEventListener('mouseenter',stop);root.addEventListener('mouseleave',start);root.addEventListener('focusin',stop);root.addEventListener('focusout',e=>{if(!root.contains(e.relatedTarget))start()});document.addEventListener('visibilitychange',()=>document.hidden?stop():start());show(0);start()})();
 
-// School library controls (no placeholder links to unpublished PDFs)
-(()=>{const grade=document.getElementById('library-grade');const buttons=[...document.querySelectorAll('[data-library-type]')];const cards=[...document.querySelectorAll('.library-book')];const message=document.getElementById('library-message');const empty=document.getElementById('library-empty');if(!grade||!message||!empty)return;let type='book';function render(){const show=grade.value==='1'&&type==='book';cards.forEach(c=>c.hidden=!show);empty.hidden=show;message.textContent=show?'الصف الأول الابتدائي: 6 ملفات PDF موجودة في المكتبة، ويجري تجهيز عرضها داخل الموقع.':'لم تُربط ملفات هذا الصف والنوع بالموقع بعد. تابع المكتبة الدراسية في البوت.';buttons.forEach(b=>{const active=b.dataset.libraryType===type;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active));});}grade.addEventListener('change',render);buttons.forEach(b=>b.addEventListener('click',()=>{type=b.dataset.libraryType;render();}));render();})();
+// In-site Iraqi school library. Populate with verified published PDF links only.
+(()=>{
+ const grade=document.getElementById('library-grade'),buttons=[...document.querySelectorAll('[data-library-type]')],results=document.getElementById('library-results'),message=document.getElementById('library-message'),empty=document.getElementById('library-empty');
+ if(!grade||!message||!empty||!results)return;
+ const files=[]; // {grade:"1",type:"book",title:"...",url:"/path/to/file.pdf"} once uploaded
+ let type='book';
+ function render(){
+   results.replaceChildren();
+   const matched=files.filter(f=>f.grade===grade.value&&f.type===type);
+   for(const f of matched){
+     const card=document.createElement('article');card.className='card library-book';
+     const details=document.createElement('div');const title=document.createElement('h3');title.textContent=f.title;
+     const link=document.createElement('a');link.className='button primary';link.href=f.url;link.target='_blank';link.rel='noopener noreferrer';link.textContent='📖 فتح PDF داخل المتصفح';
+     details.append(title,link);card.append(details);results.append(card);
+   }
+   empty.hidden=matched.length>0;
+   message.textContent=grade.options[grade.selectedIndex].text+' — '+({book:'الكتب',notes:'الملازم',exams:'الأسئلة والوزاريات'}[type])+': '+(matched.length?'عدد الملفات '+matched.length:'بانتظار ربط ملفات PDF الأصلية');
+   buttons.forEach(b=>{const active=b.dataset.libraryType===type;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active));});
+ }
+ grade.addEventListener('change',render);buttons.forEach(b=>b.addEventListener('click',()=>{type=b.dataset.libraryType;render()}));render();
+})();
