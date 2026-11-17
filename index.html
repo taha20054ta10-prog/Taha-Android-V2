@@ -51,6 +51,9 @@
 .media-items button[aria-pressed=true]{border-color:#74c8e5;background:#203653}
 .media-items img{width:76px;aspect-ratio:16/9;object-fit:cover;border-radius:7px}
 .media-side .sub-link{color:#a5ebff}
+.media-open-video:not([hidden]){display:table;padding:.55rem .85rem;margin-bottom:.7rem;border-radius:9px;background:#a3f1ed;color:#0b2834;font-weight:800}
+.media-player-error{padding:1.25rem;color:#d2e6f4;text-align:center}
+.media-player-error a{display:table;margin:.55rem auto 0;color:#a5ebff}
 @media(max-width:720px){.media-layout{grid-template-columns:1fr;padding:.75rem;gap:.8rem}.media-tabs{gap:.15rem;padding:.5rem}.media-tabs button{font-size:.85rem}.media-stage[data-kind=tiktok] iframe{height:500px}}
 </style>
 <style>
@@ -260,6 +263,7 @@
         <div class="media-side">
           <h3 id="media-heading">شروحات يوتيوب</h3>
           <div id="media-items" class="media-items"></div>
+          <a id="media-open-video" class="media-open-video" target="_blank" rel="noopener noreferrer" hidden>افتح الفيديو في تيك توك ↗</a>
           <a id="media-source" class="sub-link" href="https://www.youtube.com/@abomomel" target="_blank" rel="noopener noreferrer">افتح القناة على يوتيوب ↗</a>
         </div>
       </div>
@@ -329,13 +333,34 @@
   const items = hub.querySelector('#media-items');
   const heading = hub.querySelector('#media-heading');
   const source = hub.querySelector('#media-source');
+  const direct = hub.querySelector('#media-open-video');
   const chosen = {};
+
+  window.addEventListener('message', event => {
+    const frame = stage.querySelector('iframe');
+    if (current !== 'tiktok' || !frame || event.origin !== 'https://www.tiktok.com'
+      || event.source !== frame.contentWindow || event.data?.['x-tiktok-player'] !== true
+      || !['onPlayerError', 'onError'].includes(event.data?.type)) return;
+    const fallback = document.createElement('div');
+    fallback.className = 'media-player-error';
+    fallback.setAttribute('role', 'status');
+    fallback.textContent = 'تعذّر تشغيل الفيديو داخل الموقع.';
+    const link = document.createElement('a');
+    link.href = direct.href;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    link.textContent = 'افتح نفس الفيديو في تيك توك ↗';
+    fallback.append(link);
+    stage.replaceChildren(fallback);
+  });
   let current;
 
   function display(key, index) {
     chosen[key] = index;
     const item = platforms[key].items[index];
     stage.dataset.kind = key;
+    direct.hidden = key !== 'tiktok';
+    if (key === 'tiktok') direct.href = platforms.tiktok.link + '/video/' + item.id;
     items.querySelectorAll('button').forEach((button, i) => button.setAttribute('aria-pressed', String(i === index)));
     if (key === 'telegram') {
       const widget = document.createElement('script');
@@ -356,6 +381,7 @@
     frame.title = item.title;
     frame.loading = 'lazy';
     frame.referrerPolicy = 'strict-origin-when-cross-origin';
+    frame.allow = 'fullscreen; picture-in-picture';
     frame.allowFullscreen = true;
     stage.replaceChildren(frame);
   }
