@@ -27,6 +27,32 @@
           crossorigin="anonymous"></script>
 <link rel="stylesheet" href="education-live.css"><script src="education-live.js" defer></script>
 <link rel="stylesheet" href="feedback.css"><script src="feedback.js" defer></script>
+<style>
+.media-hub{border:1px solid #58677b66;border-radius:24px;overflow:hidden;background:#0b1424;color:#eef5ff;box-shadow:0 14px 38px #04091638}
+.media-hub button{font:inherit;color:inherit;cursor:pointer}
+.media-tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.4rem;padding:.75rem;background:#101d30;border-bottom:1px solid #53647e55}
+.media-tabs button{padding:.7rem .25rem;border:1px solid transparent;border-radius:12px;background:transparent;white-space:nowrap}
+.media-tabs button[aria-selected=true]{background:#203653;border-color:#708ba8}
+.media-tabs button span{color:#9de5fa;margin-inline-end:.2rem}
+.media-hub :focus-visible{outline:2px solid #a5ebff;outline-offset:2px}
+.media-layout{display:grid;grid-template-columns:minmax(0,1.8fr) minmax(0,1fr);gap:1.15rem;padding:1.1rem}
+.media-stage{border-radius:16px;overflow:hidden;background:#050b15;min-height:14rem;display:grid;place-items:center}
+.media-stage iframe{border:0;width:100%;display:block}
+.media-stage[data-kind=youtube]{aspect-ratio:16/9}
+.media-stage[data-kind=youtube] iframe{height:100%}
+.media-stage[data-kind=tiktok] iframe{max-width:380px;height:530px}
+.media-stage[data-kind=instagram] iframe{max-width:490px;height:480px}
+.media-stage[data-kind=telegram]{padding:.65rem;background:#101c2c}
+.media-stage[data-kind=telegram] iframe{max-width:620px;min-height:310px}
+.media-side{min-width:0;align-self:start}
+.media-side h3{color:#eef5ff;margin:0 0 .7rem}
+.media-items{display:grid;gap:.5rem;margin-bottom:.95rem}
+.media-items button{border:1px solid #52678266;border-radius:12px;background:#152339;display:flex;align-items:center;gap:.6rem;padding:.55rem;text-align:start;width:100%;min-height:48px}
+.media-items button[aria-pressed=true]{border-color:#74c8e5;background:#203653}
+.media-items img{width:76px;aspect-ratio:16/9;object-fit:cover;border-radius:7px}
+.media-side .sub-link{color:#a5ebff}
+@media(max-width:720px){.media-layout{grid-template-columns:1fr;padding:.75rem;gap:.8rem}.media-tabs{gap:.15rem;padding:.5rem}.media-tabs button{font-size:.85rem}.media-stage[data-kind=tiktok] iframe{height:500px}}
+</style>
 </head>
 <body>
   <a class="skip" href="#main">انتقل للمحتوى</a>
@@ -189,16 +215,23 @@
 <div class="feature-grid guide-grid"><article class="card feature-tile"><h3>شرح تحميل التطبيقات</h3><video class="guide-player" controls playsinline preload="metadata" aria-label="شرح تحميل التطبيقات"><source src="media/apps-guide.mp4" type="video/mp4"></video><p>من بطاقة التطبيق إلى تنزيل ملف APK وتثبيته.</p><a class="sub-link" href="#articles">عرض دليل التثبيت ←</a></article><article class="card feature-tile"><h3>شرح المكتبة المدرسية</h3><video class="guide-player" controls playsinline preload="metadata" aria-label="شرح المكتبة المدرسية"><source src="media/study-guide.mp4" type="video/mp4"></video><p>اختيار الصف، تصفّح الملازم والوزاريات، وطريقة فتح PDF.</p><a class="sub-link" href="library.html">افتح المكتبة الدراسية ←</a></article></div>
 </section>
 
-    <section id="social-hub" class="container section social-hub" aria-labelledby="social-hub-title">
-      <div class="section-head"><div><span class="social-eyebrow">مجتمع طه أندرويد</span><h2 id="social-hub-title">تابع أعمالنا على منصات التواصل</h2><p>شروحات التطبيقات، عروض المشاريع، الفيديوهات الجديدة وآخر التحديثات من حساباتنا الرسمية.</p></div></div>
-      <div class="social-hub-grid">
-        <article class="social-platform instagram-platform"><span class="social-platform-icon" aria-hidden="true">◎</span><span class="social-platform-label">INSTAGRAM</span><h3>إنستغرام</h3><p>تصاميمنا وأحدث أعمالنا وصور التطبيقات.</p><span class="social-handle" dir="ltr">@abo.moammal.official</span><a class="social-platform-action" href="https://www.instagram.com/abo.moammal.official/" target="_blank" rel="noopener noreferrer" aria-label="زيارة حساب طه أندرويد على إنستغرام">تابع الحساب ↗</a></article>
-        <article class="social-platform tiktok-platform"><span class="social-platform-icon" aria-hidden="true">♪</span><span class="social-platform-label">TIKTOK</span><h3>تيك توك</h3><p>مقاطع قصيرة وشرح سريع لمشاريعنا.</p><span class="social-handle" dir="ltr">@abomomel3</span><a class="social-platform-action" href="https://www.tiktok.com/@abomomel3" target="_blank" rel="noopener noreferrer" aria-label="زيارة حساب طه أندرويد على تيك توك">شاهد المقاطع ↗</a></article>
-        <article class="social-platform youtube-platform"><span class="social-platform-icon" aria-hidden="true">▶</span><span class="social-platform-label">YOUTUBE</span><h3>يوتيوب</h3><p>شروحات البرامج والفيديوهات الكاملة.</p><span class="social-handle" dir="ltr">@abomomel</span><a class="social-platform-action" href="https://www.youtube.com/@abomomel" target="_blank" rel="noopener noreferrer" aria-label="زيارة قناة طه أندرويد على يوتيوب">زيارة القناة ↗</a></article>
-        <article class="social-platform telegram-platform"><span class="social-platform-icon" aria-hidden="true">✈</span><span class="social-platform-label">TELEGRAM</span><h3>تيليگرام</h3><p>تحميل التطبيقات والإعلانات والتحديثات أولاً بأول.</p><span class="social-handle" dir="ltr">@TahaAppsPlusPRO</span><a class="social-platform-action" href="https://t.me/TahaAppsPlusPRO" target="_blank" rel="noopener noreferrer" aria-label="زيارة قناة طه أندرويد على تيليگرام">انضم للقناة ↗</a></article>
+<section id="social-hub" class="container section social-hub" aria-labelledby="social-hub-title">
+  <div class="section-head"><div><h2 id="social-hub-title">تابع طه أندرويد</h2><p>شروحات التطبيقات، المقاطع القصيرة وآخر منشورات القناة.</p></div></div>
+  <div class="media-hub">
+    <div class="media-tabs" role="tablist" aria-label="منصات طه أندرويد"><button type="button" id="media-youtube" role="tab" aria-controls="media-panel" aria-selected="true" tabindex="0" data-platform="youtube"><span aria-hidden="true">▶</span> يوتيوب</button><button type="button" id="media-tiktok" role="tab" aria-controls="media-panel" aria-selected="false" tabindex="-1" data-platform="tiktok"><span aria-hidden="true">♪</span> تيك توك</button><button type="button" id="media-instagram" role="tab" aria-controls="media-panel" aria-selected="false" tabindex="-1" data-platform="instagram"><span aria-hidden="true">◎</span> إنستغرام</button><button type="button" id="media-telegram" role="tab" aria-controls="media-panel" aria-selected="false" tabindex="-1" data-platform="telegram"><span aria-hidden="true">✈</span> تيليجرام</button></div>
+    <div id="media-panel" role="tabpanel" aria-labelledby="media-youtube" tabindex="0">
+      <div class="media-layout">
+        <div id="media-stage" class="media-stage"></div>
+        <div class="media-side">
+          <h3 id="media-heading">شروحات يوتيوب</h3>
+          <div id="media-items" class="media-items"></div>
+          <a id="media-source" class="sub-link" href="https://www.youtube.com/@abomomel" target="_blank" rel="noopener noreferrer">افتح القناة على يوتيوب ↗</a>
+        </div>
       </div>
-      <div class="social-video-cta"><div><strong>🎬 شاهد عروضنا وشروحاتنا</strong><p>تصفح قسم الفيديوهات داخل الموقع، وانتقل إلى قنواتنا لمشاهدة المقاطع المنشورة فعلياً.</p></div><a class="button primary" href="#videos">استكشف الفيديوهات ←</a></div>
-    </section>
+    </div>
+    <noscript><p><a href="https://www.youtube.com/@abomomel">يوتيوب</a> · <a href="https://www.tiktok.com/@abomomel3">تيك توك</a> · <a href="https://www.instagram.com/abo.moammal.official/">إنستغرام</a> · <a href="https://t.me/TahaAppsPlusPRO">تيليجرام</a></p></noscript>
+  </div>
+</section>
     <section id="articles" class="container section guides" aria-labelledby="articles-title">
       <div class="section-head"><div><h2 id="articles-title">دليل الاستخدام</h2><p>خطوات التحميل والتثبيت والوصول لقسم الدراسة.</p></div></div>
       <div class="faq">
@@ -237,6 +270,110 @@
       </div>
     </div>
   </footer>
+<script>
+(() => {
+  const platforms = {
+    youtube: {title:'شروحات يوتيوب', link:'https://www.youtube.com/@abomomel', label:'افتح القناة على يوتيوب', items:[
+      {id:'Y5DResHXXR4', title:'جولة في موقع طه أندرويد والمكتبة الدراسية'},
+      {id:'5SNY_dWSJOg', title:'منهاجي بلس PRO للطلاب'},
+      {id:'luXft3oDHJQ', title:'عرض Download Plus PRO'},
+      {id:'dNO878uz0oQ', title:'شرح إمبراطورية التمويل'}]},
+    tiktok: {title:'مقاطع تيك توك', link:'https://www.tiktok.com/@abomomel3', label:'افتح الحساب على تيك توك', items:[
+      {id:'7706860397109775634', title:'جرّب المدرّس الذكي'},
+      {id:'7705711453470248199', title:'الكتب والمناهج مع منهاجي بلس'},
+      {id:'7708712618323791112', title:'إمبراطورية التمويل PRO'}]},
+    instagram: {title:'إنستغرام طه أندرويد', link:'https://www.instagram.com/abo.moammal.official/', label:'افتح الحساب على إنستغرام', items:[
+      {id:'abo.moammal.official', title:'الملف الشخصي والمنشورات العامة'}]},
+    telegram: {title:'منشورات تيليجرام', link:'https://t.me/TahaAppsPlusPRO', label:'افتح القناة على تيليجرام', items:[
+      {id:'TahaAppsPlusPRO/13', title:'منشور Download Plus PRO'}]}
+  };
+  const hub = document.querySelector('#social-hub');
+  const tabs = [...hub.querySelectorAll('[role="tab"]')];
+  const panel = hub.querySelector('#media-panel');
+  const stage = hub.querySelector('#media-stage');
+  const items = hub.querySelector('#media-items');
+  const heading = hub.querySelector('#media-heading');
+  const source = hub.querySelector('#media-source');
+  const chosen = {};
+  let current;
+
+  function display(key, index) {
+    chosen[key] = index;
+    const item = platforms[key].items[index];
+    stage.dataset.kind = key;
+    items.querySelectorAll('button').forEach((button, i) => button.setAttribute('aria-pressed', String(i === index)));
+    if (key === 'telegram') {
+      const widget = document.createElement('script');
+      widget.src = 'https://telegram.org/js/telegram-widget.js?22';
+      widget.async = true;
+      widget.dataset.telegramPost = item.id;
+      widget.dataset.width = '100%';
+      stage.replaceChildren(widget);
+      return;
+    }
+    const urls = {
+      youtube: 'https://www.youtube-nocookie.com/embed/' + item.id + '?playsinline=1',
+      tiktok: 'https://www.tiktok.com/player/v1/' + item.id + '?autoplay=0',
+      instagram: 'https://www.instagram.com/' + item.id + '/embed/'
+    };
+    const frame = document.createElement('iframe');
+    frame.src = urls[key];
+    frame.title = item.title;
+    frame.loading = 'lazy';
+    frame.referrerPolicy = 'strict-origin-when-cross-origin';
+    frame.allowFullscreen = true;
+    stage.replaceChildren(frame);
+  }
+
+  function select(tab) {
+    const key = tab.dataset.platform;
+    if (current === key) return;
+    current = key;
+    const platform = platforms[key];
+    tabs.forEach(button => {
+      button.setAttribute('aria-selected', String(button === tab));
+      button.tabIndex = button === tab ? 0 : -1;
+    });
+    panel.setAttribute('aria-labelledby', tab.id);
+    heading.textContent = platform.title;
+    source.href = platform.link;
+    source.textContent = platform.label + ' ↗';
+    items.replaceChildren(...(platform.items.length > 1 ? platform.items.map((item, index) => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      if (key === 'youtube') {
+        const thumbnail = document.createElement('img');
+        thumbnail.src = 'https://i.ytimg.com/vi/' + item.id + '/mqdefault.jpg';
+        thumbnail.alt = '';
+        thumbnail.loading = 'lazy';
+        button.append(thumbnail);
+      }
+      const label = document.createElement('span');
+      label.textContent = item.title;
+      button.append(label);
+      button.addEventListener('click', () => display(key, index));
+      return button;
+    }) : []));
+    display(key, chosen[key] ?? 0);
+  }
+
+  tabs.forEach((tab, index) => {
+    tab.addEventListener('click', () => select(tab));
+    tab.addEventListener('keydown', event => {
+      const movement = {ArrowLeft: 1, ArrowRight: -1};
+      let next;
+      if (event.key === 'Home') next = 0;
+      else if (event.key === 'End') next = tabs.length - 1;
+      else if (event.key in movement) next = (index + movement[event.key] + tabs.length) % tabs.length;
+      else return;
+      event.preventDefault();
+      tabs[next].focus();
+      select(tabs[next]);
+    });
+  });
+  select(tabs[0]);
+})();
+</script>
 </body>
 </html>
 
