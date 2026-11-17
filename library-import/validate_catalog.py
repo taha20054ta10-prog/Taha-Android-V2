@@ -3,13 +3,18 @@
 import json, re, urllib.request, urllib.error, time, pathlib, datetime
 ROOT=pathlib.Path(__file__).resolve().parents[1]
 s=(ROOT/'library.js').read_text(encoding='utf-8')
-arrays=re.findall(r'files(?:\.push\(\.\.\.)?\s*=\s*(\[.*?\])\s*(?:;|\))',s,re.S)
-# The original catalogue is declared as const files=[...]; additional arrays are files.push(...[...]).
-arrays=re.findall(r'(?:const\s+files\s*=|files\.push\(\.\.\.)\s*(\[.*?\])\s*(?:;|\))',s,re.S)
+# Extract the initial JSON literal and each subsequent files.push(...[...]) literal.
+# JSONDecoder.raw_decode handles JavaScript lines without semicolons.
+decoder=json.JSONDecoder()
+arrays=[]
+for match in re.finditer(r'(?:const\\s+files\\s*=|files\\.push\\(\\.\\.\\.)\\s*(?=\\[)',s):
+ chunk=s[match.end():].lstrip()
+ parsed, consumed=decoder.raw_decode(chunk)
+ if not isinstance(parsed,list): raise ValueError('Expected array at '+str(match.start()))
+ arrays.append(parsed)
 items=[]
 for chunk in arrays:
- try: items.extend(json.loads(chunk))
- except json.JSONDecodeError as exc: raise ValueError('Cannot parse library catalog: '+str(exc)) from exc
+ items.extend(chunk)
 if not items: raise RuntimeError('No catalog entries parsed: aborting empty audit')
 results=[]
 for i,f in enumerate(items):
