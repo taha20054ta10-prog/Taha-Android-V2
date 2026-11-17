@@ -10,6 +10,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Audit all library links
+        run: python3 library-import/audit_library.py
       - name: Check candidate PDF source availability
         run: python3 library-import/check_sources.py
       - name: Upload verified, rehosting-approved PDF files
@@ -25,4 +27,5 @@ jobs:
             library-import/report.json
             library-import/preflight-report.json
             library-import/uploaded-catalog.json
+            library-import/all-links-report.json
           if-no-files-found: ignore
