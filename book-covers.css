@@ -1,13 +1,7 @@
-.library-cover-box{position:relative;height:auto;min-width:0;aspect-ratio:4/5;background:#0b3971}
-.book-jacket{--glow:#49b8fb;--accent:#fce2a8;position:absolute;inset:0;box-sizing:border-box;display:grid;grid-template-rows:auto auto minmax(1rem,1fr) auto auto auto;gap:.38em;place-items:center;text-align:center;padding:8% 9%;isolation:isolate;container-type:inline-size;color:#fff;background:radial-gradient(ellipse at 25% 8%,var(--glow),transparent 65%),linear-gradient(145deg,#115da3,#10274c 88%);line-height:1.3}
-.book-jacket::before{content:"";position:absolute;inset:5%;border:1px solid var(--accent);border-radius:8px;opacity:.72;pointer-events:none}
-.book-jacket[data-palette="science"]{--glow:#2697b4;--accent:#bbf3e8}
-.book-jacket[data-palette="language"]{--glow:#647ed2;--accent:#f8d9fe}
-.book-jacket[data-palette="humanities"]{--glow:#377bab;--accent:#ffe7be}
-.jacket-brand{font-size:clamp(.66rem,7cqw,1.4rem);font-weight:800}
-.jacket-kind,.jacket-credit{font-size:clamp(.47rem,4.4cqw,.86rem);color:var(--accent)}
-.jacket-symbol{font-size:clamp(1rem,21cqw,4rem);line-height:1;color:var(--accent);font-family:system-ui,sans-serif;font-weight:800;text-shadow:0 4px 10px #061b42a0}
-.jacket-title{font-size:clamp(.67rem,7.1cqw,1.34rem);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere}
-.jacket-grade{font-size:clamp(.52rem,5.1cqw,1rem);font-weight:600}
-.approved-cover{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#0b3971}
-.approved-cover[hidden]{display:none}
+.library-cover-box{position:relative;width:100%;height:auto;min-width:0;aspect-ratio:640/853;background:#0a3768;border-radius:12px;overflow:hidden}
+.math-style-cover{position:absolute;inset:0;container-type:inline-size;background:#0a3768 url("covers/math-primary1.webp") center/100% 100% no-repeat;isolation:isolate}
+.math-cover-title,.math-cover-grade{position:absolute;display:flex;align-items:center;justify-content:center;box-sizing:border-box;text-align:center;overflow:hidden;padding:.18em .28em;overflow-wrap:anywhere}
+.math-cover-title{inset:18.5% 12.4% auto;height:17.1%;border:1px solid #78d7fb;border-radius:1.25em;background:radial-gradient(ellipse at 50% 115%,#1b61a1 7%,#093262 68%,#062044);color:#fff5da;font-size:clamp(.64rem,10cqw,2.3rem);line-height:1.15;font-weight:900;text-shadow:0 .09em #9c6522,0 .15em .2em #061b3c}
+.math-cover-title.math-title-long{font-size:clamp(.54rem,6.8cqw,1.65rem)}
+.math-cover-grade{inset:38.4% 22% auto;height:9.8%;border-radius:1.15em;background:linear-gradient(#fff5db,#f6deb2);color:#102247;font-size:clamp(.54rem,7.2cqw,1.55rem);line-height:1.08;font-weight:900}
+.book-share{align-self:flex-start}

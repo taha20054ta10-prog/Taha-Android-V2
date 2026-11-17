@@ -36,48 +36,44 @@
    if(typeof viewer.showModal==='function')viewer.showModal();
    else window.open(f.url.replace('/preview','/view'),'_blank','noopener');
  }
- const subjects=[
-   [/رياضيات|الجبر|الهندسة/,'∑','math'],
-   [/فيزياء/,'⚛','science'],[/كيمياء/,'H₂O','science'],
-   [/أحياء|الاحياء|علوم/,'✿','science'],
-   [/إنجليزي|انجليزي|إنكليزي|انكليزي/,'ABC','language'],
-   [/فرنسي/,'FR','language'],[/عربي|القراءة|القواعد|الأدب/,'أ','language'],
-   [/اجتماعيات|تاريخ|جغرافيا|جغرافية|اقتصاد|فلسفة/,'◈','humanities'],
-   [/حاسوب/,'⌘','math'],[/إسلامية|اسلامية|قرآن/,'☾','humanities']
- ];
+ const requested=new URLSearchParams(window.location.search);
+ const requestedGrade=requested.get('grade');
+ if(Array.from(grade.options).some(option=>option.value===requestedGrade)) grade.value=requestedGrade;
+ const requestedType=requested.get('type');
+ if(buttons.some(button=>button.dataset.libraryType===requestedType)) type=requestedType;
+ search.value=(requested.get('q') || '').slice(0,180);
  function makeCover(entry, gradeLabel){
    const box=document.createElement('div');
    box.className='library-cover-box';
    const cover=document.createElement('div');
-   const subject=subjects.find(([pattern])=>pattern.test(entry.title));
-   cover.className='book-jacket';
-   cover.dataset.palette=subject?.[2] || 'general';
-   const kind=({book:'كتاب دراسي',notes:'ملزمة دراسية',exams:'أسئلة وزارية'})[entry.type];
-   const add=(tag,cls,value)=>{
-     const el=document.createElement(tag);
-     el.className=cls;
-     el.textContent=value;
-     cover.append(el);
-   };
-   add('span','jacket-brand','طه أندرويد');
-   add('span','jacket-kind',kind);
-   add('span','jacket-symbol',subject?.[1] || '✧');
-   add('strong','jacket-title',entry.title.trim());
-   add('span','jacket-grade',gradeLabel);
-   add('small','jacket-credit','المصمم والمبرمج طه علي الازيرجاوي');
+   cover.className='math-style-cover';
    cover.setAttribute('aria-hidden','true');
-   box.append(cover);
-   if(entry.grade==='1'&&entry.type==='book'&&/^كتاب الرياضيات الأول الابتدائي/.test(entry.title)){
-     const image=document.createElement('img');
-     image.className='library-cover approved-cover';
-     image.alt='غلاف بتصميم طه أندرويد: '+entry.title;
-     image.decoding='async';
-     image.addEventListener('load',()=>{image.hidden=false;},{once:true});
-     image.hidden=true;
-     image.src='covers/math-primary1.webp';
-     box.append(image);
+   const exactMathCover=entry.grade==='1'&&entry.type==='book'&&/^كتاب الرياضيات الأول الابتدائي(?:\s|$)/.test(entry.title);
+   if(!exactMathCover){
+     const title=document.createElement('strong');
+     title.className='math-cover-title';
+     const label=entry.title.trim()
+       .replace(/^(?:تحميل\s+)?(?:كتاب|ملزمة)\s+/,'')
+       .replace(/\s+(?:(?:للصف|الصف|صف)\s+|(?:للـ)?(?:الأول|الثاني|الثالث|الرابع|الخامس|السادس)\s+(?:الابتدائي|ابتدائي|المتوسط|متوسط|الإعدادي|اعدادي|العلمي|علمي|الأدبي|الادبي|ادبي)(?=\s|$|[،.،:—–-])).*$/u,'')
+       .replace(/\s*[—–].*$/,'')
+       .replace(/\s+pdf\b/ig,'')
+       .trim();
+     title.textContent=label || entry.title.trim();
+     if(title.textContent.length>34)title.classList.add('math-title-long');
+     const stage=document.createElement('span');
+     stage.className='math-cover-grade';
+     stage.textContent=gradeLabel;
+     cover.append(title,stage);
    }
+   box.append(cover);
    return box;
+ }
+ function bookLink(file){
+   const link=new URL('library.html',window.location.href);
+   link.searchParams.set('grade',file.grade);
+   link.searchParams.set('type',file.type);
+   link.searchParams.set('q',file.title.trim());
+   return link.href;
  }
  function render(){
    results.replaceChildren();
@@ -94,7 +90,21 @@
      const coverBox=makeCover(f,grade.options[grade.selectedIndex].text);
      const credit=document.createElement('small');credit.className='library-cover-credit';credit.textContent='المصمم والمبرمج طه علي الازيرجاوي';
      const gradeLabel=document.createElement('p');gradeLabel.className='library-grade-label';gradeLabel.textContent=grade.options[grade.selectedIndex].text;
-     card.append(coverBox,gradeLabel,title,read,external,credit);results.append(card);
+     const share=document.createElement('a');
+     share.className='sub-link book-share';
+     share.href=bookLink(f);
+     share.textContent='رابط المشاركة ↗';
+     share.addEventListener('click',async event=>{
+       if(!navigator.clipboard?.writeText) return;
+       event.preventDefault();
+       try {
+         await navigator.clipboard.writeText(share.href);
+         share.textContent='تم نسخ الرابط ✓';
+       } catch {
+         window.location.assign(share.href);
+       }
+     });
+     card.append(coverBox,gradeLabel,title,read,external,share,credit);results.append(card);
    }
    empty.hidden=matched.length>0;
    if(!matched.length)empty.textContent=all.length?'ماكو ملف يطابق البحث. امسح كلمة البحث حتى تشوف كل ملفات الصف.':'ما متوفرة ملفات موثقة لهذا الصف وهذا القسم حالياً. راح تنضاف هنا بعد رفع ملفات PDF الأصلية.';
