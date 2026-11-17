@@ -160,3 +160,14 @@ body{background:radial-gradient(ellipse at 85% 5%,#1d2354 0%,transparent 40%),#0
 @keyframes preview-pulse{50%{transform:scale(1.15);box-shadow:0 0 42px #3bbdffb0}}
 @keyframes hero-hover{50%{transform:translateY(-9px)}}
 @media(prefers-reduced-motion:reduce){.animated-preview,.animated-preview::after,.animated-preview span,.hero-visual img{animation:none!important}}
+
+/* Clearly identified branded illustration instead of anonymous square glyph */
+.slide-identity{grid-column:2;grid-row:1;justify-self:center;display:flex;flex-direction:column;align-items:center;gap:9px;text-align:center;z-index:1;animation:identity-float 5s ease-in-out infinite}
+.slide-logo{width:clamp(112px,22vw,190px);height:clamp(112px,22vw,190px);border-radius:28%;display:grid;place-items:center;background:radial-gradient(circle at 30% 20%,#91d8ff99,transparent 40%),linear-gradient(145deg,#174d95,#542d94);border:2px solid #8fd9ff8a;box-shadow:0 0 35px #60aaff7a,inset 0 0 25px #fff2;transform:rotate(-5deg)}
+.slide-logo span{font-size:clamp(3.6rem,9vw,6.5rem);line-height:1;filter:drop-shadow(0 7px 8px #070f3088)}
+.slide-logo img{width:86%;height:86%;object-fit:contain}
+.slide-identity strong{font-size:clamp(.8rem,1.8vw,1.12rem);color:#fff;max-width:220px;line-height:1.4}
+.slide-identity small{font-size:.57rem;letter-spacing:.09em;color:#a9d8ff}
+@keyframes identity-float{50%{transform:translateY(-9px)}}
+@media(max-width:680px){.slide-logo{width:108px;height:108px}.slide-logo span{font-size:3.5rem}.slide-identity strong{font-size:.72rem}.slide-identity small{font-size:.46rem}.slide-identity{gap:5px}}
+@media(prefers-reduced-motion:reduce){.slide-identity{animation:none}}
