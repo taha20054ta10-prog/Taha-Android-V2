@@ -29,6 +29,37 @@
    if(typeof viewer.showModal==='function')viewer.showModal();
    else window.open(f.url.replace('/preview','/view'),'_blank','noopener');
  }
+ // Branded cover art is generated locally for every catalog entry; it is not an official textbook cover.
+ const gradeNames=Array.from(grade.options).reduce((a,o)=>(a[o.value]=o.textContent.trim(),a),{});
+ const escapeXml=v=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&apos;'}[c]));
+ const subjectFor=title=>{
+   const t=title.replace(/^(كتاب|ملزمة|اسئلة|أسئلة|وزاريات|الاسئلة الوزارية)\\s*/,'').replace(/\\s+(للصف|الصف|الأول|الثاني|الثالث|الرابع|الخامس|السادس|طبعة|202[0-9]).*$/,'').replace(/\\s*[—–-].*$/,'').trim();
+   const patterns=[['الرياضيات','📐'],['الفيزياء','⚛'],['الكيمياء','⚗'],['الأحياء','✿'],['العلوم','✿'],['القراءة','✒'],['اللغة العربية','✒'],['الانكليزي','ABC'],['الإنكليزي','ABC'],['الإنجليزي','ABC'],['الاسلامية','☪'],['الإسلامية','☪'],['الاجتماعيات','◎'],['التاريخ','⌛'],['الجغرافية','◎'],['الحاسوب','⌘'],['الفرنسي','FR']];
+   const match=patterns.find(([name])=>title.includes(name));
+   return {name:(match?match[0]:t)||title,icon:match?match[1]:'✦'};
+ };
+ const coverFor=f=>{
+   const gradeText=gradeNames[f.grade]||'المرحلة الدراسية';
+   const {name,icon}=subjectFor(f.title);
+   const kind=f.type==='notes'?'ملزمة دراسية':f.type==='exams'?'أسئلة وزارية':'كتاب دراسي';
+   const label=name.length>28?name.slice(0,27)+'…':name;
+   const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="600" height="840" viewBox="0 0 600 840" role="img" aria-label="${escapeXml(f.title)}">
+   <defs><linearGradient id="sky" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#7ce9ff"/><stop offset=".36" stop-color="#087fd3"/><stop offset=".75" stop-color="#07367e"/><stop offset="1" stop-color="#111d54"/></linearGradient><linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff2a8"/><stop offset=".45" stop-color="#f3ba4b"/><stop offset="1" stop-color="#a86a13"/></linearGradient></defs>
+   <rect width="600" height="840" rx="25" fill="url(#sky)"/><path d="M-20 165Q220 20 610 105M-30 730Q320 550 640 650" fill="none" stroke="#b6f5ff" stroke-width="16" opacity=".45"/><path d="M30 22H570V818H30Z" fill="none" stroke="url(#gold)" stroke-width="9" rx="18"/>
+   <text x="300" y="78" font-family="Tahoma,Arial,sans-serif" font-size="29" fill="#fff" font-weight="bold" text-anchor="middle">طه أندرويد | Taha Android</text>
+   <text x="300" y="123" font-family="Tahoma,Arial,sans-serif" font-size="24" fill="#d5f6ff" text-anchor="middle">المكتبة الدراسية العراقية</text>
+   <rect x="42" y="163" width="516" height="150" rx="36" fill="#071b50" stroke="url(#gold)" stroke-width="7"/>
+   <text x="300" y="228" font-family="Tahoma,Arial,sans-serif" font-size="${label.length>18?31:42}" fill="white" font-weight="bold" text-anchor="middle" direction="rtl">${escapeXml(label)}</text>
+   <text x="300" y="283" font-family="Tahoma,Arial,sans-serif" font-size="27" fill="#ffdc80" text-anchor="middle">${kind}</text>
+   <text x="300" y="364" font-family="Tahoma,Arial,sans-serif" font-size="31" fill="white" font-weight="bold" text-anchor="middle" direction="rtl">${escapeXml(gradeText)}</text>
+   <circle cx="300" cy="540" r="137" fill="#0c2460" stroke="#9aeaff" stroke-width="5"/><circle cx="300" cy="540" r="115" fill="#0d6cbd" opacity=".7"/>
+   <text x="300" y="581" font-family="Tahoma,Arial,sans-serif" font-size="${icon.length>2?91:130}" fill="#fff0ac" font-weight="bold" text-anchor="middle">${escapeXml(icon)}</text>
+   <rect x="35" y="729" width="530" height="77" rx="34" fill="#091b4b" stroke="url(#gold)" stroke-width="6"/>
+   <text x="300" y="759" font-family="Tahoma,Arial,sans-serif" font-size="21" fill="#fff" text-anchor="middle">المصمم والمبرمج</text>
+   <text x="300" y="790" font-family="Tahoma,Arial,sans-serif" font-size="26" fill="#fff" font-weight="bold" text-anchor="middle">طه علي الازيرجاوي</text>
+   </svg>`;
+   return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
+ };
  function render(){
    results.replaceChildren();
    const all=validFiles.filter(f=>f.grade===grade.value&&f.type===type);
@@ -40,14 +71,10 @@
      const read=document.createElement('button');read.type='button';read.className='button primary';read.textContent='📖 قراءة PDF';read.addEventListener('click',()=>openViewer(f));
      const external=document.createElement('a');external.className='sub-link';external.href=f.url.replace('/preview','/view');external.target='_blank';external.rel='noopener noreferrer';external.textContent='فتح ملف PDF ↗';
      const cover=document.createElement('img');
-     const fileId=f.url.match(/\/file\/d\/([^/]+)/)?.[1];
-     cover.className='library-cover';cover.alt='معاينة غلاف '+f.title;
-     cover.loading='lazy';cover.decoding='async';
-     const subject=f.title.includes('رياضيات')?'math':f.title.includes('انكليزي')||f.title.includes('إنكليزي')||f.title.includes('الإنكليزي')?'english':null;
-     if(subject&&grade.value==='1')cover.src='covers/'+subject+'-first-primary.svg';
-     else if(fileId)cover.src='https://drive.google.com/thumbnail?id='+encodeURIComponent(fileId)+'&sz=w480';else cover.hidden=true;
+     cover.className='library-cover';cover.alt='غلاف بتصميم طه أندرويد: '+f.title;
+     cover.loading='lazy';cover.decoding='async';cover.src=coverFor(f);
+     const coverFallback=document.createElement('div');coverFallback.className='library-cover-fallback';coverFallback.hidden=true;coverFallback.textContent=f.title+' — '+grade.options[grade.selectedIndex].text;
      cover.addEventListener('error',()=>{cover.hidden=true;coverFallback.hidden=false;});
-     const coverFallback=document.createElement('div');coverFallback.className='library-cover-fallback';coverFallback.setAttribute('role','img');coverFallback.setAttribute('aria-label','بطاقة تعريفية للكتاب، وليست الغلاف الأصلي');coverFallback.hidden=true;coverFallback.textContent=f.title+' — '+grade.options[grade.selectedIndex].text;
      const coverBox=document.createElement('div');coverBox.className='library-cover-box';coverBox.append(cover,coverFallback);
      const credit=document.createElement('small');credit.className='library-cover-credit';credit.textContent='المصمم والمبرمج طه علي الازيرجاوي';
      const gradeLabel=document.createElement('p');gradeLabel.className='library-grade-label';gradeLabel.textContent=grade.options[grade.selectedIndex].text;
