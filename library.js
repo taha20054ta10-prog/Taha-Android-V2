@@ -43,7 +43,7 @@
      cover.loading='lazy';cover.decoding='async';
      if(fileId)cover.src='https://drive.google.com/thumbnail?id='+encodeURIComponent(fileId)+'&sz=w480';
      cover.addEventListener('error',()=>{cover.hidden=true;coverFallback.hidden=false;});
-     const coverFallback=document.createElement('div');coverFallback.className='library-cover-fallback';coverFallback.hidden=true;coverFallback.textContent='الغلاف غير متاح للعرض';
+     const coverFallback=document.createElement('div');coverFallback.className='library-cover-fallback';coverFallback.setAttribute('role','img');coverFallback.setAttribute('aria-label','بطاقة تعريفية للكتاب، وليست الغلاف الأصلي');coverFallback.hidden=true;coverFallback.textContent=f.title+' — '+grade.options[grade.selectedIndex].text;
      const coverBox=document.createElement('div');coverBox.className='library-cover-box';coverBox.append(cover,coverFallback);
      const gradeLabel=document.createElement('p');gradeLabel.className='library-grade-label';gradeLabel.textContent=grade.options[grade.selectedIndex].text;
      card.append(coverBox,gradeLabel,title,read,external);results.append(card);
