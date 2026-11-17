@@ -41,7 +41,7 @@ begin
     last_pdf=greatest(d.last_pdf,excluded.last_pdf);
 end;
 $$;
-revoke all on function public.taha_record_visit(uuid,text) from public;
+revoke all on function public.taha_record_visit(uuid,text) from public, authenticated;
 grant execute on function public.taha_record_visit(uuid,text) to anon;
 
 create function public.taha_owner_metrics(p_days integer default 7)
