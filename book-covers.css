@@ -1,0 +1,13 @@
+.library-cover-box{position:relative;height:auto;min-width:0;aspect-ratio:4/5;background:#0b3971}
+.book-jacket{--glow:#49b8fb;--accent:#fce2a8;position:absolute;inset:0;box-sizing:border-box;display:grid;grid-template-rows:auto auto minmax(1rem,1fr) auto auto auto;gap:.38em;place-items:center;text-align:center;padding:8% 9%;isolation:isolate;container-type:inline-size;color:#fff;background:radial-gradient(ellipse at 25% 8%,var(--glow),transparent 65%),linear-gradient(145deg,#115da3,#10274c 88%);line-height:1.3}
+.book-jacket::before{content:"";position:absolute;inset:5%;border:1px solid var(--accent);border-radius:8px;opacity:.72;pointer-events:none}
+.book-jacket[data-palette="science"]{--glow:#2697b4;--accent:#bbf3e8}
+.book-jacket[data-palette="language"]{--glow:#647ed2;--accent:#f8d9fe}
+.book-jacket[data-palette="humanities"]{--glow:#377bab;--accent:#ffe7be}
+.jacket-brand{font-size:clamp(.66rem,7cqw,1.4rem);font-weight:800}
+.jacket-kind,.jacket-credit{font-size:clamp(.47rem,4.4cqw,.86rem);color:var(--accent)}
+.jacket-symbol{font-size:clamp(1rem,21cqw,4rem);line-height:1;color:var(--accent);font-family:system-ui,sans-serif;font-weight:800;text-shadow:0 4px 10px #061b42a0}
+.jacket-title{font-size:clamp(.67rem,7.1cqw,1.34rem);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere}
+.jacket-grade{font-size:clamp(.52rem,5.1cqw,1rem);font-weight:600}
+.approved-cover{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#0b3971}
+.approved-cover[hidden]{display:none}
