@@ -1,1 +1,82 @@
-[]
+[
+  {
+    "grade": "2",
+    "type": "book",
+    "title": "كتاب الرياضيات الثاني الابتدائي — طبعة 2025 (180 صفحة)",
+    "slug": "source-2-001",
+    "url": "https://www.stadiraq.com/PDF/1760565450.pdf",
+    "approved_for_rehosting": false
+  },
+  {
+    "grade": "4",
+    "type": "book",
+    "title": "كتاب القراءة الرابع الابتدائي — PDF كامل",
+    "slug": "source-4-002",
+    "url": "https://bk1.shr4.com/books/b4/2025-2026/كتاب القراءة الرابع الابتدائي.pdf",
+    "approved_for_rehosting": false
+  },
+  {
+    "grade": "2",
+    "type": "book",
+    "title": "كتاب نشاط الإنكليزي الثاني الابتدائي — PDF كامل",
+    "slug": "source-2-003",
+    "url": "https://bk1.shr4.com/books/b2/2024-2025/كتاب الانكليزي النشاط الصف الثاني الابتدائي.pdf",
+    "approved_for_rehosting": false
+  },
+  {
+    "grade": "6",
+    "type": "book",
+    "title": "كتاب نشاط الإنكليزي السادس الابتدائي — PDF كامل",
+    "slug": "source-6-004",
+    "url": "https://bk1.shr4.com/books/b6/2025-2026/الانكليزي/كتاب الانكليزي النشاط للصف السادس الابتدائي.pdf",
+    "approved_for_rehosting": false
+  },
+  {
+    "grade": "3",
+    "type": "book",
+    "title": "كتاب نشاط العلوم الثالث الابتدائي — PDF كامل",
+    "slug": "source-3-005",
+    "url": "https://bk1.shr4.com/books/b3/2025-2026/كتاب نشاط العلوم الثالث الابتدائي.pdf",
+    "approved_for_rehosting": false
+  },
+  {
+    "grade": "13",
+    "type": "book",
+    "title": "كتاب علم الاجتماع — الرابع الأدبي (وزارة التربية، طبعة 2025)",
+    "slug": "source-13-006",
+    "url": "https://bk3.shr4.com/books/bb4/2025-2026/%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9%20%D8%A7%D9%84%D8%A7%D8%AF%D8%A8%D9%8A/%D9%83%D8%AA%D8%A7%D8%A8%20%D8%B9%D9%84%D9%85%20%D8%A7%D9%84%D8%A7%D8%AC%D8%AA%D9%85%D8%A7%D8%B9%20%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9%20%D8%A7%D9%84%D8%A7%D8%AF%D8%A8%D9%8A.pdf",
+    "approved_for_rehosting": false
+  },
+  {
+    "grade": "1",
+    "type": "book",
+    "title": "كتاب القرآن الكريم والتربية الإسلامية — الأول الابتدائي — طبعة 2025",
+    "slug": "source-1-007",
+    "url": "https://bk1.shr4.com/books/b1/2025-2026/%D9%83%D8%AA%D8%A7%D8%A8%20%D8%A7%D9%84%D8%A7%D8%B3%D9%84%D8%A7%D9%85%D9%8A%D8%A9%20%D8%A7%D9%84%D8%A7%D9%88%D9%84%20%D8%A7%D9%84%D8%A7%D8%A8%D8%AA%D8%AF%D8%A7%D8%A6%D9%8A.pdf",
+    "approved_for_rehosting": false
+  },
+  {
+    "grade": "6",
+    "type": "book",
+    "title": "كتاب الرياضيات — السادس الابتدائي — طبعة 2025",
+    "slug": "source-6-008",
+    "url": "https://bk1.shr4.com/books/b6/2025-2026/%D9%83%D8%AA%D8%A7%D8%A8%20%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6%D9%8A%D8%A7%D8%AA%20%D8%A7%D9%84%D8%B3%D8%A7%D8%AF%D8%B3%20%D8%A7%D9%84%D8%A7%D8%A8%D8%AA%D8%AF%D8%A7%D8%A6%D9%8A.pdf",
+    "approved_for_rehosting": false
+  },
+  {
+    "grade": "9",
+    "type": "book",
+    "title": "كتاب الرياضيات — الثالث المتوسط — طبعة 2025",
+    "slug": "source-9-009",
+    "url": "https://bk2.shr4.com/books/bb3/2025-2026/%D9%83%D8%AA%D8%A7%D8%A8%20%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6%D9%8A%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AB%D8%A7%D9%84%D8%AB%20%D9%85%D8%AA%D9%88%D8%B3%D8%B7.pdf",
+    "approved_for_rehosting": false
+  },
+  {
+    "grade": "5",
+    "type": "book",
+    "title": "كتاب العلوم — الخامس الابتدائي — طبعة 2025",
+    "slug": "source-5-010",
+    "url": "https://bk1.shr4.com/books/b5/2025-2026/%D9%83%D8%AA%D8%A7%D8%A8%20%D8%A7%D9%84%D8%B9%D9%84%D9%88%D9%85%20%D8%A7%D9%84%D8%AE%D8%A7%D9%85%D8%B3%20%D8%A7%D9%84%D8%A7%D8%A8%D8%AA%D8%AF%D8%A7%D8%A6%D9%8A.pdf",
+    "approved_for_rehosting": false
+  }
+]
