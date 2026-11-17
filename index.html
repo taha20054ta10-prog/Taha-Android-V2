@@ -558,7 +558,13 @@
     answer.textContent = 'جاري تحضير الشرح…';
     try {
       const result = await request('tutor', {query:byId('question').value,grade:byId('grade').value,subject:byId('subject').value});
-      answer.textContent = result.answer;
+      answer.textContent = String(result.answer)
+        .replace(/\\(?:displaystyle|left|right)\b/g,'')
+        .replace(/\\(?:d?frac|tfrac)\{([^{}]+)\}\{([^{}]+)\}/g,'$1/$2')
+        .replace(/\\[()[\]]/g,'')
+        .replace(/\\times\b/g,'×')
+        .replace(/^\s*#{1,6} +/gm,'')
+        .replace(/\*\*([^*]+)\*\*/g,'$1');
     } catch (error) {
       answer.textContent = /Failed to fetch|signal|timeout|JSON|Unexpected/i.test(error.message) ? 'تعذّر الاتصال بالمدرّس. جرّب تيليجرام من الرابط أدناه.' : error.message;
     } finally { button.disabled = false; }
