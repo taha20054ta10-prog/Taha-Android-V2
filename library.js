@@ -59,6 +59,11 @@
    summary.textContent='المتوفر لهذا الصف: 📘 '+countFor(grade.value,'book')+' كتب | 📒 '+countFor(grade.value,'notes')+' ملازم | 📝 '+countFor(grade.value,'exams')+' أسئلة';
    buttons.forEach(button=>{const active=button.dataset.libraryType===type;button.classList.toggle('active',active);button.setAttribute('aria-pressed',String(active));button.textContent=({book:'📘 الكتب',notes:'📒 الملازم',exams:'📝 الأسئلة والوزاريات'}[button.dataset.libraryType])+' ('+countFor(grade.value,button.dataset.libraryType)+')';});
  }
+ const official2026={primary:'https://manahj.edu.iq/index.php?name=Pages&op=page&pid=159',middle:'https://manahj.edu.iq/index.php?name=Pages&op=page&pid=160',secondary:'https://manahj.edu.iq/index.php?name=Pages&op=page&pid=161'};
+ const catalog2026={ '2':'https://iraqedu.net/الثاني-الابتدائي/كتب-الثاني-الابتدائي/', '4':'https://iraqedu.net/الرابع-الابتدائي/كتب-الرابع-الابتدائي/'};
+ const sourceBar=document.createElement('aside');sourceBar.className='card';sourceBar.style.cssText='padding:15px;margin:14px 0;border:1px solid #5d84bb';results.before(sourceBar);
+ function renderSources(){const g=Number(grade.value),stage=g<=6?'primary':g<=9?'middle':'secondary';const official=official2026[stage];const catalog=catalog2026[grade.value];sourceBar.replaceChildren();const h=document.createElement('h3');h.textContent='📥 مصادر كتب 2025–2026 لهذا الصف';const p=document.createElement('p');p.textContent='روابط مصادر للبحث عن الكتب الناقصة؛ ليست ملفات PDF مستضافة أو مفحوصة داخل المكتبة.';const a=document.createElement('a');a.href=official;a.target='_blank';a.rel='noopener noreferrer';a.className='button primary';a.textContent='مناهج وزارة التربية 2025–2026 ↗';sourceBar.append(h,p,a);if(catalog){const x=document.createElement('a');x.href=catalog;x.target='_blank';x.rel='noopener noreferrer';x.className='button ghost';x.style.marginInlineStart='10px';x.textContent='فهرس كتب الصف 2025–2026 ↗';sourceBar.append(x)}}
+ grade.addEventListener('change',renderSources);renderSources();
  grade.addEventListener('change',()=>{search.value='';render()});
  buttons.forEach(button=>button.addEventListener('click',()=>{type=button.dataset.libraryType;search.value='';render()}));
  search.addEventListener('input',render);
