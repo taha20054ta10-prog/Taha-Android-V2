@@ -53,6 +53,27 @@
 .media-side .sub-link{color:#a5ebff}
 @media(max-width:720px){.media-layout{grid-template-columns:1fr;padding:.75rem;gap:.8rem}.media-tabs{gap:.15rem;padding:.5rem}.media-tabs button{font-size:.85rem}.media-stage[data-kind=tiktok] iframe{height:500px}}
 </style>
+<style>
+.services-offer{margin-block:1.25rem}
+.services-offer-inner{position:relative;isolation:isolate;overflow:hidden;display:grid;grid-template-columns:minmax(0,1.55fr) minmax(170px,1fr);align-items:center;gap:2rem;border:1px solid #53bdcf7a;border-radius:24px;background:radial-gradient(ellipse at 0% 90%,#204d6a 0%,transparent 58%),linear-gradient(135deg,#09172a,#102f45);padding:clamp(1.25rem,4vw,3rem);box-shadow:0 14px 42px #06132540;color:#eff9ff}
+.services-offer-inner h2{font-size:clamp(1.6rem,3.7vw,2.75rem);line-height:1.25;color:#f2fbff;margin:0 0 .65rem}
+.services-offer-inner p{color:#d2e6f4;max-width:54ch;margin:.5rem 0 1rem;line-height:1.8}
+.services-offer-inner ul{display:flex;flex-wrap:wrap;list-style:none;gap:.5rem;margin:0 0 1.1rem;padding:0}
+.services-offer-inner li{padding:.32rem .65rem;border:1px solid #86bdd970;border-radius:8px;color:#e1f3ff;font-size:.9rem}
+.services-offer-cta{display:inline-flex;min-height:44px;align-items:center;gap:.65rem;padding:.5rem .95rem;border-radius:10px;background:#a3f1ed;color:#0b2834;font-weight:800;text-decoration:none}
+.services-offer-cta:hover{background:#d9fffb}
+.services-offer-cta:focus-visible{outline:2px solid #fff;outline-offset:4px}
+.services-offer-art{width:100%;max-width:320px;aspect-ratio:4/3;justify-self:center;position:relative;direction:ltr;filter:drop-shadow(0 12px 18px #05112075)}
+.services-offer-window{position:absolute;inset:7% 17% 14% 3%;padding:10%;border:1px solid #76d3df;box-shadow:inset 0 0 30px #23a9b558;border-radius:12px;background:#142e46}
+.services-offer-window i{display:inline-block;width:6px;height:6px;border-radius:50%;background:#9de7e5;margin-right:4px;vertical-align:top}
+.services-offer-window div{height:12%;border-radius:3px;background:#4e91aa;margin-block:7%}
+.services-offer-window div:first-of-type{height:37%;background:linear-gradient(123deg,#43bfd4,#21466e)}
+.services-offer-window div:last-of-type{width:65%}
+.services-offer-phone{position:absolute;right:4%;bottom:4%;width:32%;height:65%;padding:6%;border:2px solid #a5eeed;border-radius:14px;background:#0b2033}
+.services-offer-phone div{height:52%;border-radius:5px;background:linear-gradient(135deg,#9dece5,#3777a1)}
+.services-offer-phone i{display:block;height:6%;border-radius:4px;background:#609ab2;margin-top:14%}
+@media(max-width:600px){.services-offer-inner{grid-template-columns:minmax(0,1fr);gap:.5rem}.services-offer-art{display:none}}
+</style>
 </head>
 <body>
   <a class="skip" href="#main">انتقل للمحتوى</a>
@@ -95,6 +116,20 @@
       </div>
     </section>
 
+    <section class="container services-offer" id="project-services" aria-labelledby="project-services-title">
+      <div class="services-offer-inner">
+        <div>
+          <h2 id="project-services-title">نصمّم مواقع وتطبيقات لأعمالكم</h2>
+          <p>مستعدون نبني موقع إلكتروني أو تطبيق حسب احتياجكم، لأي مجال. ونجهّز إعلانات ممولة للتعريف بتطبيقكم أو مشروعكم.</p>
+          <ul aria-label="الخدمات المتاحة"><li>مواقع إلكترونية</li><li>تطبيقات مخصّصة</li><li>إعلانات ممولة</li></ul>
+          <a class="services-offer-cta" href="https://www.instagram.com/abo.moammal.official/" target="_blank" rel="noopener noreferrer">راسلنا على إنستغرام <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="services-offer-art" aria-hidden="true">
+          <div class="services-offer-window"><i></i><i></i><i></i><div></div><div></div><div></div></div>
+          <div class="services-offer-phone"><div></div><i></i><i></i></div>
+        </div>
+      </div>
+    </section>
     <div class="container"><a class="sponsor-strip" href="ads.html"><span><strong>الإعلانات والرعايات</strong><small>عرّف جمهور طه أندرويد بتطبيقك أو خدمتك.</small></span><b>فرص التعاون&nbsp; ←</b></a></div>
     <aside class="container sponsor-placement" id="home-sponsor" aria-label="إعلان ممول" hidden></aside>
 <section class="container section feedback-layout" aria-label="مختارات طه أندرويد وآراء الزوار"><div class="feature-grid"><a class="card feature-tile" href="#apps"><small>التطبيقات</small><strong>حمّل تطبيقات أندرويد ←</strong></a><a class="card feature-tile" href="library.html"><small>الدراسة</small><strong>كتب وملازم حسب صفك ←</strong></a><a class="card feature-tile" href="#videos"><small>الفيديو</small><strong>شاهد عروض وشروحات الموقع ←</strong></a><a class="card feature-tile" href="ads.html"><small>الرعايات</small><strong>اعرض مشروعك لجمهورنا ←</strong></a></div><aside class="card feedback-card" id="feedback" aria-labelledby="feedback-title">
