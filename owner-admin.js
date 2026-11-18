@@ -91,6 +91,25 @@
     }
   }
 
+  async function refreshSources() {
+    if (!accessToken) return;
+    const rows=document.querySelector('#owner-sources-rows');
+    const note=document.querySelector('#owner-sources-status');
+    const labels={facebook:'فيسبوك',google:'Google',telegram:'تيليجرام',instagram:'إنستغرام',tiktok:'تيك توك',youtube:'يوتيوب',pinterest:'Pinterest',direct:'دخول مباشر أو غير معروف',other:'مصدر آخر'};
+    try {
+      const data=await request('/rest/v1/rpc/taha_owner_sources',{p_days:Number(range.value)},accessToken);
+      rows.replaceChildren();
+      for(const item of data){
+        const tr=document.createElement('tr');
+        for(const value of [labels[item.source]||item.source,nf.format(item.views),nf.format(item.visitors)]){
+          const td=document.createElement('td');
+          td.textContent=value;td.style.padding='10px';tr.append(td);
+        }
+        rows.append(tr);
+      }
+      note.textContent=data.length?'المشاهدات حسب مصدر الوصول':'لا توجد بيانات مصادر زيارات بعد.';
+    }catch{note.textContent='تعذّر تحميل مصادر الزيارات.'}
+  }
   async function refreshFiles() {
     if (!accessToken) return;
     const rows=document.querySelector('#owner-files-rows'), note=document.querySelector('#owner-files-status');
@@ -114,7 +133,7 @@
     try {
       const data = await request('/rest/v1/rpc/taha_owner_metrics', { p_days: days }, accessToken)
       if (session === generation && days === Number(range.value)) show(data)
-      if (session === generation) refreshFiles()
+      if (session === generation) { refreshFiles(); refreshSources() }
     } catch (error) {
       if (session !== generation) return
       if (['401','403'].includes(error.message)) lock('انتهت الجلسة. سجّل دخولك من جديد.')
@@ -143,6 +162,7 @@
       document.querySelector('#owner-title').focus()
       refreshFeedback()
       refreshFiles()
+      refreshSources()
     } catch {
       status.textContent = 'تعذّر تسجيل الدخول. تحقّق من حساب المالك وكلمة المرور.'
     } finally {
