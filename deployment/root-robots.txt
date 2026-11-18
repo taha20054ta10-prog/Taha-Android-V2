@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://taha20054ta10-prog.github.io/Taha-Android-V2/sitemap.xml

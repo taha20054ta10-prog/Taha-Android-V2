@@ -28,6 +28,7 @@
   function lock(message) {
     generation++
     window.TahaOwnerReports?.close()
+    window.TahaGoogleReports?.close()
     accessToken = undefined
     gate.hidden = false
     dashboard.hidden = true
@@ -161,6 +162,7 @@
       generation++
       accessToken = session.access_token
       window.TahaOwnerReports?.open(accessToken)
+      window.TahaGoogleReports?.open()
       login.reset()
       show(data)
       gate.hidden = true
