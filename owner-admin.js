@@ -91,6 +91,21 @@
     }
   }
 
+  async function refreshFiles() {
+    if (!accessToken) return;
+    const rows=document.querySelector('#owner-files-rows'), note=document.querySelector('#owner-files-status');
+    try {
+      const data=await request('/rest/v1/rpc/taha_owner_files',{p_days:Number(range.value)},accessToken);
+      rows.replaceChildren();
+      for(const item of data){
+        const tr=document.createElement('tr');
+        for(const value of [item.title,item.category,nf.format(item.clicks)]){
+          const td=document.createElement('td');td.textContent=value;td.style.padding='10px';tr.append(td);
+        }rows.append(tr);
+      }
+      note.textContent=data.length?'آخر ١٠٠ ملف حسب عدد الضغطات':'لا توجد ضغطات مسجلة في الفترة المختارة.';
+    }catch{note.textContent='تعذّر تحميل تفاصيل الملفات.'}
+  }
   async function refresh() {
     if (!accessToken || refreshing) return
     refreshing = true
@@ -99,6 +114,7 @@
     try {
       const data = await request('/rest/v1/rpc/taha_owner_metrics', { p_days: days }, accessToken)
       if (session === generation && days === Number(range.value)) show(data)
+      if (session === generation) refreshFiles()
     } catch (error) {
       if (session !== generation) return
       if (['401','403'].includes(error.message)) lock('انتهت الجلسة. سجّل دخولك من جديد.')
@@ -126,6 +142,7 @@
       dashboard.hidden = false
       document.querySelector('#owner-title').focus()
       refreshFeedback()
+      refreshFiles()
     } catch {
       status.textContent = 'تعذّر تسجيل الدخول. تحقّق من حساب المالك وكلمة المرور.'
     } finally {
