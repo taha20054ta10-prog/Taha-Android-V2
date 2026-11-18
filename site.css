@@ -197,3 +197,18 @@ body{background:radial-gradient(ellipse at 85% 5%,#1d2354 0%,transparent 40%),#0
 .cover-buttons a:nth-child(n+7){display:none}
 .news-ticker{display:none}
 @media(max-width:580px){.cover-buttons{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.cover-buttons a{min-height:64px;padding:10px 7px}}
+
+/* Service entry cards: concise summaries, with full existing sections kept below. */
+.taha-entry-section{padding-block:30px 18px}
+.taha-entry-heading{margin-bottom:18px}
+.taha-entry-heading h2{font-size:clamp(1.45rem,3vw,2rem);margin-bottom:5px}
+.taha-entry-heading p{color:var(--muted)}
+.taha-entry-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.taha-entry-card{display:flex;flex-direction:column;align-items:flex-start;gap:10px;border:1px solid #365475;border-radius:17px;padding:22px;background:linear-gradient(150deg,#14283e,#101a30);min-width:0}
+.taha-entry-icon{font-size:1.8rem}
+.taha-entry-card h3{font-size:1.12rem}
+.taha-entry-card p{font-size:.89rem;color:#d0dcea;line-height:1.8;flex:1}
+.taha-entry-card a{display:inline-flex;align-items:center;min-height:44px;padding:8px 12px;border:1px solid #6a9cbb;border-radius:9px;color:#b7eeff;font-weight:800;font-size:.87rem}
+.taha-entry-card a:hover{background:#203f5a}
+@media(max-width:850px){.taha-entry-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:480px){.taha-entry-grid{grid-template-columns:1fr}.taha-entry-card{padding:17px;gap:7px}}
