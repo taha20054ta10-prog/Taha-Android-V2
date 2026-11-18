@@ -10,6 +10,14 @@
     // Continue with an ID scoped to this page if browser storage is unavailable.
   }
 
+  window.tahaRecordFile = function(kind,title,category) {
+    if (!['pdf','download'].includes(kind) || !title) return;
+    fetch(TAHA_METRICS.endpoint + '/rest/v1/rpc/taha_record_file', {
+      method:'POST', headers:{'Content-Type':'application/json',apikey:TAHA_METRICS.publicKey},
+      body:JSON.stringify({p_visitor:visitor,p_kind:kind,p_title:String(title).slice(0,180),p_category:String(category||'أخرى').slice(0,40)}),
+      keepalive:true
+    }).catch(()=>{});
+  };
   function record(event) {
     fetch(TAHA_METRICS.endpoint + '/rest/v1/rpc/taha_record_visit', {
       method: 'POST',
