@@ -32,6 +32,6 @@
   setInterval(() => { if (!document.hidden) record('active') }, 45000)
   document.addEventListener('click', event => {
     const control = event.target.closest('[data-metric]')
-    if (control) record(control.dataset.metric)
+    if (control) { record(control.dataset.metric); if (control.dataset.metric === 'download') window.tahaRecordFile?.('download',control.dataset.fileTitle || control.closest('article,section')?.querySelector('h2,h3')?.textContent?.trim() || control.textContent.trim(),'تطبيق أندرويد'); }
   })
 })()
