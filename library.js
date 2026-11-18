@@ -140,20 +140,14 @@
     status.className = 'library-grade-label';
     status.textContent = [file.official ? 'وزارة التربية' : null,
       formatLabels[file.format], scopeLabels[file.scope]].filter(Boolean).join(' · ');
-    const pdf = file.format === 'pdf' || file.format === 'drive';
-    const action = externalLink(externalUrl(file),
-      pdf ? 'فتح PDF ↗' : file.format === 'viewer' ? 'فتح المعاينة ↗' : 'فتح المصدر ↗', 'button primary');
-    if (pdf && typeof HTMLDialogElement !== 'undefined' && typeof HTMLDialogElement.prototype.showModal === 'function') {
-      action.addEventListener('click', event => {
-        if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
-        event.preventDefault();
-        openViewer(file);
-      });
-    }
-    const track = () => window.tahaRecordFile?.((pdf || file.format==='viewer') ? 'pdf' : 'section', file.title, file.type === 'book' ? 'كتاب مدرسي' : file.type === 'notes' ? 'ملزمة' : file.type === 'exams' ? 'أسئلة وزارية' : 'ملف دراسي', {grade:gradeLabel,subject:subjects[file.subject]||file.subject});
-    action.addEventListener('click', track);
-    card.append(makeCover(file, gradeLabel), subtitle, title, status, action);
-    if (pdf) { const extra = externalLink(externalUrl(file), 'فتح في تبويب جديد ↗'); extra.addEventListener('click', track); card.append(extra); }
+    const detail = document.createElement('a');
+    detail.className = 'button primary';
+    detail.href = 'book.html?' + new URLSearchParams({grade:file.grade,type:file.type,title:file.title});
+    detail.textContent = '📖 تفاصيل الملف وطريقة القراءة ←';
+    const formatNote = document.createElement('p');
+    formatNote.className = 'library-grade-label';
+    formatNote.textContent = file.format === 'source' ? 'الرابط يؤدي إلى صفحة مصدر خارجي' : 'القراءة متاحة عبر صفحة التفاصيل';
+    card.append(makeCover(file, gradeLabel), subtitle, title, status, formatNote, detail);
     if (alternatives.length) {
       const versions = document.createElement('details');
       const summary = document.createElement('summary');
