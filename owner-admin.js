@@ -27,6 +27,7 @@
 
   function lock(message) {
     generation++
+    window.TahaOwnerReports?.close()
     accessToken = undefined
     gate.hidden = false
     dashboard.hidden = true
@@ -93,11 +94,13 @@
 
   async function refreshSources() {
     if (!accessToken) return;
+    const sourceGeneration=generation;
     const rows=document.querySelector('#owner-sources-rows');
     const note=document.querySelector('#owner-sources-status');
     const labels={facebook:'فيسبوك',google:'Google',telegram:'تيليجرام',instagram:'إنستغرام',tiktok:'تيك توك',youtube:'يوتيوب',pinterest:'Pinterest',direct:'دخول مباشر أو غير معروف',other:'مصدر آخر'};
     try {
       const data=await request('/rest/v1/rpc/taha_owner_sources',{p_days:Number(range.value)},accessToken);
+      if(sourceGeneration!==generation)return;
       rows.replaceChildren();
       for(const item of data){
         const tr=document.createElement('tr');
@@ -112,9 +115,11 @@
   }
   async function refreshFiles() {
     if (!accessToken) return;
+    const sourceGeneration=generation;
     const rows=document.querySelector('#owner-files-rows'), note=document.querySelector('#owner-files-status');
     try {
       const data=await request('/rest/v1/rpc/taha_owner_files',{p_days:Number(range.value)},accessToken);
+      if(sourceGeneration!==generation)return;
       rows.replaceChildren();
       for(const item of data){
         const tr=document.createElement('tr');
@@ -155,6 +160,7 @@
       const data = await request('/rest/v1/rpc/taha_owner_metrics', { p_days: Number(range.value) }, session.access_token)
       generation++
       accessToken = session.access_token
+      window.TahaOwnerReports?.open(accessToken)
       login.reset()
       show(data)
       gate.hidden = true

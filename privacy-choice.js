@@ -1,0 +1,1 @@
+document.getElementById('analytics-reset').addEventListener('click',()=>{window['ga-disable-G-3XWG1JH4VT']=true;try{for(const k of ['taha-visitor-v1','taha-session-v2','taha-session-test-v2'])localStorage.removeItem(k);localStorage.setItem('taha-analytics-consent','false')}catch{}location.reload()});

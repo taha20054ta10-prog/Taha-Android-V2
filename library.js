@@ -150,7 +150,7 @@
         openViewer(file);
       });
     }
-    const track = () => window.tahaRecordFile?.(pdf ? 'pdf' : 'download', file.title, file.type === 'book' ? 'كتاب مدرسي' : file.type === 'notes' ? 'ملزمة' : file.type === 'exams' ? 'أسئلة وزارية' : 'ملف دراسي');
+    const track = () => window.tahaRecordFile?.((pdf || file.format==='viewer') ? 'pdf' : 'section', file.title, file.type === 'book' ? 'كتاب مدرسي' : file.type === 'notes' ? 'ملزمة' : file.type === 'exams' ? 'أسئلة وزارية' : 'ملف دراسي', {grade:gradeLabel,subject:subjects[file.subject]||file.subject});
     action.addEventListener('click', track);
     card.append(makeCover(file, gradeLabel), subtitle, title, status, action);
     if (pdf) { const extra = externalLink(externalUrl(file), 'فتح في تبويب جديد ↗'); extra.addEventListener('click', track); card.append(extra); }
@@ -160,7 +160,7 @@
       summary.textContent = 'روابط ونسخ إضافية';
       versions.append(summary);
       for (const entry of alternatives) {
-        versions.append(externalLink(externalUrl(entry), entry.title + ' ↗'));
+        const alt=externalLink(externalUrl(entry), entry.title + ' ↗'); alt.addEventListener('click',()=>window.tahaRecordFile?.('pdf',entry.title,'ملف دراسي',{grade:gradeLabel,subject:subjects[entry.subject]||entry.subject})); versions.append(alt);
       }
       card.append(versions);
     }
