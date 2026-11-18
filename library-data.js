@@ -275,5 +275,10 @@ const libraryCatalog = [
   {"grade":"15","type":"exams","title":"أسئلة اللغة العربية الوزارية للسادس الإعدادي الأدبي – الدور الأول 2026","url":"https://qus.haltaelam.com/arabic6l-min2026-d1/","subject":"arabic","format":"source","year":"2026","scope":"archive"},
   {"grade":"2","type":"notes","title":"ملزمة الرياضيات — الثاني الابتدائي 2026–2027","url":"https://ar3ab.com/mam2p/","subject":"math","format":"source","year":"2026–2027"},
   {"grade":"3","type":"notes","title":"ملزمة العلوم — الثالث الابتدائي 2026–2027","url":"https://ar3ab.com/scm3p/","subject":"science","format":"source","year":"2026–2027"},
-  {"grade":"12","type":"notes","title":"ملخص كلاميات فصل الوراثة — السادس العلمي 2027","url":"https://iedaad.com/files/ملخص-كلاميات-فصل-الوراثة-للسادس-العلم/","subject":"biology","format":"source","author":"قاسم آل ذيب","year":"2027","scope":"partial"}
+  {"grade":"12","type":"notes","title":"ملخص كلاميات فصل الوراثة — السادس العلمي 2027","url":"https://iedaad.com/files/ملخص-كلاميات-فصل-الوراثة-للسادس-العلم/","subject":"biology","format":"source","author":"قاسم آل ذيب","year":"2027","scope":"partial"},
+  {"grade":"1","type":"book","title":"قراءتي — كتاب الطالب للأول الابتدائي 2026–2027","url":"https://iraqedu.net/كتاب-القراءة-للصف-الاول-الابتدائي/","subject":"arabic","format":"source","year":"2026","scope":"source-edition"},
+  {"grade":"1","type":"book","title":"قراءتي — كتاب نشاط القراءة للأول الابتدائي 2026–2027","url":"https://iraqedu.net/كتاب-نشاط-القراءة-للصف-الاول-ابتدائي/","subject":"arabic","format":"source","year":"2026","scope":"source-edition"},
+  {"grade":"1","type":"book","title":"قراءتي — دليل المعلم للأول الابتدائي 2026–2027","url":"https://iraqedu.net/دليل-معلم-القراءة-للصف-الاول-ابتدائي/","subject":"arabic","format":"source","year":"2026","scope":"source-edition"},
+  {"grade":"10","type":"book","title":"رياضيات الرابع العلمي 2026–2027 — فهرس النسخة","url":"https://iraqedu.net/كتاب-الرياضيات-للصف-الرابع-العلمي/","subject":"math","format":"source","year":"2026","scope":"edition-unconfirmed"},
+  {"grade":"13","type":"book","title":"رياضيات الرابع الأدبي — الفصل الأول من طبعة 2026","url":"https://iraqedu.net/كتاب-الرياضيات-للصف-الرابع-الادبي/","subject":"math","format":"source","year":"2026","scope":"partial"}
 ];

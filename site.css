@@ -185,3 +185,5 @@ body{background:radial-gradient(ellipse at 85% 5%,#1d2354 0%,transparent 40%),#0
 .slide-logo.original-app-logo img{width:100%;height:100%;object-fit:contain}
 .slide-logo.original-app-logo.portrait-art img{width:94%;height:94%}
 .app-icon.original-product-logo{display:block;object-fit:contain}
+
+.site-news-label{color:inherit;text-decoration:none}.site-news-label:hover,.site-news-label:focus-visible{text-decoration:underline}

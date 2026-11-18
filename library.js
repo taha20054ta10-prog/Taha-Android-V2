@@ -26,7 +26,7 @@
   const scopeLabels = {
     partial: 'محتوى جزئي', archive: 'نسخة في أرشيف خارجي', compilation: 'تجميع تدريبي لأسئلة وزارية',
     'edition-unconfirmed': 'اكتمال الطبعة وتطابقها مع المنهج المحدّث قيد التحقق',
-    publisher: 'فهرس الموزع'
+    publisher: 'فهرس الموزع', 'source-edition': 'إصدار 2026–2027 بحسب المصدر'
   };
   const gradeSlugs = [
     'primary-1', 'primary-2', 'primary-3', 'primary-4', 'primary-5', 'primary-6',
