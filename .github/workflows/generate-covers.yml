@@ -1,9 +1,5 @@
 name: Generate illustrated school covers
 on:
-  push:
-    paths:
-      - 'library-import/generate_covers.py'
-      - '.github/workflows/generate-covers.yml'
   workflow_dispatch:
 permissions:
   contents: write
