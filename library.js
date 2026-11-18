@@ -1,121 +1,243 @@
 'use strict';
-// In-site Iraqi school library. Populate with verified published PDF links only.
-(()=>{
- const grade=document.getElementById('library-grade'),buttons=[...document.querySelectorAll('[data-library-type]')],results=document.getElementById('library-results'),message=document.getElementById('library-message'),empty=document.getElementById('library-empty');
- if(!grade||!message||!empty||!results)return;
- const files=[{"grade":"2","type":"book","title":"كتاب الرياضيات الثاني الابتدائي — طبعة 2025 (180 صفحة)","url":"https://www.stadiraq.com/PDF/1760565450.pdf"},{"grade":"4","type":"book","title":"كتاب القراءة الرابع الابتدائي — PDF كامل","url":"https://bk1.shr4.com/books/b4/2025-2026/كتاب القراءة الرابع الابتدائي.pdf"},{"grade":"2","type":"book","title":"كتاب نشاط الإنكليزي الثاني الابتدائي — PDF كامل","url":"https://bk1.shr4.com/books/b2/2024-2025/كتاب الانكليزي النشاط الصف الثاني الابتدائي.pdf"},{"grade":"6","type":"book","title":"كتاب نشاط الإنكليزي السادس الابتدائي — PDF كامل","url":"https://bk1.shr4.com/books/b6/2025-2026/الانكليزي/كتاب الانكليزي النشاط للصف السادس الابتدائي.pdf"},{"grade":"3","type":"book","title":"كتاب نشاط العلوم الثالث الابتدائي — PDF كامل","url":"https://bk1.shr4.com/books/b3/2025-2026/كتاب نشاط العلوم الثالث الابتدائي.pdf"},{"grade":"9","type":"book","title":"كتاب الانكليزي الثالث المتوسط","url":"https://drive.google.com/file/d/1eNV1odcEl9Bagww9xKXxQPiJfJqQv3aX/preview"},{"grade":"12","type":"book","title":"كتاب الطالب السادس الاعدادي","url":"https://drive.google.com/file/d/15gKj-TmjEaFbP2QStaYwRiAAWoqbDbT2/preview"},{"grade":"7","type":"book","title":"كتاب الانكليزي الطالب الاول المتوسط","url":"https://drive.google.com/file/d/1ebTmuEm_sv5Yv3tNpQxHJBAruwF1fxPc/preview"},{"grade":"6","type":"notes","title":"ملزمة اجتماعيات عباس العامري السادس الابتدائي 2025","url":"https://drive.google.com/file/d/1zz_LS51pQg3ook7zVp8BVUDNitc5wFDT/preview"},{"grade":"10","type":"book","title":" كتاب جرائم حزب البعث 2026 الرابع الاعدادي","url":"https://drive.google.com/file/d/1KwcU3qZwZORYtWqWv6p8RueQJzSWtaU7/preview"},{"grade":"11","type":"book","title":"كتاب الكردي الخامس الاعدادي (1)","url":"https://drive.google.com/file/d/1XY-ntpUdQf1Pkx1_1LdijZMDFL-yrVka/preview"},{"grade":"11","type":"book","title":"كتاب الفرنسي الخامس الاعدادي (1)","url":"https://drive.google.com/file/d/1-phI1HKILAt2PgCbfaU1IsdUGrGPf6xD/preview"},{"grade":"10","type":"book","title":"كتاب الكردي الصف الرابع الاعدادي","url":"https://drive.google.com/file/d/1YWxUfZPGjXm08b0_-hkikc000v4k8Y2D/preview"},{"grade":"11","type":"book","title":"كتاب الحاسوب الخامس الاعدادي","url":"https://drive.google.com/file/d/1BPiGxlL-Ogp8WfEbcpkBPxIF9nTl_Kw8/preview"},{"grade":"11","type":"book","title":"كتاب الرياضيات الخامس العلمي","url":"https://drive.google.com/file/d/1kuHHdsrd3A9fX_gWFTsRZJNJ8ymrbqYi/preview"},{"grade":"7","type":"book","title":"كتاب الطالب الفرنسي الاول متوسط المنهج الجديد","url":"https://drive.google.com/file/d/1kiMlZ26QtkmPb1T7uOhiE2-pK-2jU3SP/preview"},{"grade":"6","type":"book","title":"كتاب نشاط العلوم السادس الابتدائي","url":"https://drive.google.com/file/d/1QiJXj0Aa0fEtp2_kTkmKYQu09yIL-Ust/preview"},{"grade":"6","type":"book","title":"كتاب تمرينات الرياضيات السادس الابتدائي","url":"https://drive.google.com/file/d/1WjTTipG5RW52qUZDhjmXj7uN4B0YPr1C/preview"},{"grade":"6","type":"book","title":"كتاب القراءة السادس الابتدائي","url":"https://drive.google.com/file/d/1YsbcKHGfzCO6d1d0aXykdh1SOFsTnnH6/preview"},{"grade":"5","type":"book","title":"كتاب العلوم النشاط الخامس الابتدائي","url":"https://drive.google.com/file/d/1cSZp8Uszg1hKZb7te8FbNZY0r6eZyqSM/preview"},{"grade":"5","type":"notes","title":"ملزمة الاجتماعيات الخامس الابتدائي الاستاذ عماد علي","url":"https://drive.google.com/file/d/1ZekVd7RnD7QSALK7mbgmBhes2OK93JUf/preview"},{"grade":"6","type":"book","title":"كتاب القواعد السادس الابتدائي","url":"https://drive.google.com/file/d/1POyExJU-KWzrWTNtXBNb4V5QaXKTnIZJ/preview"},{"grade":"6","type":"book","title":"كتاب الاجتماعيات السادس الابتدائي","url":"https://drive.google.com/file/d/18niTWYBMKB6z5TTTwa_1J6Jn6-oE2amK/preview"},{"grade":"11","type":"book","title":"كتاب الفيزياء الخامس الاعدادي","url":"https://drive.google.com/file/d/1xjUntupzglhjG0hxUgPrxwh5GV4oSEpQ/preview"},{"grade":"7","type":"book","title":"كتاب الاسلامية الاول المتوسط","url":"https://drive.google.com/file/d/1OH-Lqrm_iYyjjiFiWHTNyoA-1rL7uu9A/preview"},{"grade":"7","type":"book","title":"كتاب الاجتماعيات الاول المتوسط","url":"https://drive.google.com/file/d/12qfuTKj-q6S6bmyr5DY5MZ5V4s6Fic4j/preview"},{"grade":"7","type":"book","title":"كتاب التربية الاخلاقية الاول المتوسط","url":"https://drive.google.com/file/d/1YSOmjLFoQmxPFebXzSlr8I3nK_OX2q3_/preview"},{"grade":"7","type":"book","title":"كتاب الحاسوب الاول المتوسط","url":"https://drive.google.com/file/d/10Wl8EWY4K49xH_e56dWwESMbf4Xv0fkl/preview"},{"grade":"9","type":"book","title":"كتاب الاجتماعيات الثالث المتوسط","url":"https://drive.google.com/file/d/1OiUNK1G3rsqwBvK31BzP8CREAfbaslPD/preview"},{"grade":"7","type":"book","title":"كتاب الانكليزي النشاط الاول المتوسط","url":"https://drive.google.com/file/d/19OMUVaFki5sOrKopNV3dNXNFAfyctNA0/preview"},{"grade":"9","type":"book","title":"كتاب الفيزياء الثالث المتوسط","url":"https://drive.google.com/file/d/1P11YNHUwmpwUxGo0n8mHrig_8H2-Wwpy/preview"},{"grade":"7","type":"book","title":"كتاب العربي الاول المتوسط الجزء الاول","url":"https://drive.google.com/file/d/15HbbZsaVr3kRYiA1mN-MCFJ93GYoGmdB/preview"},{"grade":"14","type":"book","title":"كتاب الرياضيات الخامس الادبي","url":"https://drive.google.com/file/d/1QNdqeUQZ0NcxC8PROURXEhS44_8q0wMb/preview"},{"grade":"11","type":"book","title":"كتاب العربي الخامس الاعدادي الجزء الاول","url":"https://drive.google.com/file/d/1RLjREu5JoMKGpD8_b_gLkvzjRHdn_S0V/preview"},{"grade":"7","type":"book","title":"كتاب العربي الاول المتوسط الجزء الثاني","url":"https://drive.google.com/file/d/1dbWwmcbuIk5B5dHCMkdMr3GlmliQz9lG/preview"},{"grade":"6","type":"book","title":"كتاب الاسلامية السادس الابتدائي","url":"https://drive.google.com/file/d/1a_VcmloZrQIJv9D7dmOXKOubK3sSI5Zb/preview"},{"grade":"8","type":"book","title":"كتاب العربي الثاني المتوسط الجزء الاول","url":"https://drive.google.com/file/d/1OEdt_8GFL9zGZtO_IRLZWKWZincLwABe/preview"},{"grade":"10","type":"book","title":"كتاب الفرنسي الرابع الاعدادي","url":"https://drive.google.com/file/d/1NQeM-KwwkHvddSyZqSeGu1VZkiZ7jJOr/preview"},{"grade":"7","type":"book","title":"كتاب الاحياء الاول المتوسط","url":"https://drive.google.com/file/d/1geNodbkHQf3VlO53OMlCI2GNAyVNjsXG/preview"},{"grade":"9","type":"book","title":"كتاب الاسلامية الثالث المتوسط","url":"https://drive.google.com/file/d/1XKHbp6l4_1hlngfukXyHwNizP7yEzSmo/preview"},{"grade":"7","type":"book","title":"كتاب الكيمياء الاول المتوسط","url":"https://drive.google.com/file/d/1O-NOD6M678eCwnreSax7_Zm1wN6kK8k9/preview"},{"grade":"12","type":"book","title":"كتاب العربي السادس الاعدادي الجزء الاول","url":"https://drive.google.com/file/d/1gnacaVOCO7CqgJH74j7monJij_LFewmD/preview"},{"grade":"6","type":"book","title":"كتاب الرياضيات السادس الابتدائي","url":"https://drive.google.com/file/d/1qvYJnF__-cQg47cagZAXgIXV1EoZo_27/preview"},{"grade":"15","type":"book","title":"كتاب الرياضيات السادس الادبي","url":"https://drive.google.com/file/d/10mWTCKdNiDS23xURlIyt9GJHguyEL6sf/preview"},{"grade":"12","type":"book","title":"كتاب العربي السادس الاعدادي الجزء الثاني","url":"https://drive.google.com/file/d/1TztHvEUgty3NS5yJ-SiGLQffsxyQCS2r/preview"},{"grade":"14","type":"book","title":"كتاب التاريخ الخامس الادبي","url":"https://drive.google.com/file/d/1Mkqo6UnuYBWQBkPK-uN4Mb0doQtibf8C/preview"},{"grade":"7","type":"book","title":"كتاب الفيزياء الاول المتوسط","url":"https://drive.google.com/file/d/17C9Znib_fAMM1QThbuhViS-_Ad6r_FqV/preview"},{"grade":"9","type":"book","title":"كتاب العربي الثالث المتوسط الجزء الثاني","url":"https://drive.google.com/file/d/1quyKYOMXbT_0e8NL9Da60xGZjp64-uBA/preview"},{"grade":"9","type":"book","title":"كتاب العربي الثالث المتوسط الجزء الاول","url":"https://drive.google.com/file/d/1DqKeUGPW4uwc5F7l3VOiASZd3w9vaa1d/preview"},{"grade":"11","type":"book","title":"كتاب العربي الخامس الاعدادي الجزء الثاني","url":"https://drive.google.com/file/d/1ZcHyXnUMCcPDdQVdfmNI25IcNRdo0ihM/preview"},{"grade":"14","type":"book","title":"كتب الفلسفة الخامس الادبي","url":"https://drive.google.com/file/d/1-ghKFJiYTwctG2wmL11ivLi1d6DR-4dU/preview"},{"grade":"7","type":"book","title":"كتاب الرياضيات الاول المتوسط","url":"https://drive.google.com/file/d/1aNby0ioRGuiz58MV67JxUrxJsx6dog8V/preview"},{"grade":"7","type":"book","title":"كتاب الرياضيات الاول المتوسط","url":"https://drive.google.com/file/d/1CLZWsdYDjCeuRgVMae9bcwsYdV9Az9gI/preview"},{"grade":"8","type":"book","title":"كتاب الاسلامية الثاني المتوسط","url":"https://drive.google.com/file/d/1E71oB0V44mQcuSzlVxlD0yfJGvj6QTp8/preview"},{"grade":"6","type":"book","title":"كتاب العلوم السادس الابتدائي","url":"https://drive.google.com/file/d/1hHSjYlxNHCkx8_D9ZeYtBxW7szZZ0Rdu/preview"},{"grade":"8","type":"book","title":"كتاب الاحياء الثاني المتوسط","url":"https://drive.google.com/file/d/1Me1qgUdsi1KBO1BwplhB5GkfMhgg0VUo/preview"},{"grade":"14","type":"book","title":"كتاب الجغرافية الخامس الادبي","url":"https://drive.google.com/file/d/16uQOg5lDUN3aZUyDmPoKqO7DJK2jGSjn/preview"},{"grade":"15","type":"book","title":"كتاب التاريخ السادس الادبي","url":"https://drive.google.com/file/d/1WBFbwpMLttNlrWBwJ3ghU-JT3nCLRF3R/preview"},{"grade":"6","type":"book","title":"اجتماعيات حامد ياسين السادس ابتدائي 2025","url":"https://drive.google.com/file/d/1T7cM7ZQpizyRmceO-N7oZFNUAsShaS9F/preview"},{"grade":"12","type":"book","title":"كتاب الانكليزي الطالب السادس الاعدادي","url":"https://drive.google.com/file/d/1S_tlxcBOTTPOAIvIP9dsoVyHOtK1I1_u/preview"},{"grade":"10","type":"book","title":"كتاب الانكليزي (الطالب) الرابع الاعدادي","url":"https://drive.google.com/file/d/1yWrGFwY8R_knxWP4x4Q6Oz7ACwehUsWq/preview"},{"grade":"9","type":"book","title":"كتاب الرياضيات الثالث المتوسط","url":"https://drive.google.com/file/d/1uNvIvJ2Hugx6z-nux2tJ-EpV8peXR5WH/preview"},{"grade":"12","type":"book","title":"كتاب الفرنسي السادس الاعدادي","url":"https://drive.google.com/file/d/1VTF5zrF_vhqnLmlVO0ThtIirGSjy1k9v/preview"},{"grade":"12","type":"book","title":"كتاب الرياضيات السادس العلمي","url":"https://drive.google.com/file/d/1_uEn4pWh7xelWAj-X65lsw6EvsYUbKZC/preview"},{"grade":"9","type":"book","title":"كتاب الكيمياء الثالث المتوسط","url":"https://drive.google.com/file/d/1zECy0QzU8t-0gZoFQVGJU3Rg5IV2yYBg/preview"},{"grade":"5","type":"book","title":"كتاب تمرينات الرياضيات المنهج الجديد الخامس الابتدائي 2027 pdf","url":"https://drive.google.com/file/d/19DHxz1UPhfqTQyoNmYa1OXzQziJh9xJt/preview"},{"grade":"3","type":"book","title":"كتاب نشاط العلوم الثالث الابتدائي 2027 pdf","url":"https://drive.google.com/file/d/1R24bhouFv_4-qS5n1VMosi1Ay2XSljAe/preview"},{"grade":"4","type":"book","title":"كتاب تمرينات الرياضيات الرابع الابتدائي 2027 pdf","url":"https://drive.google.com/file/d/10pVVWNc7ne-JrUoCWXNNK0-eJrIHOOY-/preview"},{"grade":"3","type":"book","title":"كتاب نشاط الانكليزي الثالث الابتدائي 2027 pdf","url":"https://drive.google.com/file/d/1LqdcoNMnFtxBUAmLKWAKfKKbqheKrzK5/preview"},{"grade":"5","type":"book","title":"كتاب القواعد للصف الخامس الابتدائي 2027","url":"https://drive.google.com/file/d/1x87l5GBVpy2mspiDX2tKytQT0Gl61_AB/preview"},{"grade":"4","type":"book","title":"كتاب القواعد للصف الرابع الابتدائي 2027","url":"https://drive.google.com/file/d/1GxP4J13xxmL4ZPPp5bL3Cfgu6XilTfyj/preview"},{"grade":"3","type":"book","title":"كتاب القراءة للصف الثالث الابتدائي 2027","url":"https://drive.google.com/file/d/1R0nn79zKC-Kk4FyEGinaPwwi6xcKTHcy/preview"},{"grade":"3","type":"book","title":"كتاب تمرينات الرياضيات الثالث الابتدائي 2027","url":"https://drive.google.com/file/d/14uIAfeU2QJvzd8i8BrWNAW1fKdMlbmo-/preview"},{"grade":"2","type":"book","title":"كتاب الاسلامية للصف الثاني الابتدائي 2027","url":"https://drive.google.com/file/d/1emHilQXtzMK6ZjmkcxZIZUBmTCuTuUig/preview"},{"grade":"5","type":"book","title":"كتاب الرياضيات للصف الخامس الابتدائي 2027","url":"https://drive.google.com/file/d/1JAjxfNb6Wd4r3C1JcbZXrFNwUzCNXFoN/preview"},{"grade":"5","type":"book","title":"كتاب القراءة للصف الخامس الابتدائي 2027","url":"https://drive.google.com/file/d/1jnflLValLhYMw9vA-kTqZq0RbJkcTxL5/preview"},{"grade":"1","type":"book","title":"كتاب الانكليزي للأول الابتدائي 2027","url":"https://drive.google.com/file/d/1_f_hn0FfPSp3DEc_Fumk2W5tsyx1B8Q9/preview"},{"grade":"1","type":"book","title":"كتاب تمرينات الرياضيات الأول الابتدائي","url":"https://drive.google.com/file/d/1MZOYGQY3vWZn9kpInL3SzsSpXLwZXYL9/preview"},{"grade":"1","type":"book","title":"كتاب الرياضيات الأول الابتدائي 2027","url":"https://drive.google.com/file/d/1uibVEBlYsftjaRRXctAJlqIaiKIzkZTc/preview"},{"grade":"1","type":"book","title":"كتاب العلوم الأول الابتدائي 2027","url":"https://drive.google.com/file/d/12Wta5GIOC-92yf3ZIOE5FIMvn9g57F_s/preview"},{"grade":"1","type":"book","title":"كتاب القراءة الأول الابتدائي 2027","url":"https://drive.google.com/file/d/15o1IT8_h-HgFeBRVulAuYdi0HfMXsjhc/preview"},{"grade":"13","type":"book","title":"كتاب علم الاجتماع — الرابع الأدبي (وزارة التربية، طبعة 2025)","url":"https://bk3.shr4.com/books/bb4/2025-2026/%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9%20%D8%A7%D9%84%D8%A7%D8%AF%D8%A8%D9%8A/%D9%83%D8%AA%D8%A7%D8%A8%20%D8%B9%D9%84%D9%85%20%D8%A7%D9%84%D8%A7%D8%AC%D8%AA%D9%85%D8%A7%D8%B9%20%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9%20%D8%A7%D9%84%D8%A7%D8%AF%D8%A8%D9%8A.pdf"},{"grade":"1","type":"book","title":"كتاب القرآن الكريم والتربية الإسلامية — الأول الابتدائي — طبعة 2025","url":"https://bk1.shr4.com/books/b1/2025-2026/%D9%83%D8%AA%D8%A7%D8%A8%20%D8%A7%D9%84%D8%A7%D8%B3%D9%84%D8%A7%D9%85%D9%8A%D8%A9%20%D8%A7%D9%84%D8%A7%D9%88%D9%84%20%D8%A7%D9%84%D8%A7%D8%A8%D8%AA%D8%AF%D8%A7%D8%A6%D9%8A.pdf"},{"grade":"6","type":"book","title":"كتاب الرياضيات — السادس الابتدائي — طبعة 2025","url":"https://bk1.shr4.com/books/b6/2025-2026/%D9%83%D8%AA%D8%A7%D8%A8%20%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6%D9%8A%D8%A7%D8%AA%20%D8%A7%D9%84%D8%B3%D8%A7%D8%AF%D8%B3%20%D8%A7%D9%84%D8%A7%D8%A8%D8%AA%D8%AF%D8%A7%D8%A6%D9%8A.pdf"},{"grade":"9","type":"book","title":"كتاب الرياضيات — الثالث المتوسط — طبعة 2025","url":"https://bk2.shr4.com/books/bb3/2025-2026/%D9%83%D8%AA%D8%A7%D8%A8%20%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6%D9%8A%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AB%D8%A7%D9%84%D8%AB%20%D9%85%D8%AA%D9%88%D8%B3%D8%B7.pdf"},{"grade":"5","type":"book","title":"كتاب العلوم — الخامس الابتدائي — طبعة 2025","url":"https://bk1.shr4.com/books/b5/2025-2026/%D9%83%D8%AA%D8%A7%D8%A8%20%D8%A7%D9%84%D8%B9%D9%84%D9%88%D9%85%20%D8%A7%D9%84%D8%AE%D8%A7%D9%85%D8%B3%20%D8%A7%D9%84%D8%A7%D8%A8%D8%AA%D8%AF%D8%A7%D8%A6%D9%8A.pdf"}]
 
- files.push(...[{"grade":"6","type":"book","title":"كتاب العلوم السادس الابتدائي 2027 — صفحة المصدر","url":"https://mlazimna.com/file/كتاب-العلوم-الصف-السادس-الابتدائي-2027-pdf/","externalSource":true},{"grade":"6","type":"book","title":"كتاب نشاط العلوم السادس الابتدائي 2027 — صفحة المصدر","url":"https://mlazimna.com/file/كتاب-نشاط-العلوم-الصف-السادس-الابتدائي/","externalSource":true},{"grade":"6","type":"notes","title":"ملزمة اللغة العربية — عمار السلامي — السادس الابتدائي 2027","url":"https://mlazimna.com/file/ملزمة-عربي-عمار-السلامي-الصف-السادس-ال/","externalSource":true},{"grade":"6","type":"notes","title":"ملزمة الاجتماعيات — عباس العامري — السادس الابتدائي 2027","url":"https://mlazimna.com/file/تحميل-ملزمة-اجتماعيات-الصف-السادس-الابتدائي/","externalSource":true},{"grade":"6","type":"exams","title":"وزاريات قواعد اللغة العربية — السادس الابتدائي 2026","url":"https://mlazimna.com/file/ملزمة-وزاريات-قواعد-الصف-السادس-الابت/","externalSource":true}]);
- files.push(...[{"grade":"6","type":"book","title":"كتاب الاجتماعيات السادس الابتدائي 2027 — المصدر","url":"https://mlazimna.com/stage/المرحلة-الابتدائية/primary-6/","externalSource":true},{"grade":"6","type":"book","title":"كتاب القواعد السادس الابتدائي 2027 — المصدر","url":"https://mlazimna.com/file/كتاب-القواعد-الصف-السادس-الابتدائي-2027-pdf/","externalSource":true},{"grade":"6","type":"notes","title":"ملزمة الاجتماعيات محمد فؤاد — السادس الابتدائي 2026","url":"https://mlazimna.com/stage/المرحلة-الابتدائية/primary-6/","externalSource":true},{"grade":"6","type":"exams","title":"أسئلة عربي تمهيدي السادس الابتدائي 2022 — فهرس المصدر","url":"https://mlazimna.com/stage/المرحلة-الابتدائية/primary-6/","externalSource":true}]);
- files.push(...[{"grade":"9","type":"book","title":"كتاب اللغة العربية الجزء الأول — الثالث المتوسط 2027","url":"https://mlazimna.com/file/كتاب-العربي-الصف-الثالث-متوسط-ج1-2027-pdf/","externalSource":true},{"grade":"9","type":"book","title":"كتاب اللغة العربية الجزء الثاني — الثالث المتوسط 2027","url":"https://mlazimna.com/file/كتاب-العربي-الصف-الثالث-المتوسط-ج2-2027-pdf/","externalSource":true},{"grade":"9","type":"book","title":"كتاب اللغة الفرنسية — الثالث المتوسط 2027","url":"https://mlazimna.com/file/كتاب-الفرنسي-الصف-الثالث-متوسط-2027-pdf/","externalSource":true},{"grade":"9","type":"book","title":"كتاب التربية الإسلامية — الثالث المتوسط 2027","url":"https://mlazimna.com/file/كتاب-الاسلامية-ثالث-متوسط-2027-pdf-وزارة-التر/","externalSource":true}]);
- files.push(...[{"grade":"1","type":"notes","title":"ملزمة حروف الانكليزي الصف الاول ابتدائي 2026 – 2027 pdf","url":"https://mlazimna.com/file/%D8%AA%D8%AD%D9%85%D9%8A%D9%84-%D9%85%D9%84%D8%B2%D9%85%D8%A9-%D8%AD%D8%B1%D9%88%D9%81-%D8%A7%D9%84%D8%A7%D9%86%D9%83%D9%84%D9%8A%D8%B2%D9%8A-%D8%A7%D9%84%D8%B5%D9%81-%D8%A7%D9%84%D8%A7%D9%88%D9%84/","externalSource":true},{"grade":"1","type":"notes","title":"ملزمة الانكليزي الصف الاول ابتدائي 2026 – 2027 pdf","url":"https://mlazimna.com/file/%D8%AA%D8%AD%D9%85%D9%8A%D9%84-%D9%85%D9%84%D8%B2%D9%85%D8%A9-%D8%A7%D9%84%D8%A7%D9%86%D9%83%D9%84%D9%8A%D8%B2%D9%8A-%D8%A7%D9%84%D8%B5%D9%81-%D8%A7%D9%84%D8%A7%D9%88%D9%84-%D8%A7%D8%A8%D8%AA%D8%AF/","externalSource":true},{"grade":"5","type":"notes","title":"ملزمة العلوم الصف الخامس الابتدائي 2026 – 2027 pdf","url":"https://mlazimna.com/file/%D8%AA%D8%AD%D9%85%D9%8A%D9%84-%D9%85%D9%84%D8%B2%D9%85%D8%A9-%D8%A7%D9%84%D8%B9%D9%84%D9%88%D9%85-%D8%A7%D9%84%D8%B5%D9%81-%D8%A7%D9%84%D8%AE%D8%A7%D9%85%D8%B3-%D8%A7%D9%84%D8%A7%D8%A8%D8%AA%D8%AF/","externalSource":true},{"grade":"5","type":"notes","title":"ملزمة الاجتماعيات الصف الخامس الابتدائي 2026 – 2027 pdf","url":"https://mlazimna.com/file/%D8%AA%D8%AD%D9%85%D9%8A%D9%84-%D9%85%D9%84%D8%B2%D9%85%D8%A9-%D8%A7%D9%84%D8%A7%D8%AC%D8%AA%D9%85%D8%A7%D8%B9%D9%8A%D8%A7%D8%AA-%D8%A7%D9%84%D8%B5%D9%81-%D8%A7%D9%84%D8%AE%D8%A7%D9%85%D8%B3-%D8%A7/","externalSource":true},{"grade":"5","type":"notes","title":"ملزمة العربي الصف الخامس الاابتدائي 2026 – 2027 pdf","url":"https://mlazimna.com/file/%D8%AA%D8%AD%D9%85%D9%8A%D9%84-%D9%85%D9%84%D8%B2%D9%85%D8%A9-%D8%A7%D9%84%D8%B9%D8%B1%D8%A8%D9%8A-%D8%A7%D9%84%D8%B5%D9%81-%D8%A7%D9%84%D8%AE%D8%A7%D9%85%D8%B3-%D8%A7%D9%84%D8%A7%D8%A7%D8%A8%D8%AA/","externalSource":true},{"grade":"6","type":"notes","title":"ملزمة اجتماعيات الصف السادس الابتدائي PDF الاستاذ عباس العامري","url":"https://mlazimna.com/file/%D8%AA%D8%AD%D9%85%D9%8A%D9%84-%D9%85%D9%84%D8%B2%D9%85%D8%A9-%D8%A7%D8%AC%D8%AA%D9%85%D8%A7%D8%B9%D9%8A%D8%A7%D8%AA-%D8%A7%D9%84%D8%B5%D9%81-%D8%A7%D9%84%D8%B3%D8%A7%D8%AF%D8%B3-%D8%A7%D9%84%D8%A7/","externalSource":true},{"grade":"6","type":"notes","title":"ملزمة حامد ياسين اجتماعيات الصف السادس الابتدائي – تحميل PDF","url":"https://mlazimna.com/file/%D9%85%D9%84%D8%B2%D9%85%D8%A9-%D8%AD%D8%A7%D9%85%D8%AF-%D9%8A%D8%A7%D8%B3%D9%8A%D9%86-%D8%A7%D8%AC%D8%AA%D9%85%D8%A7%D8%B9%D9%8A%D8%A7%D8%AA-%D8%A7%D9%84%D8%B5%D9%81-%D8%A7%D9%84%D8%B3%D8%A7%D8%AF/","externalSource":true},{"grade":"6","type":"notes","title":"ملزمة محمد فؤاد اجتماعيات الصف السادس الابتدائي – 2026 PDF","url":"https://mlazimna.com/file/%D8%AA%D8%AD%D9%85%D9%8A%D9%84-%D9%85%D9%84%D8%B2%D9%85%D8%A9-%D9%85%D8%AD%D9%85%D8%AF-%D9%81%D8%A4%D8%A7%D8%AF-%D8%A7%D8%AC%D8%AA%D9%85%D8%A7%D8%B9%D9%8A%D8%A7%D8%AA-%D8%A7%D9%84%D8%B5%D9%81-%D8%A7/","externalSource":true},{"grade":"7","type":"notes","title":"ملزمة عربي مازن الهلالي الاول المتوسط 2027 الجزء الاول PDF","url":"https://mlazimna.com/file/%D9%85%D9%84%D8%B2%D9%85%D8%A9-%D8%B9%D8%B1%D8%A8%D9%8A-%D9%85%D8%A7%D8%B2%D9%86-%D8%A7%D9%84%D9%87%D9%84%D8%A7%D9%84%D9%8A-%D8%A7%D9%84%D8%A7%D9%88%D9%84-%D8%A7%D9%84%D9%85%D8%AA%D9%88%D8%B3%D8%B7-20/","externalSource":true},{"grade":"8","type":"notes","title":"ملزمة عربي مازن الهلالي الثاني المتوسط 2027 الجزء الاول PDF","url":"https://mlazimna.com/file/%D9%85%D9%84%D8%B2%D9%85%D8%A9-%D8%B9%D8%B1%D8%A8%D9%8A-%D9%85%D8%A7%D8%B2%D9%86-%D8%A7%D9%84%D9%87%D9%84%D8%A7%D9%84%D9%8A-%D8%A7%D9%84%D8%AB%D8%A7%D9%86%D9%8A-%D8%A7%D9%84%D9%85%D8%AA%D9%88%D8%B3/","externalSource":true},{"grade":"12","type":"notes","title":"ملزمة خالد الحيالي وزاريات وراثة للصف السادس العلمي PDF","url":"https://mlazimna.com/file/%D8%AA%D8%AD%D9%85%D9%8A%D9%84-%D9%85%D9%84%D8%B2%D9%85%D8%A9-%D8%AE%D8%A7%D9%84%D8%AF-%D8%A7%D9%84%D8%AD%D9%8A%D8%A7%D9%84%D9%8A-%D9%88%D8%B2%D8%A7%D8%B1%D9%8A%D8%A7%D8%AA-%D9%88%D8%B1%D8%A7%D8%AB/","externalSource":true},{"grade":"12","type":"notes","title":"ملزمة سجاد حمزة وراثة الصف السادس العلمي PDF","url":"https://mlazimna.com/file/%D8%AA%D8%AD%D9%85%D9%8A%D9%84-%D9%85%D9%84%D8%B2%D9%85%D8%A9-%D8%B3%D8%AC%D8%A7%D8%AF-%D8%AD%D9%85%D8%B2%D8%A9-%D9%88%D8%B1%D8%A7%D8%AB%D8%A9-%D8%A7%D9%84%D8%B5%D9%81-%D8%A7%D9%84%D8%B3%D8%A7%D8%AF/","externalSource":true},{"grade":"12","type":"notes","title":"ملزمة اسعدي الاسدي وراثة الصف السادس العلمي PDF","url":"https://mlazimna.com/file/%D8%AA%D8%AD%D9%85%D9%8A%D9%84-%D9%85%D9%84%D8%B2%D9%85%D8%A9-%D8%A7%D8%B3%D8%B9%D8%AF%D9%8A-%D8%A7%D9%84%D8%A7%D8%B3%D8%AF%D9%8A-%D9%88%D8%B1%D8%A7%D8%AB%D8%A9-%D8%A7%D9%84%D8%B5%D9%81-%D8%A7%D9%84/","externalSource":true},{"grade":"12","type":"notes","title":"ملزمة ابوالفضل الساعدي وراثة الصف السادس العلمي PDF","url":"https://mlazimna.com/file/%D8%AA%D8%AD%D9%85%D9%8A%D9%84-%D9%85%D9%84%D8%B2%D9%85%D8%A9-%D8%A7%D8%A8%D9%88%D8%A7%D9%84%D9%81%D8%B6%D9%84-%D8%A7%D9%84%D8%B3%D8%A7%D8%B9%D8%AF%D9%8A-%D9%88%D8%B1%D8%A7%D8%AB%D8%A9-%D8%A7%D9%84/","externalSource":true},{"grade":"15","type":"notes","title":"ملزمة مازن الهلالي قواعد اللغة العربية الصف السادس الاعدادي – 2027 PDF","url":"https://mlazimna.com/file/%D9%85%D9%84%D8%B2%D9%85%D8%A9-%D9%85%D8%A7%D8%B2%D9%86-%D8%A7%D9%84%D9%87%D9%84%D8%A7%D9%84%D9%8A-%D9%82%D9%88%D8%A7%D8%B9%D8%AF-%D8%A7%D9%84%D9%84%D8%BA%D8%A9-%D8%A7%D9%84%D8%B9%D8%B1%D8%A8%D9%8A/","externalSource":true},{"grade":"15","type":"notes","title":"ملزمة الإسلامية 2027 pdf الاستاذ ساجد العكيلي","url":"https://mlazimna.com/file/%D8%AA%D8%AD%D9%85%D9%8A%D9%84-%D9%85%D9%84%D8%B2%D9%85%D8%A9-%D8%A7%D9%84%D8%A5%D8%B3%D9%84%D8%A7%D9%85%D9%8A%D8%A9-2027-pdf-%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D8%A7%D8%B0-%D8%B3%D8%A7%D8%AC%D8%AF-%D8%A7/","externalSource":true},{"grade":"6","type":"exams","title":"أسئلة العربي التمهيدي للسادس الابتدائي — 2022","url":"https://mlazimna.com/file/%D8%A7%D8%B3%D8%A6%D9%84%D8%A9-%D8%B9%D8%B1%D8%A8%D9%8A-%D8%AA%D9%85%D9%87%D9%8A%D8%AF%D9%8A-%D8%A7%D9%84%D8%B5%D9%81-%D8%A7%D9%84%D8%B3%D8%A7%D8%AF%D8%B3-%D8%A7%D9%84%D8%A7%D8%A8%D8%AA%D8%AF%D8%A7/","externalSource":true}]);
- files.push(...[{"grade":"2","type":"book","title":"كتاب نشاط العلوم الثاني الابتدائي 2027","url":"https://mlazimna.com/file/%D9%83%D8%AA%D8%A7%D8%A8-%D9%86%D8%B4%D8%A7%D8%B7-%D8%A7%D9%84%D8%B9%D9%84%D9%88%D9%85-%D8%A7%D9%84%D8%AB%D8%A7%D9%86%D9%8A-%D8%A7%D9%84%D8%A7%D8%A8%D8%AA%D8%AF%D8%A7%D8%A6%D9%8A-2027-pdf/","externalSource":true},{"grade":"2","type":"book","title":"كتاب تمرينات الرياضيات الثاني الابتدائي 2027","url":"https://mlazimna.com/file/%D9%83%D8%AA%D8%A7%D8%A8-%D8%AA%D9%85%D8%B1%D9%8A%D9%86%D8%A7%D8%AA-%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6%D9%8A%D8%A7%D8%AA-%D8%A7%D9%84%D8%AB%D8%A7%D9%86%D9%8A-%D8%A7%D9%84%D8%A7%D8%A8%D8%AA%D8%AF/","externalSource":true},{"grade":"2","type":"book","title":"كتاب الاخلاقية الصف الثاني الابتدائي 2027 المنهج الجديد","url":"https://mlazimna.com/file/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D8%A7%D8%AE%D9%84%D8%A7%D9%82%D9%8A%D8%A9-%D8%A7%D9%84%D8%AB%D8%A7%D9%86%D9%8A-%D8%A7%D9%84%D8%A7%D8%A8%D8%AA%D8%AF%D8%A7%D8%A6%D9%8A-%D8%A7%D9%84%D9%85%D9%86/","externalSource":true},{"grade":"2","type":"book","title":"كتاب العلوم الصف الثاني الابتدائي 2027","url":"https://mlazimna.com/file/%D8%A7%D9%84%D8%B9%D9%84%D9%88%D9%85-%D8%A7%D9%84%D8%AB%D8%A7%D9%86%D9%8A-%D8%A7%D9%84%D8%A7%D8%A8%D8%AA%D8%AF%D8%A7%D8%A6%D9%8A-pdf/","externalSource":true},{"grade":"2","type":"book","title":"كتاب الانكليزي الصف الثاني الابتدائي 2027","url":"https://mlazimna.com/file/%D8%A7%D9%84%D8%A7%D9%86%D9%83%D9%84%D9%8A%D8%B2%D9%8A-%D8%A7%D9%84%D8%AB%D8%A7%D9%86%D9%8A-%D8%A7%D9%84%D8%A7%D8%A8%D8%AA%D8%AF%D8%A7%D8%A6%D9%8A-pdf/","externalSource":true},{"grade":"2","type":"book","title":"كتاب القراءة الصف الثاني الابتدائي 2027","url":"https://mlazimna.com/file/%D8%A7%D9%84%D9%82%D8%B1%D8%A7%D8%A1%D8%A9-%D8%A7%D9%84%D8%AB%D8%A7%D9%86%D9%8A-%D8%A7%D9%84%D8%A7%D8%A8%D8%AA%D8%AF%D8%A7%D8%A6%D9%8A-pdf/","externalSource":true},{"grade":"3","type":"book","title":"كتاب العلوم الصف الثالث الابتدائي 2027","url":"https://mlazimna.com/file/%D8%A7%D9%84%D8%B9%D9%84%D9%88%D9%85-%D8%A7%D9%84%D8%AB%D8%A7%D9%84%D8%AB-%D8%A7%D9%84%D8%A7%D8%A8%D8%AA%D8%AF%D8%A7%D8%A6%D9%8A-pdf/","externalSource":true},{"grade":"3","type":"book","title":"كتاب الرياضيات الصف الثالث الابتدائي 2027","url":"https://mlazimna.com/file/%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6%D9%8A%D8%A7%D8%AA-%D8%A7%D9%84%D8%AB%D8%A7%D9%84%D8%AB-%D8%A7%D9%84%D8%A7%D8%A8%D8%AA%D8%AF%D8%A7%D8%A6%D9%8A-pdf/","externalSource":true},{"grade":"3","type":"book","title":"كتاب الانكليزي الصف الثالث الابتدائي 2027","url":"https://mlazimna.com/file/%D8%A7%D9%84%D8%A7%D9%86%D9%83%D9%84%D9%8A%D8%B2%D9%8A-%D8%A7%D9%84%D8%AB%D8%A7%D9%84%D8%AB-%D8%A7%D9%84%D8%A7%D8%A8%D8%AA%D8%AF%D8%A7%D8%A6%D9%8A-pdf/","externalSource":true},{"grade":"3","type":"book","title":"الاسلامية الثالث الابتدائي","url":"https://mlazimna.com/file/%D8%A7%D9%84%D8%A7%D8%B3%D9%84%D8%A7%D9%85%D9%8A%D8%A9-%D8%A7%D9%84%D8%AB%D8%A7%D9%84%D8%AB-%D8%A7%D9%84%D8%A7%D8%A8%D8%AA%D8%AF%D8%A7%D8%A6%D9%8A-pdf/","externalSource":true},{"grade":"4","type":"book","title":"كتاب نشاط العلوم الصف الرابع الابتدائي 2027","url":"https://mlazimna.com/file/%D9%83%D8%AA%D8%A7%D8%A8-%D9%86%D8%B4%D8%A7%D8%B7-%D8%A7%D9%84%D8%B9%D9%84%D9%88%D9%85-%D8%A7%D9%84%D8%B5%D9%81-%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9-%D8%A7%D9%84%D8%A7%D8%A8%D8%AA%D8%AF%D8%A7%D8%A6/","externalSource":true},{"grade":"4","type":"book","title":"كتاب نشاط الانكليزي الصف الرابع الابتدائي 2027","url":"https://mlazimna.com/file/%D9%83%D8%AA%D8%A7%D8%A8-%D9%86%D8%B4%D8%A7%D8%B7-%D8%A7%D9%84%D8%A7%D9%86%D9%83%D9%84%D9%8A%D8%B2%D9%8A-%D8%A7%D9%84%D8%B5%D9%81-%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9-%D8%A7%D9%84%D8%A7%D8%A8%D8%AA/","externalSource":true},{"grade":"4","type":"book","title":"كتاب الاجتماعيات الصف الرابع الابتدائي 2027","url":"https://mlazimna.com/file/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D8%A7%D8%AC%D8%AA%D9%85%D8%A7%D8%B9%D9%8A%D8%A7%D8%AA-%D8%A7%D9%84%D8%B5%D9%81-%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9-%D8%A7%D9%84%D8%A7%D8%A8%D8%AA%D8%AF%D8%A7/","externalSource":true},{"grade":"4","type":"book","title":"كتاب العلوم الصف الرابع الابتدائي 2027","url":"https://mlazimna.com/file/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D8%B9%D9%84%D9%88%D9%85-%D8%A7%D9%84%D8%B5%D9%81-%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9-%D8%A7%D9%84%D8%A7%D8%A8%D8%AA%D8%AF%D8%A7%D8%A6%D9%8A-pdf-2027/","externalSource":true},{"grade":"4","type":"book","title":"كتاب الانكليزي الصف الرابع الابتدائي 2027","url":"https://mlazimna.com/file/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D8%A7%D9%86%D9%83%D9%84%D9%8A%D8%B2%D9%8A-%D8%A7%D9%84%D8%B5%D9%81-%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9-%D8%A7%D9%84%D8%A7%D8%A8%D8%AA%D8%AF%D8%A7%D8%A6%D9%8A-pdf/","externalSource":true},{"grade":"4","type":"book","title":"كتاب الرياضيات الصف الرابع الابتدائي 2027","url":"https://mlazimna.com/file/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6%D9%8A%D8%A7%D8%AA-%D8%A7%D9%84%D8%B5%D9%81-%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9-%D8%A7%D9%84%D8%A7%D8%A8%D8%AA%D8%AF%D8%A7%D8%A6%D9%8A-pdf/","externalSource":true},{"grade":"4","type":"book","title":"كتاب الاسلامية الصف الرابع الابتدائي 2027","url":"https://mlazimna.com/file/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D8%A7%D8%B3%D9%84%D8%A7%D9%85%D9%8A%D8%A9-%D8%A7%D9%84%D8%B5%D9%81-%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9-%D8%A7%D9%84%D8%A7%D8%A8%D8%AA%D8%AF%D8%A7%D8%A6%D9%8A-pdf/","externalSource":true},{"grade":"8","type":"book","title":"كتاب النشاط الانكليزي الصف الثاني المتوسط 2027","url":"https://mlazimna.com/file/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D9%86%D8%B4%D8%A7%D8%B7-%D8%A7%D9%84%D8%A7%D9%86%D9%83%D9%84%D9%8A%D8%B2%D9%8A-%D8%A7%D9%84%D8%B5%D9%81-%D8%A7%D9%84%D8%AB%D8%A7%D9%86%D9%8A-%D8%A7%D9%84%D9%85/","externalSource":true},{"grade":"8","type":"book","title":"كتاب العربي الصف الثاني المتوسط ج2 2027","url":"https://mlazimna.com/file/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D8%B9%D8%B1%D8%A8%D9%8A-%D8%A7%D9%84%D8%B5%D9%81-%D8%A7%D9%84%D8%AB%D8%A7%D9%86%D9%8A-%D8%A7%D9%84%D9%85%D8%AA%D9%88%D8%B3%D8%B7-%D8%AC2-2027-pdf/","externalSource":true},{"grade":"8","type":"book","title":"كتاب الفرنساوي الصف الثاني المتوسط 2027","url":"https://mlazimna.com/file/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D9%81%D8%B1%D9%86%D8%B3%D8%A7%D9%88%D9%8A-%D8%A7%D9%84%D8%B5%D9%81-%D8%A7%D9%84%D8%AB%D8%A7%D9%86%D9%8A-%D8%A7%D9%84%D9%85%D8%AA%D9%88%D8%B3%D8%B7-2027-pdf/","externalSource":true},{"grade":"8","type":"book","title":"كتاب الاخلاقية الصف الثاني المتوسط المنهج الجديد 2027","url":"https://mlazimna.com/file/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D8%A7%D8%AE%D9%84%D8%A7%D9%82%D9%8A%D8%A9-%D8%A7%D9%84%D8%B5%D9%81-%D8%A7%D9%84%D8%AB%D8%A7%D9%86%D9%8A-%D8%A7%D9%84%D9%85%D8%AA%D9%88%D8%B3%D8%B7-%D8%A7%D9%84/","externalSource":true},{"grade":"8","type":"book","title":"كتاب الحاسوب الصف الثاني المتوسط 2027","url":"https://mlazimna.com/file/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D8%AD%D8%A7%D8%B3%D9%88%D8%A8-%D8%A7%D9%84%D8%B5%D9%81-%D8%A7%D9%84%D8%AB%D8%A7%D9%86%D9%8A-%D8%A7%D9%84%D9%85%D8%AA%D9%88%D8%B3%D8%B7-2027-pdf/","externalSource":true},{"grade":"8","type":"book","title":"كتاب الفيزياء الصف الثاني المتوسط 2027","url":"https://mlazimna.com/file/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D9%81%D9%8A%D8%B2%D9%8A%D8%A7%D8%A1-%D8%A7%D9%84%D8%B5%D9%81-%D8%A7%D9%84%D8%AB%D8%A7%D9%86%D9%8A-%D8%A7%D9%84%D9%85%D8%AA%D9%88%D8%B3%D8%B7-2027-pdf/","externalSource":true},{"grade":"8","type":"book","title":"كتاب الكيمياء الصف الثاني المتوسط 2027","url":"https://mlazimna.com/file/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D9%83%D9%8A%D9%85%D9%8A%D8%A7%D8%A1-%D8%A7%D9%84%D8%B5%D9%81-%D8%A7%D9%84%D8%AB%D8%A7%D9%86%D9%8A-%D8%A7%D9%84%D9%85%D8%AA%D9%88%D8%B3%D8%B7-2027-pdf/","externalSource":true},{"grade":"8","type":"book","title":"كتاب الاجتماعيات الصف الثاني المتوسط 2027","url":"https://mlazimna.com/file/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D8%A7%D8%AC%D8%AA%D9%85%D8%A7%D8%B9%D9%8A%D8%A7%D8%AA-%D8%A7%D9%84%D8%B5%D9%81-%D8%A7%D9%84%D8%AB%D8%A7%D9%86%D9%8A-%D8%A7%D9%84%D9%85%D8%AA%D9%88%D8%B3%D8%B7-202/","externalSource":true},{"grade":"8","type":"book","title":"كتاب الرياضيات الصف الثاني المتوسط 2027","url":"https://mlazimna.com/file/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6%D9%8A%D8%A7%D8%AA-%D8%A7%D9%84%D8%B5%D9%81-%D8%A7%D9%84%D8%AB%D8%A7%D9%86%D9%8A-%D8%A7%D9%84%D9%85%D8%AA%D9%88%D8%B3%D8%B7-%D8%AC1-2027-pd/","externalSource":true},{"grade":"8","type":"book","title":"كتاب الطالب الانكليزي الصف الثاني المتوسط 2027","url":"https://mlazimna.com/file/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D8%B7%D8%A7%D9%84%D8%A8-%D8%A7%D9%84%D8%A7%D9%86%D9%83%D9%84%D9%8A%D8%B2%D9%8A-%D8%A7%D9%84%D8%B5%D9%81-%D8%A7%D9%84%D8%AB%D8%A7%D9%86%D9%8A-%D8%A7%D9%84%D9%85/","externalSource":true},{"grade":"10","type":"book","title":"كتاب الرياضيات الصف الرابع علمي 2027","url":"https://mlazimna.com/file/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6%D9%8A%D8%A7%D8%AA-%D8%A7%D9%84%D8%B5%D9%81-%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9-%D8%B9%D9%84%D9%85%D9%8A-2027-pdf/","externalSource":true},{"grade":"10","type":"book","title":"كتاب النشاط الانكليزي الصف الرابع علمي 2027","url":"https://mlazimna.com/file/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D9%86%D8%B4%D8%A7%D8%B7-%D8%A7%D9%84%D8%A7%D9%86%D9%83%D9%84%D9%8A%D8%B2%D9%8A-%D8%A7%D9%84%D8%B5%D9%81-%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9-%D8%B9%D9%84%D9%85/","externalSource":true},{"grade":"10","type":"book","title":"كتاب العربي المنهج الجديد الصف الرابع العلمي ج2 2027","url":"https://mlazimna.com/file/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D8%B9%D8%B1%D8%A8%D9%8A-%D8%A7%D9%84%D9%85%D9%86%D9%87%D8%AC-%D8%A7%D9%84%D8%AC%D8%AF%D9%8A%D8%AF-%D8%A7%D9%84%D8%B5%D9%81-%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9-2/","externalSource":true},{"grade":"10","type":"book","title":"كتاب الحاسوب الصف الرابع علمي 2027","url":"https://mlazimna.com/file/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D8%AD%D8%A7%D8%B3%D9%88%D8%A8-%D8%A7%D9%84%D8%B5%D9%81-%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9-%D8%B9%D9%84%D9%85%D9%8A-2027-pdf/","externalSource":true},{"grade":"10","type":"book","title":"كتاب الفيزياء الصف الرابع علمي 2027","url":"https://mlazimna.com/file/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D9%81%D9%8A%D8%B2%D9%8A%D8%A7%D8%A1-%D8%A7%D9%84%D8%B5%D9%81-%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9-%D8%B9%D9%84%D9%85%D9%8A-2027-pdf/","externalSource":true},{"grade":"10","type":"book","title":"كتاب العربي المنهج الجديد الصف الرابع العلمي ج1 2027","url":"https://mlazimna.com/file/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D8%B9%D8%B1%D8%A8%D9%8A-%D8%A7%D9%84%D9%85%D9%86%D9%87%D8%AC-%D8%A7%D9%84%D8%AC%D8%AF%D9%8A%D8%AF-%D8%A7%D9%84%D8%B5%D9%81-%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9/","externalSource":true},{"grade":"10","type":"book","title":"كتاب الاحياء الصف الرابع العلمي 2027","url":"https://mlazimna.com/file/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D8%A7%D8%AD%D9%8A%D8%A7%D8%A1-%D8%A7%D9%84%D8%B5%D9%81-%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9-%D8%A7%D9%84%D8%B9%D9%84%D9%85%D9%8A-2027-pdf/","externalSource":true},{"grade":"13","type":"book","title":"كتاب الرياضيات الصف الرابع الأدبي 2027","url":"https://mlazimna.com/file/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6%D9%8A%D8%A7%D8%AA-%D8%A7%D9%84%D8%B5%D9%81-%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9-%D8%A7%D9%84%D8%A3%D8%AF%D8%A8%D9%8A-2027-pdf/","externalSource":true},{"grade":"13","type":"book","title":"كتاب العربي للصف الرابع الأدبي ج2 2027","url":"https://mlazimna.com/file/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D8%B9%D8%B1%D8%A8%D9%8A-%D9%84%D9%84%D8%B5%D9%81-%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9-%D8%A7%D9%84%D8%A3%D8%AF%D8%A8%D9%8A-%D8%AC2-2027-pdf/","externalSource":true},{"grade":"13","type":"book","title":"كتاب نشاط الانكليزي الصف الرابع الأدبي 2027","url":"https://mlazimna.com/file/%D9%83%D8%AA%D8%A7%D8%A8-%D9%86%D8%B4%D8%A7%D8%B7-%D8%A7%D9%84%D8%A7%D9%86%D9%83%D9%84%D9%8A%D8%B2%D9%8A-%D8%A7%D9%84%D8%B5%D9%81-%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9-%D8%A7%D9%84%D8%A3%D8%AF%D8%A8/","externalSource":true},{"grade":"13","type":"book","title":"كتاب جرائم حزب البعث للصف الرابع الأدبي المنهج الجديد 2027","url":"https://mlazimna.com/file/%D9%83%D8%AA%D8%A7%D8%A8-%D8%AC%D8%B1%D8%A7%D8%A6%D9%85-%D8%AD%D8%B2%D8%A8-%D8%A7%D9%84%D8%A8%D8%B9%D8%AB-%D9%84%D9%84%D8%B5%D9%81-%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9-%D8%A7%D9%84%D8%A3%D8%AF%D8%A8/","externalSource":true},{"grade":"13","type":"book","title":"كتاب الكردي الصف الرابع الأدبي 2027","url":"https://mlazimna.com/file/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D9%83%D8%B1%D8%AF%D9%8A-%D8%A7%D9%84%D8%B5%D9%81-%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9-%D8%A7%D9%84%D8%A3%D8%AF%D8%A8%D9%8A-pdf-2027/","externalSource":true},{"grade":"13","type":"book","title":"كتاب الفرنسي الصف الرابع الأدبي المنهج الجديد 2027","url":"https://mlazimna.com/file/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D9%81%D8%B1%D9%86%D8%B3%D9%8A-%D8%A7%D9%84%D8%B5%D9%81-%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9-%D8%A7%D9%84%D8%A3%D8%AF%D8%A8%D9%8A-%D8%A7%D9%84%D9%85%D9%86%D9%87/","externalSource":true},{"grade":"13","type":"book","title":"كتاب الحاسوب الصف الرابع ادبي","url":"https://mlazimna.com/file/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D8%AD%D8%A7%D8%B3%D9%88%D8%A8-%D8%A7%D9%84%D8%B5%D9%81-%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9-%D8%A7%D8%AF%D8%A8%D9%8A-pdf/","externalSource":true},{"grade":"13","type":"book","title":"كتاب التاريخ الصف الرابع الأدبي 2027","url":"https://mlazimna.com/file/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D8%AA%D8%A7%D8%B1%D9%8A%D8%AE-%D8%A7%D9%84%D8%B5%D9%81-%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9-%D8%A7%D9%84%D8%A3%D8%AF%D8%A8%D9%8A-2027-pdf/","externalSource":true},{"grade":"13","type":"book","title":"كتاب الانكليزي الصف الرابع الأدبي 2027","url":"https://mlazimna.com/file/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D8%A7%D9%86%D9%83%D9%84%D9%8A%D8%B2%D9%8A-%D8%A7%D9%84%D8%B5%D9%81-%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9-%D8%A7%D9%84%D8%A3%D8%AF%D8%A8%D9%8A-2027-pdf/","externalSource":true},{"grade":"13","type":"book","title":"كتاب العربي للصف الرابع الأدبي ج1 2027","url":"https://mlazimna.com/file/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D8%B9%D8%B1%D8%A8%D9%8A-%D9%84%D9%84%D8%B5%D9%81-%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9-%D8%A7%D9%84%D8%A3%D8%AF%D8%A8%D9%8A-%D8%AC1-2027-pdf/","externalSource":true},{"grade":"13","type":"book","title":"كتاب الاسلامية الصف الرابع الأدبي 2027","url":"https://mlazimna.com/file/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D8%A7%D8%B3%D9%84%D8%A7%D9%85%D9%8A%D8%A9-%D8%A7%D9%84%D8%B5%D9%81-%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9-%D8%A7%D9%84%D8%A3%D8%AF%D8%A8%D9%8A-2027-pdf/","externalSource":true},{"grade":"14","type":"book","title":"كتاب النشاط انكليزي الصف الخامس ادبي 2027","url":"https://mlazimna.com/file/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D9%86%D8%B4%D8%A7%D8%B7-%D8%A7%D9%86%D9%83%D9%84%D9%8A%D8%B2%D9%8A-%D8%A7%D9%84%D8%B5%D9%81-%D8%A7%D9%84%D8%AE%D8%A7%D9%85%D8%B3-%D8%A7%D8%AF%D8%A8%D9%8A-2027-pdf/","externalSource":true},{"grade":"14","type":"book","title":"كتاب العربي الصف الخامس ادبي ج2 2027","url":"https://mlazimna.com/file/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D8%B9%D8%B1%D8%A8%D9%8A-%D8%A7%D9%84%D8%B5%D9%81-%D8%A7%D9%84%D8%AE%D8%A7%D9%85%D8%B3-%D8%A7%D8%AF%D8%A8%D9%8A-%D8%AC2-2027-pdf/","externalSource":true},{"grade":"14","type":"book","title":"كتاب الفرنسي للصف الخامس الأدبي 2027","url":"https://mlazimna.com/file/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D9%81%D8%B1%D9%86%D8%B3%D9%8A-%D9%84%D9%84%D8%B5%D9%81-%D8%A7%D9%84%D8%AE%D8%A7%D9%85%D8%B3-%D8%A7%D9%84%D8%A3%D8%AF%D8%A8%D9%8A-2027-pdf/","externalSource":true},{"grade":"14","type":"book","title":"كتاب الكردي الصف الخامس الأدبي 2027","url":"https://mlazimna.com/file/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D9%83%D8%B1%D8%AF%D9%8A-%D8%A7%D9%84%D8%B5%D9%81-%D8%A7%D9%84%D8%AE%D8%A7%D9%85%D8%B3-%D8%A7%D9%84%D8%A3%D8%AF%D8%A8%D9%8A-2027-pdf/","externalSource":true},{"grade":"14","type":"book","title":"كتاب الحاسوب الصف الخامس الأدبي 2027","url":"https://mlazimna.com/file/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D8%AD%D8%A7%D8%B3%D9%88%D8%A8-%D8%A7%D9%84%D8%B5%D9%81-%D8%A7%D9%84%D8%AE%D8%A7%D9%85%D8%B3-%D8%A7%D9%84%D8%A3%D8%AF%D8%A8%D9%8A-2027-pdf/","externalSource":true},{"grade":"14","type":"book","title":"كتاب الاقتصاد للصف الخامس الادبي 2027","url":"https://mlazimna.com/file/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D8%A7%D9%82%D8%AA%D8%B5%D8%A7%D8%AF-%D9%84%D9%84%D8%B5%D9%81-%D8%A7%D9%84%D8%AE%D8%A7%D9%85%D8%B3-%D8%A7%D9%84%D8%A7%D8%AF%D8%A8%D9%8A-2027-pdf/","externalSource":true},{"grade":"14","type":"book","title":"كتاب الطالب انكليزي الصف الخامس ادبي 2027","url":"https://mlazimna.com/file/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D8%B7%D8%A7%D9%84%D8%A8-%D8%A7%D9%86%D9%83%D9%84%D9%8A%D8%B2%D9%8A-%D8%A7%D9%84%D8%B5%D9%81-%D8%A7%D9%84%D8%AE%D8%A7%D9%85%D8%B3-%D8%A7%D8%AF%D8%A8%D9%8A-2027-pdf/","externalSource":true},{"grade":"14","type":"book","title":"كتاب العربي الصف الخامس ادبي ج1 2027","url":"https://mlazimna.com/file/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D8%B9%D8%B1%D8%A8%D9%8A-%D8%A7%D9%84%D8%B5%D9%81-%D8%A7%D9%84%D8%AE%D8%A7%D9%85%D8%B3-%D8%A7%D8%AF%D8%A8%D9%8A-%D8%AC1-2027-pdf/","externalSource":true},{"grade":"15","type":"book","title":"كتاب العربي الصف السادس الإعدادي أدبي ج2 2027","url":"https://mlazimna.com/file/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D8%B9%D8%B1%D8%A8%D9%8A-%D8%A7%D9%84%D8%B5%D9%81-%D8%A7%D9%84%D8%B3%D8%A7%D8%AF%D8%B3-%D8%A7%D9%84%D8%A5%D8%B9%D8%AF%D8%A7%D8%AF%D9%8A-%D8%A3%D8%AF%D8%A8%D9%8A-2/","externalSource":true},{"grade":"15","type":"book","title":"كتاب الانكليزي ( النشاط ) صف سادس أدبي 2027","url":"https://mlazimna.com/file/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D8%A7%D9%86%D9%83%D9%84%D9%8A%D8%B2%D9%8A-%D8%A7%D9%84%D9%86%D8%B4%D8%A7%D8%B7-%D8%B5%D9%81-%D8%B3%D8%A7%D8%AF%D8%B3-%D8%A3%D8%AF%D8%A8%D9%8A-2027-pdf/","externalSource":true},{"grade":"15","type":"book","title":"كتاب الاقتصاد الصف السادس الادبي 2027","url":"https://mlazimna.com/file/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D8%A7%D9%82%D8%AA%D8%B5%D8%A7%D8%AF-%D8%A7%D9%84%D8%B5%D9%81-%D8%A7%D9%84%D8%B3%D8%A7%D8%AF%D8%B3-%D8%A7%D9%84%D8%A7%D8%AF%D8%A8%D9%8A-2027-pdf/","externalSource":true},{"grade":"15","type":"book","title":"كتاب الجغرافية الصف السادس الادبي 2027","url":"https://mlazimna.com/file/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D8%AC%D8%BA%D8%B1%D8%A7%D9%81%D9%8A%D8%A9-%D8%A7%D9%84%D8%B5%D9%81-%D8%A7%D9%84%D8%B3%D8%A7%D8%AF%D8%B3-%D8%A7%D9%84%D8%A7%D8%AF%D8%A8%D9%8A-2027-pdf/","externalSource":true},{"grade":"15","type":"book","title":"كتاب الانكليزي ( الطالب ) صف سادس أدبي 2027","url":"https://mlazimna.com/file/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D8%A7%D9%86%D9%83%D9%84%D9%8A%D8%B2%D9%8A-%D8%A7%D9%84%D8%B7%D8%A7%D9%84%D8%A8-%D8%B5%D9%81-%D8%B3%D8%A7%D8%AF%D8%B3-%D8%A3%D8%AF%D8%A8%D9%8A-2027-pdf/","externalSource":true},{"grade":"15","type":"book","title":"كتاب العربي الصف السادس الإعدادي أدبي ج1 2027","url":"https://mlazimna.com/file/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D8%B9%D8%B1%D8%A8%D9%8A-%D8%A7%D9%84%D8%B5%D9%81-%D8%A7%D9%84%D8%B3%D8%A7%D8%AF%D8%B3-%D8%A7%D9%84%D8%A5%D8%B9%D8%AF%D8%A7%D8%AF%D9%8A-%D8%A3%D8%AF%D8%A8%D9%8A/","externalSource":true},{"grade":"15","type":"book","title":"كتاب الاسلامية الصف السادس أدبي 2027","url":"https://mlazimna.com/file/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D8%A7%D8%B3%D9%84%D8%A7%D9%85%D9%8A%D8%A9-%D8%A7%D9%84%D8%B5%D9%81-%D8%A7%D9%84%D8%B3%D8%A7%D8%AF%D8%B3-%D8%A3%D8%AF%D8%A8%D9%8A-2027-pdf/","externalSource":true},{"grade":"4","type":"notes","title":"ملزمة رياضيات ياسر فخري الرابع الابتدائي 2026 PDF","url":"https://www.stadiraq.com/%D9%85%D9%84%D8%B2%D9%85%D8%A9-%D8%B1%D9%8A%D8%A7%D8%B6%D9%8A%D8%A7%D8%AA-%D9%8A%D8%A7%D8%B3%D8%B1-%D9%81%D8%AE%D8%B1%D9%8A-4/","externalSource":true},{"grade":"9","type":"notes","title":"ملزمة رياضيات حيدر وليد الثالث المتوسط 2026 الجزء الاول PDF","url":"https://www.stadiraq.com/%D9%85%D9%84%D8%B2%D9%85%D8%A9-%D8%B1%D9%8A%D8%A7%D8%B6%D9%8A%D8%A7%D8%AA-%D8%AD%D9%8A%D8%AF%D8%B1-%D9%88%D9%84%D9%8A%D8%AF-%D8%A7%D9%84%D8%AB%D8%A7%D9%84%D8%AB-%D9%85%D8%AA%D9%88%D8%B3%D8%B7/","externalSource":true},{"grade":"10","type":"notes","title":"ملزمة رياضيات علي صادق الرابع العلمي 2026 PDF","url":"https://www.stadiraq.com/%D9%85%D9%84%D8%B2%D9%85%D8%A9-%D8%B1%D9%8A%D8%A7%D8%B6%D9%8A%D8%A7%D8%AA-%D8%B9%D9%84%D9%8A-%D8%B5%D8%A7%D8%AF%D9%82-%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9-%D8%A7%D9%84%D8%B9%D9%84%D9%85%D9%8A/","externalSource":true},{"grade":"11","type":"notes","title":"ملزمة رياضيات مؤمل مهدي الخامس العلمي 2026 PDF","url":"https://www.stadiraq.com/%D9%85%D9%84%D8%B2%D9%85%D8%A9-%D8%B1%D9%8A%D8%A7%D8%B6%D9%8A%D8%A7%D8%AA-%D9%85%D8%A4%D9%85%D9%84-%D9%85%D9%87%D8%AF%D9%8A-%D8%A7%D9%84%D8%AE%D8%A7%D9%85%D8%B3-%D8%A7%D9%84%D8%B9%D9%84%D9%85%D9%8A/","externalSource":true},{"grade":"13","type":"notes","title":"ملزمة رياضيات علي صادق الرابع الادبي 2026 PDF","url":"https://www.stadiraq.com/%D9%85%D9%84%D8%B2%D9%85%D8%A9-%D8%B1%D9%8A%D8%A7%D8%B6%D9%8A%D8%A7%D8%AA-%D8%B9%D9%84%D9%8A-%D8%B5%D8%A7%D8%AF%D9%82-%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9-%D8%A7%D9%84%D8%A7%D8%AF%D8%A8%D9%8A/","externalSource":true},{"grade":"14","type":"notes","title":"ملزمة جغرافية حامد ياسين الخامس الادبي 2026 PDF","url":"https://www.stadiraq.com/%D9%85%D9%84%D8%B2%D9%85%D8%A9-%D8%AC%D8%BA%D8%B1%D8%A7%D9%81%D9%8A%D8%A9-%D8%AD%D8%A7%D9%85%D8%AF-%D9%8A%D8%A7%D8%B3%D9%8A%D9%86-%D8%A7%D9%84%D8%AE%D8%A7%D9%85%D8%B3-%D8%A7%D8%AF%D8%A8%D9%8A/","externalSource":true},{"grade":"9","type":"exams","title":"ملزمة وزاريات الرياضيات الاعرجي الثالث المتوسط 2026 PDF","url":"https://www.stadiraq.com/%D9%85%D9%84%D8%B2%D9%85%D8%A9-%D9%88%D8%B2%D8%A7%D8%B1%D9%8A%D8%A7%D8%AA-%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6%D9%8A%D8%A7%D8%AA-%D8%A7%D9%84%D8%A7%D8%B9%D8%B1%D8%AC%D9%8A-3/","externalSource":true},{"grade":"12","type":"exams","title":"ملزمة وزاريات الرياضيات محمد يوسف الموسوي السادس العلمي 2026 PDF","url":"https://www.stadiraq.com/%D9%85%D9%84%D8%B2%D9%85%D8%A9-%D9%88%D8%B2%D8%A7%D8%B1%D9%8A%D8%A7%D8%AA-%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6%D9%8A%D8%A7%D8%AA-%D9%85%D8%AD%D9%85%D8%AF-%D9%8A%D9%88%D8%B3%D9%81/","externalSource":true},{"grade":"15","type":"exams","title":"ملزمة وزاريات التاريخ مضر الجبوري السادس الادبي 2026 PDF","url":"https://www.stadiraq.com/%D9%85%D9%84%D8%B2%D9%85%D8%A9-%D9%88%D8%B2%D8%A7%D8%B1%D9%8A%D8%A7%D8%AA-%D8%A7%D9%84%D8%AA%D8%A7%D8%B1%D9%8A%D8%AE-%D9%85%D8%B6%D8%B1-%D8%A7%D9%84%D8%AC%D8%A8%D9%88%D8%B1%D9%8A-6/","externalSource":true}]);
- const gradeSources=["https://mlazimna.com/stage/%D8%A7%D9%84%D9%85%D8%B1%D8%AD%D9%84%D8%A9-%D8%A7%D9%84%D8%A7%D8%A8%D8%AA%D8%AF%D8%A7%D8%A6%D9%8A%D8%A9/primary-1/","https://mlazimna.com/stage/%D8%A7%D9%84%D9%85%D8%B1%D8%AD%D9%84%D8%A9-%D8%A7%D9%84%D8%A7%D8%A8%D8%AA%D8%AF%D8%A7%D8%A6%D9%8A%D8%A9/primary-2/","https://mlazimna.com/stage/%D8%A7%D9%84%D9%85%D8%B1%D8%AD%D9%84%D8%A9-%D8%A7%D9%84%D8%A7%D8%A8%D8%AA%D8%AF%D8%A7%D8%A6%D9%8A%D8%A9/primary-3/","https://mlazimna.com/stage/%D8%A7%D9%84%D9%85%D8%B1%D8%AD%D9%84%D8%A9-%D8%A7%D9%84%D8%A7%D8%A8%D8%AA%D8%AF%D8%A7%D8%A6%D9%8A%D8%A9/primary-4/","https://mlazimna.com/stage/%D8%A7%D9%84%D9%85%D8%B1%D8%AD%D9%84%D8%A9-%D8%A7%D9%84%D8%A7%D8%A8%D8%AA%D8%AF%D8%A7%D8%A6%D9%8A%D8%A9/primary-5/","https://mlazimna.com/stage/%D8%A7%D9%84%D9%85%D8%B1%D8%AD%D9%84%D8%A9-%D8%A7%D9%84%D8%A7%D8%A8%D8%AA%D8%AF%D8%A7%D8%A6%D9%8A%D8%A9/primary-6/","https://mlazimna.com/stage/%D8%A7%D9%84%D9%85%D8%B1%D8%AD%D9%84%D8%A9-%D8%A7%D9%84%D9%85%D8%AA%D9%88%D8%B3%D8%B7%D8%A9/intermediate-1/","https://mlazimna.com/stage/%D8%A7%D9%84%D9%85%D8%B1%D8%AD%D9%84%D8%A9-%D8%A7%D9%84%D9%85%D8%AA%D9%88%D8%B3%D8%B7%D8%A9/intermediate-2/","https://mlazimna.com/stage/%D8%A7%D9%84%D9%85%D8%B1%D8%AD%D9%84%D8%A9-%D8%A7%D9%84%D9%85%D8%AA%D9%88%D8%B3%D8%B7%D8%A9/intermediate-3/","https://mlazimna.com/stage/%D8%A7%D9%84%D9%85%D8%B1%D8%AD%D9%84%D8%A9-%D8%A7%D9%84%D8%A5%D8%B9%D8%AF%D8%A7%D8%AF%D9%8A%D8%A9/prep-4-sci/","https://mlazimna.com/stage/%D8%A7%D9%84%D9%85%D8%B1%D8%AD%D9%84%D8%A9-%D8%A7%D9%84%D8%A5%D8%B9%D8%AF%D8%A7%D8%AF%D9%8A%D8%A9/prep-5-sci/","https://mlazimna.com/stage/%D8%A7%D9%84%D9%85%D8%B1%D8%AD%D9%84%D8%A9-%D8%A7%D9%84%D8%A5%D8%B9%D8%AF%D8%A7%D8%AF%D9%8A%D8%A9/prep-6-sci/","https://mlazimna.com/stage/%D8%A7%D9%84%D9%85%D8%B1%D8%AD%D9%84%D8%A9-%D8%A7%D9%84%D8%A5%D8%B9%D8%AF%D8%A7%D8%AF%D9%8A%D8%A9/prep-4-art/","https://mlazimna.com/stage/%D8%A7%D9%84%D9%85%D8%B1%D8%AD%D9%84%D8%A9-%D8%A7%D9%84%D8%A5%D8%B9%D8%AF%D8%A7%D8%AF%D9%8A%D8%A9/prep-5-art/","https://mlazimna.com/stage/%D8%A7%D9%84%D9%85%D8%B1%D8%AD%D9%84%D8%A9-%D8%A7%D9%84%D8%A5%D8%B9%D8%AF%D8%A7%D8%AF%D9%8A%D8%A9/prep-6-art/"];
- let type='book';
- const validFiles=files.filter(f=>f.externalSource===true ? /^https:\/\/(?:mlazimna\.com|www\.stadiraq\.com)\//.test(f.url) : /^https:\/\/drive\.google\.com\/file\/d\/[a-zA-Z0-9_-]+\/preview$/.test(f.url)||/^https:\/\/bk[123]\.shr4\.com\/.*\.pdf$/i.test(f.url)||/^https:\/\/www\.stadiraq\.com\/PDF\/[0-9]+\.pdf$/i.test(f.url));
- const countFor=(g,t)=>validFiles.filter(f=>f.grade===g&&f.type===t).length;
- const selectorLabel=grade.previousElementSibling;
- if(selectorLabel)selectorLabel.textContent='اختر المرحلة والصف الدراسي';
- const summary=document.createElement('p');summary.className='library-summary';summary.setAttribute('role','status');grade.insertAdjacentElement('afterend',summary);
- const source=document.createElement('a');source.className='sub-link grade-source';source.target='_blank';source.rel='noopener noreferrer';source.textContent='مواد إضافية لهذا الصف من مصدرها ↗';summary.after(source);
- const search=document.createElement('input');search.type='search';search.placeholder='ابحث عن اسم الكتاب أو المادة';search.setAttribute('aria-label','بحث داخل ملفات الصف');search.style.cssText='width:100%;padding:12px;margin:12px 0;border-radius:10px;background:#101c2b;color:white;border:1px solid #4c647b';results.before(search);
- function openViewer(f){
-   let viewer=document.getElementById('pdf-viewer');
-   if(!viewer){
-     viewer=document.createElement('dialog');viewer.id='pdf-viewer';viewer.className='pdf-viewer';
-     viewer.innerHTML='<div class="pdf-toolbar"><strong id="pdf-title"></strong><button type="button" id="pdf-close">إغلاق ✕</button></div><iframe title="قارئ الكتب PDF" referrerpolicy="no-referrer"></iframe><p>إذا تعذر عرض الملف داخل الموقع، افتحه من الرابط المباشر.</p><a id="pdf-external" target="_blank" rel="noopener noreferrer">فتح PDF مباشرة ↗</a> <a id="pdf-download" data-metric="download" target="_blank" rel="noopener noreferrer">⬇ تنزيل PDF</a>';
-     document.body.append(viewer);
-     viewer.querySelector('#pdf-close').addEventListener('click',()=>viewer.close());
-     viewer.addEventListener('close',()=>viewer.querySelector('iframe').removeAttribute('src'));
-   }
-   viewer.querySelector('#pdf-title').textContent=f.title;
-   viewer.querySelector('iframe').src=f.url;
-   viewer.querySelector('#pdf-external').href=f.url.replace('/preview','/view');
-   const driveId=f.url.match(/\/file\/d\/([^/]+)/)?.[1];
-   viewer.querySelector('#pdf-download').href=driveId?'https://drive.google.com/uc?export=download&id='+encodeURIComponent(driveId):f.url;
-   if(typeof viewer.showModal==='function')viewer.showModal();
-   else window.open(f.url.replace('/preview','/view'),'_blank','noopener');
- }
- const requested=new URLSearchParams(window.location.search);
- const requestedGrade=requested.get('grade');
- if(Array.from(grade.options).some(option=>option.value===requestedGrade)) grade.value=requestedGrade;
- const requestedType=requested.get('type');
- if(buttons.some(button=>button.dataset.libraryType===requestedType)) type=requestedType;
- search.value=(requested.get('q') || '').slice(0,180);
- function makeCover(entry, gradeLabel){
-   const box=document.createElement('div');
-   box.className='library-cover-box';
-   const cover=document.createElement('div');
-   cover.className='math-style-cover';
-   cover.setAttribute('aria-hidden','true');
-   const exactMathCover=entry.grade==='1'&&entry.type==='book'&&/^كتاب الرياضيات الأول الابتدائي(?:\s|$)/.test(entry.title);
-   if(!exactMathCover){
-     const title=document.createElement('strong');
-     title.className='math-cover-title';
-     const label=entry.title.trim()
-       .replace(/^(?:تحميل\s+)?(?:كتاب|ملزمة)\s+/,'')
-       .replace(/\s+(?:(?:للصف|الصف|صف)\s+|(?:للـ)?(?:الأول|الثاني|الثالث|الرابع|الخامس|السادس)\s+(?:الابتدائي|ابتدائي|المتوسط|متوسط|الإعدادي|اعدادي|العلمي|علمي|الأدبي|الادبي|ادبي)(?=\s|$|[،.،:—–-])).*$/u,'')
-       .replace(/\s*[—–].*$/,'')
-       .replace(/\s+pdf\b/ig,'')
-       .trim();
-     title.textContent=label || entry.title.trim();
-     if(title.textContent.length>34)title.classList.add('math-title-long');
-     const stage=document.createElement('span');
-     stage.className='math-cover-grade';
-     stage.textContent=gradeLabel;
-     cover.append(title,stage);
-   }
-   box.append(cover);
-   return box;
- }
- function bookLink(file){
-   const link=new URL('library.html',window.location.href);
-   link.searchParams.set('grade',file.grade);
-   link.searchParams.set('type',file.type);
-   link.searchParams.set('q',file.title.trim());
-   return link.href;
- }
- function render(){
-   results.replaceChildren();
-   source.href=type==='exams'?'https://mlazimna.com/type/ministerial/':gradeSources[Number(grade.value)-1];
-   source.textContent=type==='exams'?'تصفّح أرشيف الأسئلة الوزارية عند المصدر ↗':'مواد إضافية لهذا الصف من مصدرها ↗';
-   const all=validFiles.filter(f=>f.grade===grade.value&&f.type===type);
-   const term=search.value.trim().toLocaleLowerCase('ar');
-   const matched=all.filter(f=>f.title.toLocaleLowerCase('ar').includes(term));
-   for(const f of matched){
-     const card=document.createElement('article');card.className='card library-book';
-     const title=document.createElement('h3');title.textContent=f.title;
-     const read=document.createElement('button');read.type='button';read.className='button primary';read.textContent='📖 قراءة PDF';read.addEventListener('click',()=>f.externalSource?window.open(f.url,'_blank','noopener,noreferrer'):openViewer(f));if(f.externalSource)read.textContent='📚 فتح صفحة المصدر';else read.dataset.metric='pdf';
-     const external=document.createElement('a');external.className='sub-link';external.href=f.url.replace('/preview','/view');external.target='_blank';external.rel='noopener noreferrer';external.textContent=f.externalSource?'المصدر الخارجي ↗':'فتح ملف PDF ↗';if(!f.externalSource)external.dataset.metric='pdf';
-     const coverBox=makeCover(f,grade.options[grade.selectedIndex].text);
-     const credit=document.createElement('small');credit.className='library-cover-credit';credit.textContent='المصمم والمبرمج طه علي الازيرجاوي';
-     const gradeLabel=document.createElement('p');gradeLabel.className='library-grade-label';gradeLabel.textContent=grade.options[grade.selectedIndex].text;
-     const share=document.createElement('a');
-     share.className='sub-link book-share';
-     share.href=bookLink(f);
-     share.textContent='رابط المشاركة ↗';
-     share.addEventListener('click',async event=>{
-       if(!navigator.clipboard?.writeText) return;
-       event.preventDefault();
-       try {
-         await navigator.clipboard.writeText(share.href);
-         share.textContent='تم نسخ الرابط ✓';
-       } catch {
-         window.location.assign(share.href);
-       }
-     });
-     card.append(coverBox,gradeLabel,title,read,external,share,credit);results.append(card);
-   }
-   empty.hidden=matched.length>0;
-   if(!matched.length)empty.textContent=all.length?'ماكو ملف يطابق البحث. امسح كلمة البحث حتى تشوف كل ملفات الصف.':'ما متوفرة ملفات موثقة لهذا الصف وهذا القسم حالياً. راح تنضاف هنا بعد رفع ملفات PDF الأصلية.';
-   const name=grade.options[grade.selectedIndex].text;
-   const names={book:'الكتب',notes:'الملازم',exams:'الأسئلة والوزاريات'};
-   message.textContent=name+' — '+names[type]+' — '+all.length+' مادة/رابط'+(term?'، نتائج البحث: '+matched.length:'');
-   summary.textContent='المتوفر لهذا الصف: 📘 '+countFor(grade.value,'book')+' كتب | 📒 '+countFor(grade.value,'notes')+' ملازم | 📝 '+countFor(grade.value,'exams')+' أسئلة';
-   buttons.forEach(button=>{const active=button.dataset.libraryType===type;button.classList.toggle('active',active);button.setAttribute('aria-pressed',String(active));button.textContent=({book:'📘 الكتب',notes:'📒 الملازم',exams:'📝 الأسئلة والوزاريات'}[button.dataset.libraryType])+' ('+countFor(grade.value,button.dataset.libraryType)+')';});
- }
- grade.addEventListener('change',()=>{search.value='';render()});
- buttons.forEach(button=>button.addEventListener('click',()=>{type=button.dataset.libraryType;search.value='';render()}));
- search.addEventListener('input',render);
- render();
+(() => {
+  const grade = document.getElementById('library-grade');
+  const subject = document.getElementById('library-subject');
+  const search = document.getElementById('library-search');
+  const results = document.getElementById('library-results');
+  const message = document.getElementById('library-message');
+  const empty = document.getElementById('library-empty');
+  const gradeSource = document.getElementById('library-grade-source');
+  const buttons = [...document.querySelectorAll('[data-library-type]')];
+  if (!grade || !subject || !search || !results || !message || !empty || !gradeSource) return;
+
+  const subjects = {
+    islamic: 'التربية الإسلامية', arabic: 'اللغة العربية', english: 'اللغة الإنكليزية',
+    french: 'اللغة الفرنسية', kurdish: 'اللغة الكردية', math: 'الرياضيات',
+    science: 'العلوم', physics: 'الفيزياء', chemistry: 'الكيمياء', biology: 'الأحياء',
+    social: 'الاجتماعيات', history: 'التاريخ', geo: 'الجغرافية', economics: 'الاقتصاد',
+    philosophy: 'الفلسفة وعلم النفس', sociology: 'علم الاجتماع', ethics: 'التربية الأخلاقية',
+    computer: 'الحاسوب', earth: 'علم الأرض', baath: 'جرائم حزب البعث', other: 'مواد أخرى'
+  };
+  const formatLabels = {
+    pdf: 'رابط PDF مباشر', drive: 'PDF على Google Drive', viewer: 'معاينة Google Drive',
+    source: 'صفحة المصدر'
+  };
+  const scopeLabels = {
+    partial: 'محتوى جزئي', archive: 'نسخة في أرشيف خارجي', compilation: 'تجميع تدريبي لأسئلة وزارية',
+    'edition-unconfirmed': 'اكتمال الطبعة وتطابقها مع المنهج المحدّث قيد التحقق',
+    publisher: 'فهرس الموزع'
+  };
+  const gradeSlugs = [
+    'primary-1', 'primary-2', 'primary-3', 'primary-4', 'primary-5', 'primary-6',
+    'middle-1', 'middle-2', 'middle-3', 'prep-4-sci', 'prep-5-sci', 'prep-6-sci',
+    'prep-4-lit', 'prep-5-lit', 'prep-6-lit'
+  ];
+  const files = libraryCatalog.filter(file => !file.archived);
+  const params = new URLSearchParams(location.search);
+  if ([...grade.options].some(option => option.value === params.get('grade'))) grade.value = params.get('grade');
+  let type = buttons.some(button => button.dataset.libraryType === params.get('type')) ? params.get('type') : 'book';
+  search.value = (params.get('q') || '').slice(0, 180);
+
+  function normalize(value) {
+    return value.normalize('NFKC').toLocaleLowerCase('ar')
+      .replace(/[\u0610-\u061A\u064B-\u065F\u0670\u0640]/g, '')
+      .replace(/[أإآٱ]/g, 'ا').replace(/ى/g, 'ي').replace(/ة/g, 'ه')
+      .replace(/ان[كج]ليز/g, 'انكليز')
+      .replace(/[٠-٩۰-۹]/g, digit => String(digit.charCodeAt(0) & 15))
+      .replace(/[^\p{L}\p{N}]+/gu, ' ').trim();
+  }
+
+  function externalLink(url, label, className = 'sub-link') {
+    const link = document.createElement('a');
+    link.href = url;
+    link.textContent = label;
+    link.className = className;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    return link;
+  }
+
+  function externalUrl(file) {
+    return file.format === 'drive' || file.format === 'viewer'
+      ? file.url.replace(/\/preview$/, '/view') : file.url;
+  }
+
+  function openViewer(file) {
+    let viewer = document.getElementById('pdf-viewer');
+    if (!viewer) {
+      viewer = document.createElement('dialog');
+      viewer.id = 'pdf-viewer';
+      viewer.className = 'pdf-viewer';
+      viewer.setAttribute('aria-labelledby', 'pdf-title');
+      viewer.innerHTML = '<div class="pdf-toolbar"><strong id="pdf-title"></strong><button type="button" autofocus>إغلاق ✕</button></div><iframe title="قارئ PDF" referrerpolicy="no-referrer"></iframe><p>إذا تعذّرت المعاينة، افتح الملف في تبويب جديد.</p><a target="_blank" rel="noopener noreferrer">فتح في تبويب جديد ↗</a>';
+      document.body.append(viewer);
+      viewer.querySelector('button').addEventListener('click', () => viewer.close());
+      viewer.addEventListener('close', () => viewer.querySelector('iframe').removeAttribute('src'));
+    }
+    viewer.querySelector('#pdf-title').textContent = file.title;
+    viewer.querySelector('iframe').src = file.url;
+    viewer.querySelector('a').href = externalUrl(file);
+    viewer.showModal();
+  }
+
+  function makeCover(file, gradeLabel) {
+    const cover = document.createElement('div');
+    cover.className = 'library-cover-box';
+    cover.setAttribute('aria-hidden', 'true');
+    const fallback = document.createElement('div');
+    fallback.className = 'math-style-cover';
+    const title = document.createElement('strong');
+    title.className = 'math-cover-title math-title-long';
+    const activity = file.type === 'book' && /نشاط|تمرينات/.test(file.title);
+    title.textContent = (activity ? 'نشاط · ' : '') + subjects[file.subject];
+    const stage = document.createElement('span');
+    stage.className = 'math-cover-grade';
+    stage.textContent = gradeLabel;
+    fallback.append(title, stage);
+    cover.append(fallback);
+    if (file.cover) {
+      const image = document.createElement('img');
+      image.className = 'library-cover';
+      image.alt = '';
+      image.loading = 'lazy';
+      image.addEventListener('error', () => image.remove());
+      image.src = file.cover;
+      cover.append(image);
+    }
+    return cover;
+  }
+
+  function shareLink(file) {
+    const url = new URL('library.html', location.href);
+    url.search = new URLSearchParams({grade: file.grade, type: file.type, q: file.title});
+    const link = document.createElement('a');
+    link.className = 'sub-link book-share';
+    link.href = url;
+    link.textContent = 'رابط المشاركة';
+    link.addEventListener('click', async event => {
+      if (!navigator.clipboard?.writeText) return;
+      event.preventDefault();
+      try {
+        await navigator.clipboard.writeText(link.href);
+        link.textContent = 'تم نسخ الرابط ✓';
+      } catch {
+        location.assign(link.href);
+      }
+    });
+    return link;
+  }
+
+  function makeCard(file, gradeLabel, alternatives) {
+    const card = document.createElement('article');
+    card.className = 'card library-book';
+    const subtitle = document.createElement('p');
+    subtitle.className = 'library-grade-label';
+    subtitle.textContent = [subjects[file.subject], gradeLabel, file.author, file.year].filter(Boolean).join(' · ');
+    const title = document.createElement('h3');
+    title.textContent = file.title;
+    const status = document.createElement('p');
+    status.className = 'library-grade-label';
+    status.textContent = [file.official ? 'وزارة التربية' : null,
+      formatLabels[file.format], scopeLabels[file.scope]].filter(Boolean).join(' · ');
+    const pdf = file.format === 'pdf' || file.format === 'drive';
+    const action = externalLink(externalUrl(file),
+      pdf ? 'فتح PDF ↗' : file.format === 'viewer' ? 'فتح المعاينة ↗' : 'فتح المصدر ↗', 'button primary');
+    if (pdf && typeof HTMLDialogElement !== 'undefined' && typeof HTMLDialogElement.prototype.showModal === 'function') {
+      action.addEventListener('click', event => {
+        if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+        event.preventDefault();
+        openViewer(file);
+      });
+    }
+    card.append(makeCover(file, gradeLabel), subtitle, title, status, action);
+    if (pdf) card.append(externalLink(externalUrl(file), 'فتح في تبويب جديد ↗'));
+    if (alternatives.length) {
+      const versions = document.createElement('details');
+      const summary = document.createElement('summary');
+      summary.textContent = 'روابط ونسخ إضافية';
+      versions.append(summary);
+      for (const entry of alternatives) {
+        versions.append(externalLink(externalUrl(entry), entry.title + ' ↗'));
+      }
+      card.append(versions);
+    }
+    card.append(shareLink(file));
+    return card;
+  }
+
+  function filesForGrade() {
+    return files.filter(file => file.grade === grade.value && file.type === type);
+  }
+
+  function populateSubjects(preferred = '') {
+    const available = new Set(filesForGrade().map(file => file.subject));
+    subject.replaceChildren();
+    function addOption(id, label) {
+      const option = document.createElement('option');
+      option.value = id;
+      option.textContent = label;
+      subject.append(option);
+    }
+    addOption('', 'كل المواد');
+    const sorted = Object.entries(subjects).sort((a, b) => a[1].localeCompare(b[1], 'ar'));
+    for (const [id, label] of sorted) {
+      if (available.has(id)) addOption(id, label);
+    }
+    if (available.has(preferred)) subject.value = preferred;
+  }
+
+  const priority = {pdf: 0, drive: 1, viewer: 2, source: 3};
+  function render() {
+    const all = filesForGrade();
+    const words = normalize(search.value).split(' ').filter(Boolean);
+    const groups = new Map();
+    for (const file of all) {
+      if (subject.value && file.subject !== subject.value) continue;
+      const text = normalize([file.title, subjects[file.subject], file.author, file.year].filter(Boolean).join(' '));
+      if (!words.every(word => text.includes(word))) continue;
+      const key = file.group || normalize(file.title);
+      if (!groups.has(key)) groups.set(key, []);
+      groups.get(key).push(file);
+    }
+
+    const gradeLabel = grade.selectedOptions[0].text;
+    results.replaceChildren();
+    let pdfCount = 0;
+    for (const versions of groups.values()) {
+      versions.sort((a, b) => priority[a.format] - priority[b.format]);
+      const [first, ...alternatives] = versions;
+      if (first.format === 'pdf' || first.format === 'drive') pdfCount++;
+      results.append(makeCard(first, gradeLabel, alternatives));
+    }
+    empty.hidden = groups.size > 0;
+    message.textContent = gradeLabel + ' · ' + groups.size + ' نتيجة: ' + pdfCount
+      + ' روابط PDF و' + (groups.size - pdfCount) + ' مصادر أو معاينات';
+    const exam = type === 'exams';
+    gradeSource.replaceChildren(externalLink(exam
+      ? 'https://qus.haltaelam.com/' + gradeSlugs[Number(grade.value) - 1] + '/'
+      : 'https://manahijuna.net/' + (type === 'book' ? 'الكتب-المنهجية/' : ''),
+      exam ? 'أرشيف أسئلة هذا الصف ↗' : type === 'book' ? 'فهرس خارجي للكتب بحسب الصف ↗' : 'مصادر إضافية للملازم ↗'));
+    for (const button of buttons) {
+      const active = button.dataset.libraryType === type;
+      button.classList.toggle('active', active);
+      button.setAttribute('aria-pressed', String(active));
+    }
+  }
+
+  grade.addEventListener('change', () => {
+    populateSubjects();
+    render();
+  });
+  for (const button of buttons) {
+    button.addEventListener('click', () => {
+      type = button.dataset.libraryType;
+      populateSubjects(subject.value);
+      render();
+    });
+  }
+  subject.addEventListener('change', render);
+  search.addEventListener('input', render);
+  populateSubjects(params.get('subject') || '');
+  render();
 })();

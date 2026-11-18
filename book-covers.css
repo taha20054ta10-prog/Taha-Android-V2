@@ -5,3 +5,11 @@
 .math-cover-title.math-title-long{font-size:clamp(.54rem,6.8cqw,1.65rem)}
 .math-cover-grade{inset:38.4% 22% auto;height:9.8%;border-radius:1.15em;background:linear-gradient(#fff5db,#f6deb2);color:#102247;font-size:clamp(.54rem,7.2cqw,1.55rem);line-height:1.08;font-weight:900}
 .book-share{align-self:flex-start}
+
+.library-cover-box > .library-cover{position:absolute;inset:0;background:#0a3768}
+.library-filters{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:12px;margin-top:16px}
+.library-filters label{display:block;margin-bottom:6px;font-weight:700}
+.library-filters input[type="search"]{box-sizing:border-box;width:100%;min-height:44px;padding:10px 12px;border:1px solid #5779ae;border-radius:10px;background:#101c2b;color:#fff;font:inherit}
+.library-book details a{display:block;overflow-wrap:anywhere;margin-top:8px}
+.library-book h3,.library-book .button{overflow-wrap:anywhere}
+@media(max-width:480px){.library-filters{grid-template-columns:1fr}}

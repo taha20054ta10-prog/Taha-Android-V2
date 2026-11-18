@@ -1,11 +1,9 @@
 #!/usr/bin/env python3
 """Generate individual illustrated PNG book covers for all published catalog items."""
-import json, re, math, random
-from pathlib import Path
+import re, math, random
+from catalog import ROOT, load_catalog
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
-ROOT=Path(__file__).resolve().parents[1]
-js=(ROOT/'library.js').read_text(encoding='utf-8')
-items=json.loads(re.search(r'const files=(\[.*?\])\s*\n\s*let type=',js,re.S).group(1))
+items = [entry for entry in load_catalog() if not entry.get('archived') and entry['format'] in {'pdf', 'drive'}]
 OUT=ROOT/'covers'/'catalog'
 OUT.mkdir(parents=True,exist_ok=True)
 W,H=600,840
