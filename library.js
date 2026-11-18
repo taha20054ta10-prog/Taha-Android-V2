@@ -150,8 +150,10 @@
         openViewer(file);
       });
     }
+    const track = () => window.tahaRecordFile?.(pdf ? 'pdf' : 'download', file.title, file.type === 'book' ? 'كتاب مدرسي' : file.type === 'notes' ? 'ملزمة' : file.type === 'exams' ? 'أسئلة وزارية' : 'ملف دراسي');
+    action.addEventListener('click', track);
     card.append(makeCover(file, gradeLabel), subtitle, title, status, action);
-    if (pdf) card.append(externalLink(externalUrl(file), 'فتح في تبويب جديد ↗'));
+    if (pdf) { const extra = externalLink(externalUrl(file), 'فتح في تبويب جديد ↗'); extra.addEventListener('click', track); card.append(extra); }
     if (alternatives.length) {
       const versions = document.createElement('details');
       const summary = document.createElement('summary');
