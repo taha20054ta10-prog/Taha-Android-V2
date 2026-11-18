@@ -1,14 +1,14 @@
 (() => {
  if(window.__tahaAnalytics) return; window.__tahaAnalytics=true;
  const privacy=()=>navigator.globalPrivacyControl||navigator.doNotTrack==='1';
- const testing=new URLSearchParams(location.search).get('analytics_test')==='1';
+ let mode=new URLSearchParams(location.search).get('analytics_test');try{if(mode!==null)sessionStorage.setItem('taha-test-mode',mode);else mode=sessionStorage.getItem('taha-test-mode')}catch{}const testing=['1','ga'].includes(mode),gaTesting=mode==='ga';
  let running=false,stopped=false,visitor,session;
  const uid=()=>crypto.randomUUID();
  const read=(k)=>{try{return JSON.parse(localStorage.getItem(k))}catch{return null}};
  const write=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch{}};
  const allowed=()=>!privacy()&&read('taha-analytics-consent')===true;
  function consentUI(){
-  if(read('taha-analytics-consent')!==null||privacy()||testing)return;
+  if(read('taha-analytics-consent')!==null||privacy()||(testing&&!gaTesting))return;
   const box=document.createElement('aside');box.className='analytics-consent';box.setAttribute('aria-label','اختيار الخصوصية');
   const text=document.createElement('p');text.textContent='تسمح بإحصائيات الزيارة حتى نطوّر الموقع؟ نستخدم معرّف متصفح عشوائي وGoogle Analytics. تگدر ترفض وتستمر بالتصفح.';
   const link=document.createElement('a');link.href='privacy.html';link.textContent='سياسة الخصوصية';
@@ -18,10 +18,10 @@
   box.append(text,link,yes,no);document.body.append(box);
  }
  function start(){
-  if(running||privacy()||(!testing&&!allowed()))return;running=true;
-  if(!testing){
+  if(running||privacy()||((!testing||gaTesting)&&!allowed()))return;running=true;
+  if(!testing||gaTesting){
    window.dataLayer=window.dataLayer||[];window.gtag=window.gtag||function(){window.dataLayer.push(arguments)};
-   const safeUrl=new URL(location.origin+location.pathname);for(const k of ['utm_source','utm_medium','utm_campaign']){const v=new URLSearchParams(location.search).get(k);if(v)safeUrl.searchParams.set(k,v.slice(0,100))}let safeRef='';try{const r=new URL(document.referrer);safeRef=r.origin+r.pathname}catch{}window.gtag('js',new Date());window.gtag('config','G-3XWG1JH4VT',{page_location:safeUrl.href,page_referrer:safeRef});
+   const safeUrl=new URL(location.origin+location.pathname);for(const k of ['utm_source','utm_medium','utm_campaign']){const v=new URLSearchParams(location.search).get(k);if(v)safeUrl.searchParams.set(k,v.slice(0,100))}let safeRef='';try{const r=new URL(document.referrer);safeRef=r.origin+r.pathname}catch{}window.gtag('js',new Date());window.gtag('config','G-3XWG1JH4VT',{page_location:safeUrl.href,page_referrer:safeRef,debug_mode:gaTesting});
    const script=document.createElement('script');script.async=true;script.src='https://www.googletagmanager.com/gtag/js?id=G-3XWG1JH4VT';document.head.append(script);
   }
   if(!crypto?.randomUUID||(navigator.webdriver&&!testing))return;
