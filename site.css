@@ -212,3 +212,20 @@ body{background:radial-gradient(ellipse at 85% 5%,#1d2354 0%,transparent 40%),#0
 .taha-entry-card a:hover{background:#203f5a}
 @media(max-width:850px){.taha-entry-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:480px){.taha-entry-grid{grid-template-columns:1fr}.taha-entry-card{padding:17px;gap:7px}}
+
+/* Library reading and navigation improvements, preserving existing destinations. */
+#library-title{font-size:clamp(1.5rem,4vw,2.25rem);line-height:1.55}
+.library-help{padding:16px 20px;margin-bottom:18px;border:1px solid #52728f;border-radius:14px;background:#10233a;line-height:1.9}
+.library-help summary{cursor:pointer;font-weight:700;min-height:44px;display:list-item;padding-block:8px}
+.library-help ol{padding-inline-start:24px}.library-help li{margin-block:8px}
+.library-shortcuts{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:20px}
+.library-shortcuts a{display:inline-flex;align-items:center;padding:10px 14px;min-height:44px;border:1px solid #6187a3;border-radius:10px;color:#b7eeff}
+#library .library-grade-label{font-size:.9375rem;opacity:1;color:#cbd9e7}
+#library .library-cover-credit{font-size:.875rem}
+#library .library-filters input,#library .library-filters select,#library-grade{font-size:1rem;min-height:48px;max-width:100%}
+#library .library-tabs button{min-height:44px;white-space:normal}
+#library .library-book .button{font-size:.9375rem;min-height:48px;white-space:normal}
+#library-reset{margin-block:12px;min-height:44px;white-space:normal}
+#library-reset:disabled{opacity:.6;cursor:default}
+.library-shortcuts a:focus-visible,.library-help summary:focus-visible{outline:3px solid #a3f1ed;outline-offset:3px}
+@media(max-width:480px){#library .library-grid{grid-template-columns:1fr}#library .library-book{padding:16px}#library .library-book h3{font-size:1.0625rem}#library .library-cover-box{height:240px}.library-help{padding:12px 16px}.library-shortcuts{flex-direction:column}}

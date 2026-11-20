@@ -8,6 +8,7 @@
   const message = document.getElementById('library-message');
   const empty = document.getElementById('library-empty');
   const gradeSource = document.getElementById('library-grade-source');
+  const reset = document.getElementById('library-reset');
   const buttons = [...document.querySelectorAll('[data-library-type]')];
   if (!grade || !subject || !search || !results || !message || !empty || !gradeSource) return;
 
@@ -207,6 +208,20 @@
       results.append(makeCard(first, gradeLabel, alternatives));
     }
     empty.hidden = groups.size > 0;
+    if (reset) {
+      reset.hidden = false;
+      reset.disabled = !search.value && !subject.value;
+    }
+    // Keep campaign attribution while making the selected shelf shareable.
+    const url = new URL(location.href);
+    url.searchParams.set('grade', grade.value);
+    url.searchParams.set('type', type);
+    for (const [key, value] of [['subject', subject.value], ['q', search.value.trim()]]) {
+      if (value) url.searchParams.set(key, value);
+      else url.searchParams.delete(key);
+    }
+    history.replaceState(null, '', url);
+
     message.textContent = gradeLabel + ' · ' + groups.size + ' نتيجة: ' + pdfCount
       + ' روابط PDF و' + (groups.size - pdfCount) + ' مصادر أو معاينات';
     const exam = type === 'exams';
@@ -232,6 +247,12 @@
       render();
     });
   }
+  reset?.addEventListener('click', () => {
+    search.value = '';
+    subject.value = '';
+    render();
+    search.focus();
+  });
   subject.addEventListener('change', render);
   search.addEventListener('input', render);
   populateSubjects(params.get('subject') || '');
