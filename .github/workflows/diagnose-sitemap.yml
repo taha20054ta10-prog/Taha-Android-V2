@@ -1,0 +1,60 @@
+name: Diagnose Sitemap Accessibility
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  sitemap-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check HTTP, XML, robots and listed URLs
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import urllib.request, urllib.error, xml.etree.ElementTree as ET, sys
+          base = "https://taha20054ta10-prog.github.io/Taha-Android-V2/"
+          def fetch(path):
+              url = base + path
+              req = urllib.request.Request(url, headers={"User-Agent": "TahaAndroid-Sitemap-Diagnostic/1.0"})
+              try:
+                  with urllib.request.urlopen(req, timeout=20) as response:
+                      body = response.read()
+                      print(f"{path}: HTTP {response.status}; Content-Type: {response.headers.get('Content-Type')}; bytes={len(body)}")
+                      return body
+              except Exception as exc:
+                  print(f"{path}: ERROR {type(exc).__name__}: {exc}")
+                  return None
+          xml = fetch("sitemap.xml")
+          robots = fetch("robots.txt")
+          failures = 0
+          if robots is None:
+              failures += 1
+          elif b"sitemap.xml" not in robots.lower():
+              print("WARNING: robots.txt does not reference sitemap.xml")
+          if xml is None:
+              sys.exit(1)
+          try:
+              root = ET.fromstring(xml)
+              urls = [el.text.strip() for el in root.findall(".//{http://www.sitemaps.org/schemas/sitemap/0.9}loc") if el.text]
+              print(f"XML valid; URLs found: {len(urls)}")
+              if not urls:
+                  failures += 1
+              for url in urls:
+                  if not url.startswith(base):
+                      print(f"WARNING: URL outside expected site: {url}")
+                  try:
+                      req = urllib.request.Request(url, headers={"User-Agent":"TahaAndroid-Sitemap-Diagnostic/1.0"})
+                      with urllib.request.urlopen(req, timeout=15) as response:
+                          print(f"URL HTTP {response.status}: {url}")
+                  except Exception as exc:
+                      print(f"URL ERROR: {url}: {exc}")
+                      failures += 1
+          except ET.ParseError as exc:
+              print(f"XML parsing ERROR: {exc}")
+              failures += 1
+          sys.exit(1 if failures else 0)
+          PY
