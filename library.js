@@ -21,7 +21,7 @@
     computer: 'الحاسوب', earth: 'علم الأرض', baath: 'جرائم حزب البعث', other: 'مواد أخرى'
   };
   const formatLabels = {
-    pdf: 'رابط PDF مباشر', drive: 'PDF على Google Drive', viewer: 'معاينة Google Drive',
+    pdf: 'رابط PDF مباشر', drive: 'ملف PDF على Google Drive', viewer: 'معاينة Google Drive',
     source: 'صفحة المصدر'
   };
   const scopeLabels = {
@@ -149,6 +149,12 @@
     formatNote.className = 'library-grade-label';
     formatNote.textContent = file.format === 'source' ? 'الرابط يؤدي إلى صفحة مصدر خارجي' : 'القراءة متاحة عبر صفحة التفاصيل';
     card.append(makeCover(file, gradeLabel), subtitle, title, status, formatNote, detail);
+    if (file.accessNote) {
+      const note = document.createElement('p');
+      note.className = 'library-grade-label';
+      note.textContent = file.accessNote;
+      card.append(note);
+    }
     if (alternatives.length) {
       const versions = document.createElement('details');
       const summary = document.createElement('summary');
