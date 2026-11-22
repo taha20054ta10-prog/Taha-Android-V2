@@ -7,16 +7,8 @@
  const read=(k)=>{try{return JSON.parse(localStorage.getItem(k))}catch{return null}};
  const write=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch{}};
  const allowed=()=>!privacy()&&read('taha-analytics-consent')===true;
- function consentUI(){
-  if(read('taha-analytics-consent')!==null||privacy()||(testing&&!gaTesting))return;
-  const box=document.createElement('aside');box.className='analytics-consent';box.setAttribute('aria-label','اختيار الخصوصية');
-  const text=document.createElement('p');text.textContent='تسمح بإحصائيات الزيارة حتى نطوّر الموقع؟ نستخدم معرّف متصفح عشوائي وGoogle Analytics. تگدر ترفض وتستمر بالتصفح.';
-  const link=document.createElement('a');link.href='privacy.html';link.textContent='سياسة الخصوصية';
-  const choose=(value)=>{write('taha-analytics-consent',value);box.remove();if(value)start()};
-  const yes=document.createElement('button');yes.textContent='أوافق على الإحصائيات';yes.onclick=()=>choose(true);
-  const no=document.createElement('button');no.textContent='أرفض';no.onclick=()=>choose(false);
-  box.append(text,link,yes,no);document.body.append(box);
- }
+ // No automatic consent popup. Analytics remains opt-in only.
+ function consentUI(){ return; }
  function start(){
   if(running||privacy()||((!testing||gaTesting)&&!allowed()))return;running=true;
   if(!testing||gaTesting){
