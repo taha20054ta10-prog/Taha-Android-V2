@@ -19,6 +19,8 @@ jobs:
           python-version: '3.12'
       - run: python tests/grade_video_links.py
       - run: python tests/site_integrity.py
+      - run: python tests/site_navigation.py
+      - run: node --check site-paths.js
       - run: python tests/lesson_media_integrity.py
       - run: node --check study-slides.js
       - run: node --check curriculum-player.js
