@@ -1,5 +1,8 @@
 name: Audit educational library links
 on:
+  push:
+    branches: [main]
+    paths: ['*.html', '*.js', '*.xml', '*.css', 'tests/**', 'library-import/**', '.github/workflows/validate-library.yml']
   workflow_dispatch:
   schedule:
     - cron: '0 4 * * 1'
@@ -15,9 +18,12 @@ jobs:
         with:
           python-version: '3.12'
       - run: python tests/grade_video_links.py
-      - run: python library-import/validate_catalog.py
+      - run: python tests/site_integrity.py
+      - run: python library-import/validate_catalog.py --offline
+      - if: github.event_name != 'push'
+        run: python library-import/validate_catalog.py
       - uses: actions/upload-artifact@v4
-        if: always()
+        if: always() && github.event_name != 'push'
         with:
           name: taha-android-library-audit
           path: library-import/audit-report.json
