@@ -34,7 +34,11 @@ def local_target(value):
         path = path[len(SITE_PATH):]
     elif path.startswith("/"):
         return None  # Root paths may be services outside the static site.
-    return (ROOT / path).resolve()
+    target = (ROOT / path).resolve()
+    # A directory URL such as './' is the published index page, not a broken link.
+    if target.is_dir():
+        return target / 'index.html'
+    return target
 
 INDEXED = set()
 PAGES = sorted(ROOT.rglob("*.html"))
