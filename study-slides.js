@@ -5,7 +5,7 @@
   'use strict';
   if (window.tahaIllustratedLessonsInitialized) return;
   window.tahaIllustratedLessonsInitialized = true;
-  const studyCards = Array.from(document.querySelectorAll('article.lesson, article.less, section.topic, article.letter'));
+  const studyCards = Array.from(document.querySelectorAll('article.lesson, article.less, section.topic, article.topic, article.letter, div.exercise'));
   if (!studyCards.length || typeof HTMLDialogElement === 'undefined') return;
 
   const style = document.createElement('style');
