@@ -28,6 +28,10 @@ for name, expected_ids in {
         assert f'data-video="{vid}"' in text, f"missing matched video: {vid}"
         assert f"https://www.youtube.com/watch?v={vid}" in text, f"missing attribution: {vid}"
 
+science = (ROOT / "grade-two-science.html").read_text(encoding="utf-8")
+for video_id in ("uO5SwIIu9tk", "EeuUxMyed8E"):
+    assert f"youtube-nocookie.com/embed/{video_id}" in science
+    assert f"youtube.com/watch?v={video_id}" in science
 script = (ROOT / "study-slides.js").read_text(encoding="utf-8")
 assert "ليس فيديو مصوّراً" in script
 assert "speechSynthesis" in script
