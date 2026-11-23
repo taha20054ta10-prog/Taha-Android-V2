@@ -14,3 +14,5 @@ if(eng)add(document.querySelector("main"),"الإنكليزي – الدرس "+N
 const container=(science&&Number(science[1])===1)?document.querySelector("main"):path==="grade-three-science.html"?document.getElementById("chapter-1"):null;
 if(container){const id="ElY8dNmIUVE";const a=document.createElement("a");a.href="https://www.youtube.com/watch?v="+id;a.target="_blank";a.rel="noopener noreferrer";a.textContent="▶ شرح التغذية عند النباتات – علوم الثالث الابتدائي على يوتيوب";a.style.cssText="display:block;padding:10px;background:#18334a;color:#ffe3a6;border-radius:8px;margin:10px 0";container.append(a)}
 })();
+// Show lesson-by-lesson illustrated walkthroughs without claiming to host teacher videos.
+(function(){if(!document.querySelector('article.lesson,article.less,section.topic,article.letter'))return;const s=document.createElement('script');s.src='study-slides.js?v=1';s.defer=true;document.head.append(s)})();
