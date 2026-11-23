@@ -195,7 +195,8 @@ body{background:radial-gradient(ellipse at 85% 5%,#1d2354 0%,transparent 40%),#0
 .cover-buttons a{min-height:66px;animation:none;box-shadow:none}
 .cover-buttons a::before{animation:none;display:none}
 .cover-buttons a:nth-child(n+7){display:none}
-.news-ticker{display:none}
+.news-ticker{display:flex;visibility:visible;min-height:48px}.news-ticker .site-news-label{color:#ffe2a0;text-decoration:none}.news-ticker .ticker-track{animation-duration:95s}
+
 @media(max-width:580px){.cover-buttons{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.cover-buttons a{min-height:64px;padding:10px 7px}}
 
 /* Service entry cards: concise summaries, with full existing sections kept below. */
