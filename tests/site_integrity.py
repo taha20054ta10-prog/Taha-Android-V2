@@ -1,12 +1,13 @@
 """Fast offline checks for site navigation, teaching links and XML sitemap."""
 from html.parser import HTMLParser
 from pathlib import Path
-from urllib.parse import urlsplit, unquote
+from urllib.parse import urlsplit, unquote, urljoin, quote
 from xml.etree import ElementTree as ET
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 SITE_PATH = "/Taha-Android-V2/"
+SITE_ORIGIN = "https://taha20054ta10-prog.github.io"
 ISSUES = []
 
 class PageParser(HTMLParser):
@@ -22,20 +23,22 @@ class PageParser(HTMLParser):
             if attrs.get(attr):
                 self.attrs_found.append((tag, attr, attrs[attr]))
 
-def local_target(value):
+def local_target(value, page):
     value = value.strip()
-    if not value or value.startswith(("#", "//")):
+    if not value or value.startswith('#'):
         return None
     parsed = urlsplit(value)
-    if parsed.scheme or parsed.netloc or not parsed.path:
+    if not parsed.path:
         return None
-    path = unquote(parsed.path)
-    if path.startswith(SITE_PATH):
-        path = path[len(SITE_PATH):]
-    elif path.startswith("/"):
-        return None  # Root paths may be services outside the static site.
-    target = (ROOT / path).resolve()
-    # A directory URL such as './' is the published index page, not a broken link.
+    source_url = SITE_ORIGIN + SITE_PATH + quote(page.relative_to(ROOT).as_posix())
+    resolved = urlsplit(urljoin(source_url, value))
+    if resolved.scheme not in ('http', 'https') or resolved.netloc.lower() != urlsplit(SITE_ORIGIN).netloc:
+        return None
+    if not resolved.path.startswith(SITE_PATH):
+        if parsed.scheme or parsed.netloc or parsed.path.startswith('/'):
+            return None  # Same-host paths outside this project belong to other sites.
+        return ROOT.parent / '__outside_project__'
+    target = (ROOT / unquote(resolved.path[len(SITE_PATH):])).resolve()
     if target.is_dir():
         return target / 'index.html'
     return target
@@ -55,7 +58,7 @@ for path in PAGES:
     if "noindex" not in parser.robots.lower():
         INDEXED.add(path.relative_to(ROOT).as_posix())
     for tag, attr, value in parser.attrs_found:
-        target = local_target(value)
+        target = local_target(value, path)
         if target is not None and (not target.is_relative_to(ROOT) or not target.is_file()):
             ISSUES.append(f"{path.relative_to(ROOT)}: missing {attr}={value}")
 sitemap = ET.parse(ROOT / "sitemap.xml")
