@@ -36,6 +36,7 @@
     report.replaceChildren()
     feedbackList.replaceChildren()
     feedbackSummary.textContent = ''
+    document.querySelector('#resource-ratings-rows')?.replaceChildren();document.querySelector('#resource-ratings-comments')?.replaceChildren();const ratingStatus=document.querySelector('#resource-ratings-status');if(ratingStatus)ratingStatus.textContent=''
     dashboard.querySelectorAll('[data-stat]').forEach(node => { node.textContent = '—' })
   }
 
@@ -131,6 +132,21 @@
       note.textContent=data.length?'آخر ١٠٠ ملف حسب عدد الضغطات':'لا توجد ضغطات مسجلة في الفترة المختارة.';
     }catch{note.textContent='تعذّر تحميل تفاصيل الملفات.'}
   }
+  async function refreshResourceRatings() {
+    if(!accessToken)return;
+    const session=generation, rows=document.querySelector('#resource-ratings-rows'), comments=document.querySelector('#resource-ratings-comments'), status=document.querySelector('#resource-ratings-status');
+    if(!rows||!comments||!status)return;
+    status.textContent='جارٍ جلب التقييمات…';
+    try{
+      const data=await request('/rest/v1/rpc/taha_resource_rating_owner',{},accessToken);
+      if(session!==generation)return;
+      const labels={book:'كتب',notes:'ملازم',exams:'وزاريات',lesson:'شروحات'};
+      rows.replaceChildren(...data.items.map(item=>{const tr=document.createElement('tr');for(const v of [item.title,labels[item.category]||item.category,nf.format(item.average),nf.format(item.rating_count),nf.format(item.website),nf.format(item.app)]){const td=document.createElement('td');td.textContent=v;td.style.padding='8px';tr.append(td)}return tr}));
+      comments.replaceChildren(...data.comments.map(item=>{const li=document.createElement('li');li.textContent=item.title+' · '+nf.format(item.rating)+' / ٥ · '+(item.source==='app'?'التطبيق':'الموقع')+' — '+item.suggestion;return li}));
+      status.textContent=data.items.length?'حتى ٢٠٠ مرجع حسب عدد التقييمات — آخر تحديث الآن':'لا توجد تقييمات مسجلة بعد.';
+    }catch{if(session===generation)status.textContent='تعذّر تحميل تقييمات المراجع.';}
+  }
+  document.querySelector('#refresh-resource-ratings')?.addEventListener('click',refreshResourceRatings);
   async function refresh() {
     if (!accessToken || refreshing) return
     refreshing = true
@@ -139,7 +155,7 @@
     try {
       const data = await request('/rest/v1/rpc/taha_owner_metrics', { p_days: days }, accessToken)
       if (session === generation && days === Number(range.value)) show(data)
-      if (session === generation) { refreshFiles(); refreshSources() }
+      if (session === generation) { refreshFiles(); refreshSources(); refreshResourceRatings() }
     } catch (error) {
       if (session !== generation) return
       if (['401','403'].includes(error.message)) lock('انتهت الجلسة. سجّل دخولك من جديد.')
@@ -171,6 +187,7 @@
       refreshFeedback()
       refreshFiles()
       refreshSources()
+      refreshResourceRatings()
     } catch {
       status.textContent = 'تعذّر تسجيل الدخول. تحقّق من حساب المالك وكلمة المرور.'
     } finally {
