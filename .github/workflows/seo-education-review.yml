@@ -27,3 +27,5 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git commit -m "SEO: improve individual education resources and contextual links"
           git push origin HEAD:refs/heads/seo-education-bulk-20261127
+
+# Re-run after correcting the subject hub inventory.
