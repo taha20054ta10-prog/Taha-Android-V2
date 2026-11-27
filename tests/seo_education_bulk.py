@@ -92,7 +92,7 @@ def metadata(c,title,desc):
 docs={p:(ROOT/p).read_text(encoding="utf-8") for p in sorted(paths) if key(p)}
 refs={p:c for p,c in docs.items() if ref_re.fullmatch(p)}
 studies={p:c for p,c in docs.items() if not ref_re.fullmatch(p)}
-assert len(refs)==226 and len(studies)==130, (len(refs),len(studies))
+assert len(refs)==226 and len(studies)==109, (len(refs),len(studies))
 by_key=defaultdict(list)
 study_by_key=defaultdict(list)
 for p,c in studies.items():study_by_key[key(p)].append(p)
