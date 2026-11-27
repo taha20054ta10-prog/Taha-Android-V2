@@ -1,0 +1,29 @@
+name: One-time education SEO review
+on:
+  push:
+    branches: [seo-education-bulk-20261127]
+    paths:
+      - '.github/workflows/seo-education-review.yml'
+permissions:
+  contents: write
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python tests/seo_education_bulk.py
+      - run: python tests/site_integrity.py
+      - run: python tests/site_navigation.py
+      - name: Commit only reviewed educational HTML and sitemap to review branch
+        run: |
+          git diff --check
+          git add -- '*.html' sitemap.xml
+          if git diff --cached --quiet; then exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "SEO: improve individual education resources and contextual links"
+          git push origin HEAD:refs/heads/seo-education-bulk-20261127
